@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Skumar_IndiaRegions>
+            <active>true</active>
+            <codePool>community</codePool>
+        </Skumar_IndiaRegions>
+    </modules>
+</config>

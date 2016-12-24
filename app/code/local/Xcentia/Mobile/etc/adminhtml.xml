@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Xcentia_Mobile extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       Xcentia
+ * @package        Xcentia_Mobile
+ * @copyright      Copyright (c) 2016
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+-->
+<config>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <xcentia_mobile translate="title" module="xcentia_mobile">
+                                        <title>Mobile</title>
+                                    </xcentia_mobile>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                    <xcentia_mobile translate="title" module="xcentia_mobile">
+                        <title>App Devices</title>
+                        <children>
+                            <device translate="title" module="xcentia_mobile">
+                                <title>Device</title>
+                                <sort_order>0</sort_order>
+                            </device>
+                        </children>
+                    </xcentia_mobile>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+    <menu>
+        <xcentia_mobile translate="title" module="xcentia_mobile">
+            <title>App Devices</title>
+            <sort_order>37</sort_order>
+            <children>
+                <device translate="title" module="xcentia_mobile">
+                    <title>Device</title>
+                    <action>adminhtml/mobile_device</action>
+                    <sort_order>0</sort_order>
+                </device>
+            </children>
+        </xcentia_mobile>
+    </menu>
+</config>

@@ -1,0 +1,226 @@
+<?php $_helper = $this->helper('catalog/output'); ?>
+<?php $_product = $this->getProduct(); ?>
+<div class="project-details">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 col-sm-12">
+				<!-- left text -->
+				<div class="tittle">
+					<p>
+						<a href="<?php echo $this->getUrl() ?>">Home</a> / <a
+							href="<?php echo $this->getUrl() ?>describe.html">Describe your
+							idea</a> /
+					</p>
+					<h3>Describe your Itinerary</h3>
+				</div>
+				<!-- /left text -->
+			</div>
+		</div>
+	</div>
+</div>
+<section>
+<div class="container">
+	<form action="<?php echo $this->getUrl('projects/project/create') ?>" method="post" id="create_project_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+	<div class="row">
+		<!-- LEFT -->
+		<div class="col-md-4 col-sm-4 col-xs-12">
+			
+			<?php echo $this->getBlockHtml('formkey') ?>
+	        <div class="no-display">
+	            <input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
+	            <input type="hidden" name="related_product" id="related-products-field" value="" />
+	            <input type="hidden" name="type" value="travel" />
+	            <input type="hidden" name="distance" value="" id="distance_hidden"/>
+	        </div>
+			<div class="form-group">
+				<h4>Define Location</h4>
+				<label>Starting Point</label> <input title="Please type your travel Start point" name="origin" id="origin" type="text" value="" class="form-control margin-bottom-10" name="txtquantity"> 
+				<label>Destination</label> <input title="Please type your travel Destination point" name="destination" id="destination" type="text" value="" class="form-control margin-bottom-10" name="txtbudget"> 
+				<div class="row">
+					<div class="col-md-6" id="distance_to_show"></div>
+					<!-- <div class="col-md-6"><a class="btn btn-sm btn-info btn-bordered btn-solid">Add Waypoint</a></div>  -->
+				</div>
+				<h4>Travel Preferences</h4>
+				{CONTAINER1}
+				<div class="form-group">
+					<label class="required"><em>*</em>Car Type and Numbers</label>
+					<div class="size_options_wrappers row car-type-number" id="sizeandquanity-wrapper">
+						<div class="input-group col-xs-12">
+							<span class="input-group-addon">Small Car (for 4)</span>
+							<input type="text" class="form-control" id="size-small" name="size[Small]" value="1">
+						</div>
+						<div class="input-group col-xs-12">
+							    <span class="input-group-addon">Sedan Car (for 4)</span>
+							    <input type="text" class="form-control" id="size-sedan" name="size[Sedan]" value="0">
+							</div>
+							<div class="input-group col-xs-12">
+							    <span class="input-group-addon">SUV Car (for 5)</span>
+							    <input type="text" class="form-control" id="size-suv" name="size[SUV]" value="0">
+							</div>
+							<div class="input-group col-xs-12">
+							    <span class="input-group-addon">Family Car (for 6)</span>
+							    <input type="text" class="form-control" id="size-s" name="size[Family]" value="0">
+							</div>
+                      	</div>
+                </div>
+				<label>Budget</label>
+		        <input name="budget" value="" title="Please input your Budget" id="budget" placeholder="Your Budget for this travel (in INR)" type="text" class="form-control required-entry">
+				<h4>Date and Time</h4>
+                <div class="row">
+					<div class="col-md-6 col-sm-6 col-xs-12 text-left">
+						<label>Pick up Date</label><input title="Please select Travel Date, should be greater than Bid end Date" id="expected-date" type="date" value="" class="form-control margin-bottom-10 required-entry" name="expected[date]">
+					</div>
+					<div class="col-md-6 col-sm-6 col-xs-12 text-left">
+						<label>Pick up Time</label> <input type="time" value="<?php echo date("H:i", Mage::getModel('core/date')->timestamp()); ?>" class="form-control margin-bottom-10 required-entry" name="expected[time]">
+					</div>
+				</div>
+				<label>Bid Close Time <small>(By when will you accepts bids?)</small></label>
+				<div class="row">
+                	<div class="col-md-6"><input title="Please select Bid End Date, should be greater than today" type="date" id="bid_end-date" value="" class="form-control required-entry" name="bid_end[date]"></div>
+                   	<div class="col-md-6"><input type="time" value="<?php echo date("H:i", Mage::getModel('core/date')->timestamp()); ?>" class="form-control required-entry" name="bid_end[time]"></div>
+                </div>
+				
+			</div>
+			
+		</div>
+
+
+		<!-- RIGHT -->
+		<div class="col-md-8 col-sm-8">
+			<div class="row">
+				<div class="col-md-3 col-sm-3 col-xs-12 text-left">
+					<h4>
+						<a href="#" onClick="window.location.reload()">Re-plan</a>
+					</h4>
+				</div>
+				<div class="col-md-3 col-sm-3 col-xs-12 text-left">
+					<h4>
+						<a href="#" onClick="window.print()">Print Itinerary</a>
+					</h4>
+				</div>
+
+				<div class="col-md-6 col-sm-6 col-xs-12 text-lefts">
+					<button type="button"
+						class="submit_project navigate font-lato price size-20 normal-line-height"> <span>Finalize
+							and submit Itinerary</span><br> <i
+						class="fa fa-long-arrow-right size-30 normal-line-height"></i> </button>
+				</div>
+
+				<div class="row">
+					<div
+						class="col-md-12 col-sm-12 col-xs-12 padding-30 padding-30 padding-top-0 padding-bottom-0">
+						<div id="map" style="height:770px"></div>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+
+	</div>
+	<div class="row">
+		<div class="col-md-4 col-sm-4 col-xs-12 text-left padding-20"></div>
+		<div class="col-md-8 col-sm-8 col-xs-12 text-left padding-20">
+			<button type="button"
+						class="submit_project navigate font-lato price size-20 normal-line-height"> <span>Finalize
+							and submit Itinerary</span><br> <i
+						class="fa fa-long-arrow-right size-30 normal-line-height"></i> </button>
+		</div>
+	</div>
+	</form>
+</div>
+
+</section>
+	
+    <script>
+      function initMap() {
+        var origin_place = ''; var destination_place = '';
+    	var options = {types: ['geocode'],componentRestrictions: {country: "in"}};
+      	var origin = new google.maps.places.Autocomplete(document.getElementById('origin'), options);
+      	var destination = new google.maps.places.Autocomplete(document.getElementById('destination'), options);
+      	
+        var directionsService = new google.maps.DirectionsService;
+        var directionsDisplay = new google.maps.DirectionsRenderer;
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 10,
+        });
+        if (navigator.geolocation) {
+        	var geoSuccess = function (position) {
+                initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+                map.setCenter(initialLocation);
+            };
+        	var geoError = function(error) {
+        		initialLocation = new google.maps.LatLng(18.5204, 73.8567);
+                map.setCenter(initialLocation);
+        	};
+            navigator.geolocation.getCurrentPosition(geoSuccess, geoError);
+        }
+        directionsDisplay.setMap(map);
+
+        origin.addListener('place_changed', function() {
+        	origin_place = origin.getPlace();
+        	onChangeHandler();
+        });
+        destination.addListener('place_changed', function() {
+        	destination_place = destination.getPlace();
+        	onChangeHandler();
+        });
+        var onChangeHandler = function() {
+          calculateAndDisplayRoute(directionsService, directionsDisplay, origin_place, destination_place);
+        };
+        //document.getElementById('origin').addEventListener('change', onChangeHandler);
+        //document.getElementById('destination').addEventListener('change', onChangeHandler);
+      }
+
+      function calculateAndDisplayRoute(directionsService, directionsDisplay, origin_place, destination_place) {
+        directionsService.route({
+          //origin: document.getElementById('origin').value,
+          //destination: document.getElementById('destination').value,
+          origin: new google.maps.LatLng(origin_place.geometry.location.lat(), origin_place.geometry.location.lng()),
+          destination: new google.maps.LatLng(destination_place.geometry.location.lat(), destination_place.geometry.location.lng()),
+          travelMode: 'DRIVING'
+        }, function(response, status) {
+          if (status === 'OK') {
+            directionsDisplay.setDirections(response);
+            jQuery('#distance_to_show').html('Distance: ' + response.routes[0].legs[0].distance.text);
+            jQuery('#distance_hidden').val(response.routes[0].legs[0].distance.text);
+          } else if(document.getElementById('destination').value != '' ) {
+			alert('We are not able to locate the Starting point or Destination, Please be specific and try again.');
+          }
+        });
+      }
+    </script>
+	<script async type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGSD9ez6WVEj1PQIeUX0xKStMim2eT-OA&callback=initMap&libraries=places"></script>
+	<script type="text/javascript">
+    jQuery(document).ready(function($){
+        $('.required-entry').addClass('required');
+        $.validator.addMethod("dateGreaterThanDate", function (value, element, parameter) {
+            return value > parameter.val();
+        }, "Values must match");
+        $.validator.addMethod("dateGreaterThanToday", function (value, element, parameter) {
+            return new Date(value) > new Date();
+        }, "Values must match");
+        
+        $('#create_project_form').validate({
+			rules: {
+				origin: "required",
+				destination: "required",
+				'expected[date]' : {
+						required: true,
+						dateGreaterThanDate: $('#bid_end-date'),
+					},
+				'bid_end[date]' : {
+					required: true,
+					dateGreaterThanToday: $('#today-date'),
+				}
+			  },
+		 });
+
+		  
+		$('.submit_project').click(function(){
+			if($('#create_project_form').valid()) {
+				$('#create_project_form').submit();
+			}
+		});
+    });
+	</script>

@@ -1,0 +1,38 @@
+<?php 
+/**
+ * Xcentia_Vendors extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       Xcentia
+ * @package        Xcentia_Vendors
+ * @copyright      Copyright (c) 2016
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+/**
+ * Vendor Coverage list template
+ *
+ * @category    Xcentia
+ * @package     Xcentia_Vendors
+ * @author      Ultimate Module Creator
+ */
+?>
+<?php $_coverages = $this->getCoverages(); ?>
+<?php if ($_coverages->getSize() > 0) :?>
+<div class="coverage-title">
+    <h2><?php echo Mage::helper('xcentia_vendors')->__('Coverages') ?></h2>
+</div>
+<div class="coverages-list-container">
+    <?php foreach ($_coverages as $_coverage) : ?>
+        <div class="coverage-list-item">
+            <?php echo $_coverage->getCity();?>
+<br />
+        </div>
+    <?php endforeach;?>
+</div>
+<?php endif;?>

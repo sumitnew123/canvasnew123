@@ -1,0 +1,125 @@
+<?php 
+/**
+ * Xcentia_Messages extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       Xcentia
+ * @package        Xcentia_Messages
+ * @copyright      Copyright (c) 2016
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+/**
+ * Message list template
+ *
+ * @category    Xcentia
+ * @package     Xcentia_Messages
+ * @author      Ultimate Module Creator
+ */
+?>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<?php $_messages = $this->getMessages(); 
+ $_currentUrl = Mage::helper('core/url')->getCurrentUrl();?>
+<div class="message-view">
+	<div class="user-details message-section">
+		<ul class="nav nav-tabs">
+			<li <?php if($_currentUrl==$this->getUrl('messages/message')){?>class="active" <?php } ?>><a href="<?php echo $this->getUrl('messages/message');?>">Inbox</a></li>
+			<li <?php if($_currentUrl==$this->getUrl('messages/message/new')){?>class="active" <?php } ?>><a href="<?php echo $this->getUrl('messages/message/new');?>">Compose Mail</a></li>
+		</ul>
+	</div>
+    <h1><?php echo Mage::helper('xcentia_messages')->__('Messages') ?></h1>
+<?php if ($_messages->getSize() > 0) :?>
+    <?php //echo $this->getPagerHtml(); ?>
+   <div class="message-list-container">
+	<div class="message-list-item ">
+			<div class="col-md-6">
+				<b>Subject</b>
+			</div>
+			<div class="col-md-3">
+				<b>From</b>
+			</div>
+			<div class="col-md-3">
+				<b>Action</b>
+			</div>
+		</div>
+		<br clear="all"/>
+		<hr>
+    <?php foreach ($_messages as $_message) : ?>
+        <div class="message-list-item">
+			<div class="col-md-6">
+					<?php echo $_message->getSubject();?>
+			</div>
+			<div class="col-md-3">
+				<?php 
+				if($_message->getOwner()=='1'){
+					$cust=Mage::getModel('customer/customer')->load($_message->getCustId());
+					$firstname=$cust->getFirstname();
+					$lastname=$cust->getLastname();
+				}else{
+					$cust=Mage::getModel('customer/customer')->load($_message->getVendorId());
+					$firstname=$cust->getFirstname();
+					$lastname=$cust->getLastname();
+				}
+				echo $firstname." ".$lastname;?>
+			</div>
+			<?php /*<div class="col-md-3">
+				<button type="button" message_id="<?php echo $_message->getId();?>"  class="button ask_que">
+					<span><span><?php echo $this->__('Send Reply') ?></span></span>
+				</button>
+			</div> */ ?>
+			<div class="col-md-3">
+				<a href="<?php echo $this->getUrl('messages/message/view',array("id"=>$_message->getId())); ?>">
+					<button type="button"   class="button">
+						<span><span><?php echo $this->__('View') ?></span></span>
+					</button>
+				</a>
+			</div>
+			<br clear="all"/>
+        </div>
+		
+    <?php endforeach;?>
+    </div>
+    <?php echo $this->getPagerHtml(); ?>
+<?php else : ?>
+    <?php echo Mage::helper('xcentia_messages')->__('There are no messages at this moment');?>
+<?php endif;?>
+</div>
+<div id="ask_data" style="display: none;">
+				<div class="modal_header">
+					<h4 class="modal-title">Send Reply</h4>
+					<span class="wk_close">x</span>
+					<span class="wk_clear"></span>
+				</div>
+				<form action="<?php echo $this->getUrl('messages/message/reply'); ?>" method="post" id="ask_form">
+					<input type="hidden" name="id" id="message_id" value="" />
+					<div class="modal-body form-list">
+						<label class="required" for="name"><em>*</em>Your Query :</label>
+						<textarea style="width:100%;" class="queryquestion wk_contact_input_fields required-entry" name="body" required></textarea>
+					</div>
+					<div class="modal_footer">
+						<input type="submit" class="wk_btn wk_btn_primary clickask" id="askbtn" value="Submit">
+						<span class="wk_clear"></span>
+					</div>
+				</form>
+</div>
+<script>
+	jQuery('document').ready(function($){
+				$('.ask_que').click(function(){
+					$('#ask_form input,#ask_form textarea').removeClass('error_border');
+					$('.page').css('opacity','0.4');
+					var msgid=$(this).attr("message_id");
+					$("#message_id").val(msgid);
+					$('#ask_data').show();
+				});
+				$('.wk_close').click(function(){
+					$('.page').css('opacity','1');
+					$('#resetbtn').trigger('click');
+					$('#ask_data').hide();
+				});
+		});
+</script>

@@ -1,0 +1,70 @@
+<?php 
+/**
+ * Xcentia_Vendors extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       Xcentia
+ * @package        Xcentia_Vendors
+ * @copyright      Copyright (c) 2016
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+/**
+ * Contact list template
+ *
+ * @category    Xcentia
+ * @package     Xcentia_Vendors
+ * @author      Ultimate Module Creator
+ */
+?>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<?php $_contacts = $this->getContacts(); ?>
+<div class="container tab-pane" id="Produtservices">
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-6 padding-bottom-20 nomargin">
+			<div class="page-title contact-title">
+				<h1><?php echo Mage::helper('xcentia_vendors')->__('Contacts') ?></h1>
+			</div>
+			<br clear="all"/>
+			<?php if ($_contacts->getSize() > 0) :?>
+				<?php //echo $this->getPagerHtml(); ?>
+				<table class="tbl-craftmen font-lato">
+					<thead>
+						<tr>
+							<th >Name</th>
+							<th>Email</th>
+							<th>Mobile</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tbody>
+					<?php foreach ($_contacts as $_contact) : ?>
+						<tr>
+							<td><?php echo $_contact->getName();?></td>
+							<td><?php echo $_contact->getEmail();?></td>
+							<td><?php echo $_contact->getMobile();?></td>
+							<td>
+								<a href="<?php echo $this->getUrl('vendors/contact/index',array("id"=>$_contact->getId())); ?>" title="Edit"><span class="fa-stack"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-pencil-square-o fa-stack-1x"></i></span></a>
+								<a onclick="return confirm('Are you sure want to delete the contact <?php echo $_contact->getName(); ?>');" href="<?php echo $this->getUrl('vendors/contact/delete',array("id"=>$_contact->getId())); ?>" title="Delete"><span class="fa-stack"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-times fa-stack-1x"></i></span></a>
+							</td>
+						</tr>
+						<?php endforeach;?>
+					</tbody>
+				</table>
+				<div class="col-lg-12">
+					<?php echo $this->getPagerHtml(); ?>
+				</div>
+			<?php else : ?>
+				<?php echo Mage::helper('xcentia_vendors')->__('There are no contacts at this moment');?>
+			<?php endif;?>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-6 padding-bottom-20 nomargin">
+			<?php echo $this->getChildhtml("contact_edit");?>
+		</div>
+	</div>
+</div>

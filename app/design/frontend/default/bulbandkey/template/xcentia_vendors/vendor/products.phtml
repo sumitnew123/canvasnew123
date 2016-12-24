@@ -1,0 +1,42 @@
+<?php 
+	$products = $this->getDealerProducts();
+	if ($products->getSize() > 0):
+?>				
+	<div class="Slider ProductList">
+    	<div class="SliderTitle">
+        	<h2><?php echo Mage::helper('xcentia_vendors')->__('Buy') ?> <span><?php echo Mage::helper('xcentia_vendors')->__('Accessories') ?></span></h2>
+    	</div>
+        <div id="xcentia_vendorss_products_slider" class="owl-carousel">
+        	<?php foreach ($products as $product) : ?>
+        	<?php $product->load('media_gallery'); ?>
+        	<div class="slide-item">
+            	<div class="thumbnail">
+                	<div class="ProdImage"><a href="<?php echo $product->getProductUrl() ?>"><img src="<?php echo Mage::helper('catalog/image')->init($product, 'small_image')->resize(266, 160) ?>" alt=""></a></div>
+                </div>
+                <h4><a href="<?php echo $product->getProductUrl() ?>"><?php echo $product->getName() ?></a></h4>
+                <div class="price"><?php echo $this->getPriceHtml($product, true) ?></div>
+                <div class="action-control"> <a class="btn btn-primary" href="<?php echo $this->getAddToCartUrl($product) ?>"> <span class="add2cart"><i class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a> </div>
+        	</div>
+        	<?php endforeach;?>
+       	</div>
+	</div>
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+		$("#xcentia_vendorss_products_slider").owlCarousel({
+		  	autoPlay: 5000,
+		    items : 4, //10 items above 1000px browser width
+	        itemsCustom : false,
+			itemsDesktop : [1199,3],
+			itemsDesktopSmall : [980,3],
+			itemsTablet: [768,2],
+			itemsTabletSmall: false,
+			itemsMobile : [479,1],
+			singleItem : false,
+			stopOnHover :true,
+			itemsScaleUp : false,
+			pagination : false,
+			navigation : true
+		});
+	});
+</script>
+<?php endif;?>

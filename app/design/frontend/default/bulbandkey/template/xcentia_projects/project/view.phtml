@@ -1,0 +1,165 @@
+<?php
+/**
+ * Xcentia_Projects extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       Xcentia
+ * @package        Xcentia_Projects
+ * @copyright      Copyright (c) 2016
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+/**
+ * Project view template
+ *
+ * @category    Xcentia
+ * @package     Xcentia_Projects
+ * @author      Ultimate Module Creator
+ */
+?>
+<?php $_project = $this->getCurrentProject();?>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<div class="project-details">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 col-sm-12">
+				<!-- left text -->
+				<div class="tittle">
+					<p>
+						<a href="<?php echo $this->getUrl() ?>">Home</a> / <a href="<?php echo $this->getUrl() ?>projects.html">Open Projects</a> /
+					</p>
+					<h3>Project Request #<?php echo $_project->getId(); ?></h3>
+				</div>
+				<!-- /left text -->
+			</div>
+		</div>
+	</div>
+</div>
+<div class="project-details-head">
+   <div class="container">
+      <div class="row">
+         <div class="col-md-12 col-sm-12"><!-- left text -->
+            <h4 class="padding-top-20 padding-bottom-20 nomargin">
+               Product Details
+            </h4>
+         </div><!-- /left text -->
+         </div>
+   </div>
+</div>
+<section class="padding-top-10">
+   <div class="container">
+   <div class="row nomargin bg-white">
+      <!-- LEFT -->
+      <div class="col-md-6 col-sm-6 nopadding nomargin">
+      	 <?php echo Mage::helper('xcentia_projects')->getProjectImages($_project); ?>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="col-md-6 col-sm-6 nopadding nomargin">
+      <div class="product-description">
+         <div class="padding-20">
+            <div>
+               <h2 class="font-lato nomargin"><?php echo $_project->getName(); ?></h2>
+               <p class="font-lato size-20">Requested by <?php echo Mage::getModel('customer/customer')->load($_project->getOwnerId())->getName() ?></p>
+               <p class="font-lato size-20">Project #<?php echo $_project->getId(); ?><br/>
+        		<?php $options = json_decode($_project->getOptions()) ?><?php foreach($options as $opname => $opval) { echo $opname.': '.$opval.'<br>'; } ?></p>
+               <div class="product-description-content">
+                  <div class="font-lato price">
+                  	<?php $isClosed = false; $diff=date_diff(date_create(date("Y-m-d")),date_create($_project->getBidEnd()));
+        				if($diff->format("%R") == '-') {
+        					echo '<div class="size-30">Closed</div>';
+        					$isClosed = true;
+        				} else if($diff->format("%R%m") > 0) {
+        					echo '<div class="size-30">'.$diff->format("%m") . ' Months</div>';
+        				} else if($diff->format("%R%d") > 0) {
+        					echo '<div class="size-30">'.$diff->format("%d") . ' Days</div>';
+        				} else if($diff->format("%R%h") > 0) {
+        					echo '<div class="size-30">'.$diff->format("%h") . ' Hours</div>';
+        				} else if($diff->format("%R%i") > 0) {
+        					echo '<div class="size-30">'.$diff->format("%i") . ' Minutes</div>';
+        				}
+        			?>
+                     <div class="size-14">Left for project request</div>
+                  </div>
+                  <div class="font-lato price margin-left-40">
+                     <div class="size-30"><?php echo (int)$_project->getTotalBids(); ?></div>
+                     <div class="size-14">Number of bids</div>
+                  </div>
+                  <div class="font-lato price margin-left-40">
+                     <div class="size-30"><?php echo Mage::helper('core')->currency($_project->getbudget(), true, false); ?></div>
+                     <div class="size-14">Budget</div>
+                  </div>
+                  <?php if(!$isClosed) { ?>
+                  <a href="javascript:void()" class="navigate font-lato price size-20 normal-line-height show-bid-area padding-top-20">
+                  <span>Think you can make it?<br>
+                  Bid for this project now!</span>
+                  <i class="fa fa-long-arrow-down size-30 normal-line-height"></i>
+                  </a>
+                  <?php } ?>
+               </div>
+               <div class="margin-top-40 padding-top-40 bid-area">
+                  <?php if(Mage::helper('customer')->isLoggedIn() && Mage::helper('customer')->getCustomer()->getGroupId() == 2) { ?>
+					<?php if(Mage::helper('xcentia_vendors/vendor')->canBidonProject($_project)) { ?>
+					<?php if(!Mage::helper('xcentia_projects/project')->hasAlreadyBidByVendor($_project)) { ?>
+						<h4>What is your bid?</h4>
+						<form method="post" action="<?php echo $this->getUrl('projects/project/makebid'); ?>" enctype="multipart/form-data">
+						<input type="hidden" name="project_id" value="<?php echo $_project->getId() ?>">
+						<div class="row">
+							<div class="col-md-6 col-sm-6 col-xs-6">
+								<label>Bid Amount (Rs)</label>
+								<input required="1" type="text" value="" class="form-control margin-bottom-10" name="amount">
+							</div>
+							<div class="col-md-6 col-sm-6 col-xs-6">
+								<label>Completion Date Range</label>
+								<input required="1" type="date" value="" class="form-control margin-bottom-10" name="date">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12 col-sm-12  col-xs-12">
+								<label>Additional Comments</label>
+								<textarea name="comments" class="form-control margin-bottom-10"></textarea>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 col-sm-6 col-xs-6 margin-top-10">
+								<a href="#">Read Our Terms and Conditions</a>
+							</div>
+							<div class="col-md-6 col-sm-6 col-xs-6">
+								<button type="submit" class="btn btn-sm btn-info btn-bordered btn-solid">Bid!</button>
+							</div>
+						</div>
+						</form>
+						<?php } else { ?>
+						<h4>You have Already bid for this Project. To know your bid status and further communication, please go to <a href="<?php echo $this->getUrl('projects/project/manage', array('id' => $_project->getId() )) ?>">Manage Project</a> section</h4>	
+						<?php } ?>
+					<?php } else { ?>
+						<h4>You are not allowed to Bid on this Project as you are not subscribed for this category.</h4>	
+					<?php } ?>
+				<?php } else { ?>
+					<h4>You need to be logged in for Bidding for any project.<br> Please Login as Vendor to bid for this Project</h4>	
+					<div class="row">
+						<div class="col-md-6 col-sm-6 col-xs-6">
+							<a href="<?php echo $this->getUrl('customer/account/login', array('referer' => Mage::helper('core')->urlEncode( Mage::getUrl('*/*/*', array('id'=>$_project->getId())) ))); ?>" class="btn btn-sm btn-info btn-bordered btn-solid">Login as a Vendor</a> 
+						</div>
+					</div>
+				<?php } ?>
+               </div>
+            </div>
+      </div>
+      </div>
+      </div>
+   </div>
+   </div>
+</section>
+<script type="text/javascript">
+   jQuery(document).ready(function($){
+      $('.show-bid-area').click(function(){
+         $(".bid-area").slideToggle();
+      });
+   });
+</script>

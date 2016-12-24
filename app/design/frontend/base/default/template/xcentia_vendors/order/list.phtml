@@ -1,0 +1,44 @@
+<?php 
+/**
+ * Xcentia_Vendors extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       Xcentia
+ * @package        Xcentia_Vendors
+ * @copyright      Copyright (c) 2016
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+/**
+ * Order list template
+ *
+ * @category    Xcentia
+ * @package     Xcentia_Vendors
+ * @author      Ultimate Module Creator
+ */
+?>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<?php $_orders = $this->getOrders(); ?>
+<div class="page-title order-title">
+    <h1><?php echo Mage::helper('xcentia_vendors')->__('Orders') ?></h1>
+</div>
+<?php if ($_orders->getSize() > 0) :?>
+    <?php echo $this->getPagerHtml(); ?>
+    <div class="order-list-container">
+    <?php foreach ($_orders as $_order) : ?>
+        <div class="order-list-item">
+            <a href="<?php echo $_order->getOrderUrl()?>">
+                <?php echo $_order->getOrderId();?>
+            </a><br />
+        </div>
+    <?php endforeach;?>
+    </div>
+    <?php echo $this->getPagerHtml(); ?>
+<?php else : ?>
+    <?php echo Mage::helper('xcentia_vendors')->__('There are no orders at this moment');?>
+<?php endif;?>

@@ -1,0 +1,80 @@
+<?php
+/**
+ * Xcentia_Vendors extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       Xcentia
+ * @package        Xcentia_Vendors
+ * @copyright      Copyright (c) 2016
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+/**
+ * Vendor view template
+ *
+ * @category    Xcentia
+ * @package     Xcentia_Vendors
+ * @author      Ultimate Module Creator
+ */
+?>
+<?php $_vendor = $this->getCurrentVendor();?>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<div class="page-title vendor-title">
+    <h1><?php echo $_vendor->getTitle(); ?></h1>
+</div>
+<div class="vendor-view">
+    <div class="vendor-title">
+        <?php echo Mage::helper('xcentia_vendors')->__('Title');?>:<?php echo $_vendor->getTitle();?>
+
+    </div>
+    <div class="vendor-tagline">
+        <?php echo Mage::helper('xcentia_vendors')->__('Tagline');?>:<?php echo $_vendor->getTagline();?>
+
+    </div>
+    <div class="vendor-logo">
+        <?php if ($_vendor->getLogo()) :?>
+    <img src="<?php echo Mage::helper('xcentia_vendors/vendor_image')->init($_vendor, 'logo')->resize(75);?>" alt="<?php echo $this->escapeHtml($_vendor->getTitle());?>" />
+<?php endif;?>
+
+    </div>
+    <div class="vendor-cover">
+        <?php if ($_vendor->getCover()) :?>
+    <img src="<?php echo Mage::helper('xcentia_vendors/vendor_image')->init($_vendor, 'cover')->resize(75);?>" alt="<?php echo $this->escapeHtml($_vendor->getTitle());?>" />
+<?php endif;?>
+
+    </div>
+    <div class="vendor-about">
+        <?php echo Mage::helper('xcentia_vendors')->__('About');?>:<?php echo $_vendor->getAbout();?>
+
+    </div>
+    <div class="vendor-phone">
+        <?php echo Mage::helper('xcentia_vendors')->__('Phone');?>:<?php echo $_vendor->getPhone();?>
+
+    </div>
+    <div class="vendor-address1">
+        <?php echo Mage::helper('xcentia_vendors')->__('Address Line 1');?>:<?php echo $_vendor->getAddress1();?>
+
+    </div>
+    <div class="vendor-address2">
+        <?php echo Mage::helper('xcentia_vendors')->__('Address Line 2');?>:<?php echo $_vendor->getAddress2();?>
+
+    </div>
+    <div class="vendor-country">
+        <?php echo Mage::helper('xcentia_vendors')->__("Country");?>:<?php echo ($_vendor->getCountry()) ? Mage::getModel('directory/country')->load($_vendor->getCountry())->getName():Mage::helper('xcentia_vendors')->__('None') ?>
+
+    </div>
+    <div class="vendor-state">
+        <?php echo Mage::helper('xcentia_vendors')->__('State');?>:<?php echo $_vendor->getState();?>
+
+    </div>
+    <div class="vendor-city">
+        <?php echo Mage::helper('xcentia_vendors')->__('City');?>:<?php echo $_vendor->getCity();?>
+
+    </div>
+
+</div>

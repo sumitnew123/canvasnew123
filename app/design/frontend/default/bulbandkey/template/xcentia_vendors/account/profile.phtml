@@ -1,0 +1,121 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2006-2015 X.commerce, Inc. (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php $_vendor = $this->getCurrentVendor();?>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<div class="" id="profile">
+    
+      <div class="col-md-12 col-sm-12">
+      <div class="row cover-img" style="background-image:url('<?php echo Mage::helper('xcentia_vendors/vendor_image')->init($_vendor, 'cover'); ?>');">
+        <div class="container">
+          <div class="row">
+          <div class="col-md-4 col-sm-4">
+            <img class="img-responsive vendor-logo" src="<?php echo Mage::helper('xcentia_vendors/vendor_image')->init($_vendor, 'logo'); ?>" alt="image">
+            <h2><?php echo $_vendor->getTitle();?></h2>
+            <p><?php echo $_vendor->getTagline();?></p>
+          </div>
+          <div class="col-md-8 col-sm-8">
+            <a href="<?php echo $this->getUrl('vendors/account/editcover') ?>" class="btn btn-sm btn-default btn-bordered"> <span>Edit Cover Image</span> </a>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div> 
+    <div class="container padding-top-20">
+    <div class="row">
+    <div class="col-md-10 col-sm-10 padding-0">
+      <h4 class="page-t">About</h4>  
+    </div>
+	 <div class="col-md-1 col-sm-1 padding-0 margin-top-10">
+      <a href="<?php echo $this->getUrl('vendors/contact') ?>" class="btn btn-sm btn-default btn-bordered"> <span>Add Contacts</span> </a> 
+	 </div>
+    <div class="col-md-1 col-sm-1 padding-0 margin-top-10">
+      <a href="<?php echo $this->getUrl('vendors/account/edit') ?>" class="btn btn-sm btn-default btn-bordered"> <span>Edit</span> </a> 
+    </div>
+          </div>
+      <div class="row bg-white padding-top-20 padding-bottom-20 padding-left-10 padding-right-10">
+    
+      <div class="col-md-9 col-sm-9">
+        <?php echo $_vendor->getAbout();?>
+		 <br />
+		<?php 
+		$customer = Mage::getSingleton('customer/session')->getCustomer();
+        $contacts = Mage::getResourceModel('xcentia_vendors/contact_collection')
+                         ->addFieldToFilter('status', 1)
+						 ->addFieldToFilter('vendor_id',$customer->getId());
+        $contacts->setOrder('entity_id', 'asc');
+        ?>
+		<?php if($contacts->getSize()>0){ ?>
+			<div class="container tab-pane" id="Produtservices">
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-6 padding-bottom-20 nomargin">
+						<div class="page-title contact-title">
+							<h1><?php echo Mage::helper('xcentia_vendors')->__('Contacts') ?></h1>
+						</div>
+						<br clear="all"/>
+						 
+							<?php //echo $this->getPagerHtml(); ?>
+							<table class="tbl-craftmen font-lato">
+								<thead>
+									<tr>
+										<th >Name</th>
+										<th>Email</th>
+										<th>Mobile</th>
+										<th>Action</th>
+									</tr>
+								</thead>
+								<tbody>
+								<?php foreach ($contacts as $_contact) : ?>
+									<tr>
+										<td><?php echo $_contact->getName();?></td>
+										<td><?php echo $_contact->getEmail();?></td>
+										<td><?php echo $_contact->getMobile();?></td>
+										<td>
+											<a href="<?php echo $this->getUrl('vendors/contact/index',array("id"=>$_contact->getId())); ?>" title="Edit"><span class="fa-stack"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-pencil-square-o fa-stack-1x"></i></span></a>
+											<a onclick="return confirm('Are you sure want to delete the contact <?php echo $_contact->getName(); ?>');" href="<?php echo $this->getUrl('vendors/contact/delete',array("id"=>$_contact->getId())); ?>" title="Delete"><span class="fa-stack"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-times fa-stack-1x"></i></span></a>
+										</td>
+									</tr>
+									<?php endforeach;?>
+								</tbody>
+							</table>
+							 
+						 
+					</div>
+					 
+				</div>
+			</div>
+		  <?php } ?>
+      </div>
+      <div class="col-md-3 col-sm-3">
+        Email: <?php echo $_vendor->getEmail();?><br/>
+        Phone: <?php echo $_vendor->getPhone();?><br/>
+		<?php if($_vendor->getWebsite()!=''){ ?>Website: <?php echo $_vendor->getWebsite();?><br/><?php } ?>
+        Area: <?php echo $_vendor->getAddress1();?>,
+        <?php echo $_vendor->getAddress2();?>, <?php echo $_vendor->getCity();?>
+      </div>  
+    </div>
+  </div>
+</div>

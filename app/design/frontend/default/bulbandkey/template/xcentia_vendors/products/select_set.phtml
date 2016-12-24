@@ -1,0 +1,63 @@
+<?php 
+/**
+ * Wa_dealer extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category   	Wa
+ * @package		Wa_dealer
+ * @copyright  	Copyright (c) 2013
+ * @license		http://opensource.org/licenses/mit-license.php MIT License
+ */
+/**
+ * Page view template
+ *
+ * @category	Wa
+ * @package		Wa_dealer
+ * @author Ultimate Module Creator
+ */
+?>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<div class="row">
+	<div class="col-lg-12">
+		<h1 class="page-header"><?php echo $this->__('Create a new Product') ?></h1>
+	</div>
+	<!-- /.col-lg-12 -->
+</div>
+
+<div class="row">
+	<div class="col-lg-6">
+		<form role="form" action="<?php echo $this->getUrl('vendors/products/setselected') ?>" method="post" id="dealer_product_form">
+		<div class="panel panel-default">
+           	<div class="panel-heading"><?php echo $this->__('Select Product Type') ?></div>
+            <div class="panel-body">
+                <div class="form-group">
+                <select name="attribute_set_id" id="attribute_set_id" class="form-control required-entry">
+                <?php $sets = $this->getAllAttributeSets();
+                      foreach($sets as $set) {
+                      	echo '<option value="'.$set['value'].'">'.$set['label'].'</option>';
+                      }
+                ?>
+                </select>
+                </div>
+                <button type="submit" class="btn btn-primary"><?php echo $this->__('Create Product') ?></button>
+            </div>
+        </div>
+        </form>
+    </div>
+</div>
+    <script type="text/javascript">
+    //<![CDATA[
+        var dealerProductForm = new VarienForm('dealer_product_form');
+        dealerProductForm = function() {
+            if(this.validator.validate()) {
+                this.form.submit();
+            }
+        }.bind(dealerProductForm);
+    //]]>
+    </script>

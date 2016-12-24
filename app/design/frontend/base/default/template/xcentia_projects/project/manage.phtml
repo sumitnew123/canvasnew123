@@ -1,0 +1,308 @@
+<?php
+/**
+ * Xcentia_Projects extension
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ *
+ * @category       Xcentia
+ * @package        Xcentia_Projects
+ * @copyright      Copyright (c) 2016
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+/**
+ * Project view template
+ *
+ * @category    Xcentia
+ * @package     Xcentia_Projects
+ * @author      Ultimate Module Creator
+ */
+?>
+<?php $_project = $this->getCurrentProject();?>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<script type="text/javascript">
+<!--
+function initiateUpload(elementid, project_id, is_private, recipient_id) {
+	var settings = {
+    		url: "<?php echo $this->getUrl('projects/project/uploadattachment') ?>",
+    		method: "POST",
+    		allowedTypes:"jpg,png,gif,pdf,doc,docx,tiff,jpeg,svg",
+    		fileName: "file",
+    		formData:{"project_id":project_id,"is_private":is_private,"recipient_id":recipient_id},
+    		multiple: true,
+    		onSuccess:function(files,data,xhr) {
+    			//jQuery('.active-chat').append(data);
+    			jQuery(data).insertBefore('.active-chat .panel-body');
+    			jQuery('.active-chat .panel-body').hide();
+    			jQuery('.active-chat .ajax-file-upload-statusbar').hide();
+    		},
+    		onError: function(files,status,errMsg) {
+    			alert('Upload is Failed, try again later');
+    		}
+    	}
+    	jQuery("#"+elementid).uploadFile(settings);
+}
+//-->
+</script>
+<section>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="row">
+				<div class="section-one">
+					<div class="col-md-3">
+						<div class="row"><?php echo Mage::helper('xcentia_projects')->getProjectImages($_project); ?></div>
+					</div>
+					<div class="col-md-3">
+					<div class="size-20">
+					<?php echo $_project->getName(); ?>
+					</div>
+					<p>
+						Project #
+						<?php echo $_project->getId(); ?>
+					</p>
+					<p>
+					<?php $options = json_decode($_project->getOptions()) ?>
+					<?php foreach($options as $opname => $opval) { echo $opname.': '.$opval.'<br>'; } ?>
+					</p>
+
+				</div>
+				<div class="col-md-3">
+					<div class="font-lato price fullwidth margin-top-20 ">
+						<div class="size-30">
+						<?php echo (int)$_project->getTotalBids(); ?>
+						</div>
+						<div class="size-14">Number of bids</div>
+					</div>
+					<div class="font-lato price fullwidth margin-top-30">
+						<div class="size-30">
+						<?php $diff=date_diff(date_create(date("Y-m-d")),date_create( ($_project->getStatus() == 2) ? $_project->getExpected() : $_project->getBidEnd()));
+						if($diff->format("%R") == '-') {
+							echo 'Closed';
+						} else if($diff->format("%R%m") > 0) {
+							echo $diff->format("%m") . ' Month(s)';
+						} else if($diff->format("%R%d") > 0) {
+							echo $diff->format("%d") . ' Day(s)';
+						} else if($diff->format("%R%h") > 0) {
+							echo $diff->format("%h") . ' Hour(s)';
+						} else if($diff->format("%R%i") > 0) {
+							echo $diff->format("%i") . ' Minute(s)';
+						}
+						?>
+						</div>
+						<div class="size-14">
+							left for project
+							<?php echo ($_project->getStatus()) ? 'delivery' : 'request';?>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="font-lato price fullwidth margin-top-20">
+						<div class="size-30">
+						<?php echo Mage::helper('core')->currency($_project->getbudget(), true, false); ?>
+						</div>
+						<div class="size-14">Budget</div>
+					</div>
+					<div class="font-lato price fullwidth margin-top-30">
+						<div class="size-30">
+						<?php echo Mage::helper('core')->currency($_project->getLowestBid(), true, false) ?>
+						</div>
+						<div class="size-14">
+							Lowest Bid
+							<?php if((int)$_project->getTotalBids() > 0) { echo ' by ' . $this->getLowestBidVendor(); } ?>
+						</div>
+					</div>
+					<?php if($_project->getStatus() == 2) { ?>
+					<div class="font-lato price fullwidth margin-top-30">
+						<div class="size-30">
+						<?php echo Mage::helper('core')->currency($_project->getWinningBid(), true, false) ?>
+						</div>
+						<div class="size-14">
+							Winning Bid by
+							<?php $winner = Mage::getModel('xcentia_vendors/vendor')->load($_project->getWinner()); ?>
+							<a target="_blank" href="<?php echo $winner->getVendorUrl() ?>"><?php echo $winner->getTitle() ?>
+							</a>
+						</div>
+					</div>
+					<?php } ?>
+				</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<?php if($_project->getIsLive() == 1) { ?>
+	<div class="row">
+		<h4>Project Disscussion</h4>
+		<div class="col-md-12 col-sm-12 col-xs-12 nopadding">
+			<div class="chat-wrapper">
+				<div class="container-chat">
+					<div class="left">
+						<?php $vendors = $this->getVendorList($_project) ?>
+						<div class="top">
+							<h4>Intrested Craftsmen (<?php echo $vendors->getSize() ?>)</h4>
+						</div>
+						<ul class="people">
+							<li customer="all" class="person" data-chat="broadcast">
+								<span class="name">All Messages</span>
+							</li>
+							<?php if($_project->getOwnerId() == Mage::helper('customer')->getCustomer()->getId()) {
+								foreach($vendors as $vendor) {
+								$vendorlist[$vendor->getCustomerId()] = $vendor;
+							?>
+							<li customer="<?php echo $vendor->getCustomerId() ?>" vendor="<?php echo $vendor->getId() ?>" id="vendor-<?php echo $vendor->getCustomerId() ?>" class="person" data-chat="vendor-<?php echo $vendor->getCustomerId() ?>">
+								<span class="name"><?php echo $vendor->getTitle() ?></span>
+								<span class="time"><img src="<?php echo Mage::helper('xcentia_vendors/vendor_image')->init($vendor, 'logo')->keepFrame(false)->resize(100, 100); ?>" class="img-responsive img-circle" /></span>
+							</li>
+							<?php } } else { ?>
+							<li customer="<?php echo $_project->getOwnerId() ?>" class="person" data-chat="customer">
+								<span class="name">Customer</span>
+							</li>
+							<?php } ?>
+						</ul>
+					</div>
+					<div class="right">
+						<div class="top">
+							<div class="chat-box-vendor-heading" id="lowest-bid">
+								<?php if((int)$_project->getTotalBids() > 0) { ?>
+								<div class="chat-box-vendor-left-section">
+									<h4>Lowest Bid Amount: <?php echo Mage::helper('core')->currency($_project->getLowestBid(), true, false) ?></h4>
+									<p><?php if((int)$_project->getTotalBids() > 0) { echo 'By ' . $this->getLowestBidVendor(); } ?></p>
+								</div>
+								<div class="chat-box-vendor-right-section pull-right">
+									<?php if(Mage::registry('lowest_bid') && $_project->getStatus() == 1 && $_project->getOwnerId() == Mage::helper('customer')->getCustomer()->getId()) { ?>
+										<a class="btn btn-sm btn-success btn-bordered margin-right-10 pull-right" href="<?php echo $this->getUrl('projects/project/acceptbid', array('id'=> Mage::registry('lowest_bid')->getId() ))?>">Accept</a>
+									<?php } ?>
+								</div>
+								<?php } ?>
+							</div>
+							<?php $bids = $this->getAllBids($_project);
+								foreach($bids as $bid) {
+							?>
+							<div class="chat-box-vendor-heading" style="display: none;" id="bid-<?php echo $bid->getVendorId()?>">
+								<div class="chat-box-vendor-left-section">
+									<h4>Bid Amount: <?php echo Mage::helper('core')->currency($bid->getAmount(), true, false) ?></h4>
+									<p>By <?php echo $this->getBidVendor($bid)  ?></p>
+								</div>
+								<div class="chat-box-vendor-right-section pull-right">
+									<?php if($_project->getStatus() == 1 && $_project->getOwnerId() == Mage::helper('customer')->getCustomer()->getId()) { ?>
+										<a class="btn btn-sm btn-success btn-bordered margin-right-10 pull-right" href="<?php echo $this->getUrl('projects/project/acceptbid', array('id'=>$bid->getId() ) )?>">Accept</a>
+									<?php } ?>
+								</div>
+							</div>
+							<?php } ?>
+						</div>
+						<div class="chat" data-chat="broadcast">
+						<?php echo $this->getMessages($_project, $vendorlist);  ?>
+						</div>
+						<?php if($_project->getOwnerId() == Mage::helper('customer')->getCustomer()->getId()) {
+							foreach($vendorlist as $customer => $vendor) { 
+						?>
+						<div class="chat" data-chat="vendor-<?php echo $customer ?>">
+							<?php echo $this->getMessages($_project, $vendorlist, false, $customer); ?>
+						</div>
+						<?php } } else { ?>
+						<div class="chat" data-chat="customer">
+							<?php echo $this->getMessages($_project, $vendorlist, false, $_project->getOwnerId()); ?>
+						</div>
+						<?php } ?>
+						
+						<div class="write">
+							<?php if($_project->getStatus() == 1 OR ($_project->getStatus() == 2 && ($_project->getOwnerId() == Mage::helper('customer')->getCustomer()->getId() OR $_project->getWinner() == Mage::helper('xcentia_vendors')->getDealer() ) )){ ?>
+								<form method="post"
+									action="<?php echo $this->getUrl('projects/project/savemessage'); ?>"
+									enctype="multipart/form-data" id="write_form">
+									<input type="hidden" name="project_id" value="<?php echo $_project->getId() ?>" id="project_id">
+									<input type="hidden" name="is_private" value="0" id="is_private">
+									<input type="hidden" name="recipient_id" value="" id="recipient_id">
+									<a href="javascript:;" class="write-link attach add-more"></a>	
+									<input type="text" name="message" title="" id="message"
+													placeholder="Write your message" value=""
+													class="form-control input-text" required />
+									<button type="button" class="write-link send send-button"></button>
+								</form>
+							<?php }?>
+							<br class="clear-fix">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<?php } else { ?>
+		<div class="row">
+			<div class="col-md-8 col-sm-8 col-xs-12 text-left padding-20">
+				<?php $product = Mage::getModel('catalog/product')->load($_project->getProductId()); ?>
+				<a href="<?php echo $product->getProductUrl(); ?>?redesign=<?php echo $_project->getDesignId() ?>" class="btn btn-sm btn-info btn-bordered pull-left" id="design_project_<?php echo $_project->getId() ?>">Edit your design</a>
+					</div>
+					<div class="col-md-4 col-sm-4 col-xs-12 text-left padding-20">
+                        <a href="<?php echo $this->getUrl('*/*/vendors', array('id'=>$_project->getId())) ?>" class="navigate font-lato price size-20 normal-line-height pull-left">
+                           <span>Choose a Craftsman</span><br>
+                           <i class="fa fa-long-arrow-right size-30 normal-line-height"></i>
+                        </a>
+					</div>
+				</div>
+	<?php } ?>
+</div>
+</section>
+	
+<script>
+jQuery(document).ready(function($){
+	// this is the id of the form
+	$(".send-button").click(function() {
+	    $.ajax({
+           type: "POST",
+           url: '<?php echo $this->getUrl('projects/project/savemessage'); ?>',
+           data: $("#write_form").serialize(), // serializes the form's elements.
+           success: function(data) {
+        	   $(data).insertBefore('.active-chat .panel-body');
+        	   $('#message').val('');
+           }
+         });
+	});
+	
+	var cnt=0;
+	$(".add-more").click(function(){ cnt++;
+		$('.active-chat .panel-body').toggle();
+	});
+
+	$('.chat[data-chat=broadcast]').addClass('active-chat');
+    $('.person[data-chat=broadcast]').addClass('active');
+
+    $('.left .person').mousedown(function(){
+        if ($(this).hasClass('.active')) {
+            return false;
+        } else {
+            var findChat = $(this).attr('data-chat');
+            var personName = $(this).find('.name').text();
+            $('.right .top .name').html(personName);
+            $('.chat').removeClass('active-chat');
+            $('.left .person').removeClass('active');
+            $(this).addClass('active');
+            $('.chat[data-chat = '+findChat+']').addClass('active-chat');
+            if($(this).attr('customer') == 'all') {
+            	$('#is_private').val(0);
+            	$('#recipient_id').val('');
+            	$('.right .top .chat-box-vendor-heading').hide();
+            	$('#lowest-bid').show();
+            } else if($(this).attr('customer') == '<?php echo $_project->getOwnerId() ?>') {
+            	$('#is_private').val(1);
+            	$('#recipient_id').val('<?php echo $_project->getOwnerId() ?>');
+            	$('.right .top .chat-box-vendor-heading').hide();
+            	$('#lowest-bid').show();
+            } else {
+            	$('#is_private').val(1);
+            	$('#recipient_id').val($(this).attr('customer'));
+            	$('.right .top .chat-box-vendor-heading').hide();
+            	$('#bid-'+$(this).attr('vendor')).show();
+            }
+            
+        }
+    });
+
+
+});
+</script>

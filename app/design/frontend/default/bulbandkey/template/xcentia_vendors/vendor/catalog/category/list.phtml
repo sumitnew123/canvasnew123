@@ -1,0 +1,47 @@
+<?php
+/**
+ * Xcentia_Vendors extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       Xcentia
+ * @package        Xcentia_Vendors
+ * @copyright      Copyright (c) 2016
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+/**
+ * Vendor category list template
+ *
+ * @category    Xcentia
+ * @package     Xcentia_Vendors
+ * @author      Ultimate Module Creator
+ */
+?>
+<?php $categories = $this->getCategoryCollection();?>
+<?php if ($categories->count() > 0) :?>
+<div class="container">
+	<div class="row">
+		<div class="col-md-11 col-sm-11 padding-0">
+      		<h4 class="nomargin"><?php echo Mage::helper('catalog')->__('Specialist Services Offered') ?></h4>  
+    	</div>
+    	<div class="col-sm-12 bg-white">
+    	<?php foreach ($categories as $category) : ?>
+	        <div class="item">
+	            <a href="<?php echo $category->getUrl()?>">
+	                <?php echo $category->getName();?>
+	            </a><br />
+	        </div>
+	    <?php endforeach; ?>
+    	</div>
+	</div>
+</div>
+
+<div class="box-collateral box-products box-up-sell">
+    
+</div>
+<?php endif;?>

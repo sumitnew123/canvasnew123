@@ -1,0 +1,152 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Xcentia_Projects extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       Xcentia
+ * @package        Xcentia_Projects
+ * @copyright      Copyright (c) 2016
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+-->
+<config>
+    <modules>
+        <Xcentia_Projects>
+            <version>1.0.1</version>
+        </Xcentia_Projects>
+    </modules>
+    <global>
+        <resources>
+            <xcentia_projects_setup>
+                <setup>
+                    <module>Xcentia_Projects</module>
+                    <class>Xcentia_Projects_Model_Resource_Setup</class>
+                </setup>
+            </xcentia_projects_setup>
+        </resources>
+        <blocks>
+            <xcentia_projects>
+                <class>Xcentia_Projects_Block</class>
+            </xcentia_projects>
+        </blocks>
+        <helpers>
+            <xcentia_projects>
+                <class>Xcentia_Projects_Helper</class>
+            </xcentia_projects>
+        </helpers>
+        <models>
+            <xcentia_projects>
+                <class>Xcentia_Projects_Model</class>
+                <resourceModel>xcentia_projects_resource</resourceModel>
+            </xcentia_projects>
+            <xcentia_projects_resource>
+                <class>Xcentia_Projects_Model_Resource</class>
+                <entities>
+                    <project>
+                        <table>xcentia_projects_project</table>
+                    </project>
+                    <bid>
+                        <table>xcentia_projects_bid</table>
+                    </bid>
+                    <message>
+                        <table>xcentia_projects_message</table>
+                    </message>
+                    <attachment>
+                        <table>xcentia_projects_attachment</table>
+                    </attachment>
+                </entities>
+            </xcentia_projects_resource>
+        </models>
+        <events>
+			<checkout_cart_product_add_after>
+	            <observers>
+	                <xcentia_projects_add_project_to_quote_observer>
+	                    <class>xcentia_projects/observer</class>
+	                    <method>addprojecttoquote</method>
+	                </xcentia_projects_add_project_to_quote_observer>
+	            </observers>
+	        </checkout_cart_product_add_after>
+		</events>
+		<fieldsets>
+            <sales_convert_quote_item>                           
+                <project_id><to_order_item>*</to_order_item></project_id>
+                <delivery_date><to_order_item>*</to_order_item></delivery_date>
+            </sales_convert_quote_item>
+
+            <sales_convert_order_item>                                              
+                <project_id><to_quote_item>*</to_quote_item></project_id>
+                <delivery_date><to_quote_item>*</to_quote_item></delivery_date>
+            </sales_convert_order_item>
+        </fieldsets>
+    </global>
+    <adminhtml>
+        <layout>
+            <updates>
+                <xcentia_projects>
+                    <file>xcentia_projects.xml</file>
+                </xcentia_projects>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Xcentia_Projects>
+                    <files>
+                        <default>Xcentia_Projects.csv</default>
+                    </files>
+                </Xcentia_Projects>
+            </modules>
+        </translate>
+    </adminhtml>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Xcentia_Projects before="Mage_Adminhtml">Xcentia_Projects_Adminhtml</Xcentia_Projects>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <frontend>
+        <routers>
+            <xcentia_projects>
+                <use>standard</use>
+                <args>
+                    <module>Xcentia_Projects</module>
+                    <frontName>projects</frontName>
+                </args>
+            </xcentia_projects>
+        </routers>
+        <layout>
+            <updates>
+                <xcentia_projects>
+                    <file>xcentia_projects.xml</file>
+                </xcentia_projects>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Xcentia_Projects>
+                    <files>
+                        <default>Xcentia_Projects.csv</default>
+                    </files>
+                </Xcentia_Projects>
+            </modules>
+        </translate>
+    </frontend>
+    <default>
+        <xcentia_projects>
+            <project>
+                <breadcrumbs>1</breadcrumbs>
+            </project>
+        </xcentia_projects>
+    </default>
+</config>

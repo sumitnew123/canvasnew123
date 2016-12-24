@@ -1,0 +1,206 @@
+<?php $collection = $this->getCollection(); ?>
+<?php echo $this->getLayout()->createBlock("core/template")->setTemplate("pdp/action/load_fonts.phtml")->toHtml() ?>
+<div class="container tab-pane" id="Projects">
+	<?php if($collection->getSize()): ?>
+	<div class="row">
+        <div class="col-sm-12 col-md-12 col-xs-12">
+            <h4 class="page-t">Projects You Are Interested In (4)</h4>
+            <table class="tbl-craftmen font-lato">
+              <thead>
+                <tr>
+                  <th>Project Details</th>
+                  <th>Description</th>
+                  <th>Number of Bids</th>
+                  <th>Lowest Bid</th>
+                  <th>Your Bid</th>
+                  <th>End Time</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+              <?php foreach ($collection as $_obj): ?>
+              <?php
+            	$thumbnails = Mage::helper("pdp")->getThumbnailImage($_obj->getFilename());
+            	$productId = $_obj->getProductId();
+            	$designLink = $this->getDesignLink($_obj->getId(), $productId);
+              ?>
+                <tr>
+                  <td data-th="Project Details">
+                  <div class="design-preview">
+                    <ul>
+                        <?php foreach($thumbnails as $thumbnail) : ?>
+                        <li>
+                            <p style="text-align: left;"><?php echo $thumbnail['name'] ?></p>
+                            <div class="pdc-svg-preview" style="border: 1px solid #ccc;line-height: 100%;margin: 5px 0; width: 200px;"><?php echo $thumbnail['image'] ?></div>
+                        
+                        </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+                
+                <div class="tbl-details">Order #40328<br>T-shirt Print</div></td>
+                  <td data-th="Description"><div class="tbl-details">Black Tshirt, Male, Medium<br>Material: 100% Cotton</div></td>
+                  <td data-th="Number of Bids"><div class="tbl-details">12</div></td>
+                  <td data-th="Lowest Bid"><div class="tbl-details">Rs. 490</div></td>
+                  <td data-th="Your Bid"><div class="tbl-details">Rs. 1200</div></td>
+                  <td data-th="End Time"><div class="tbl-details">23 Dec (2 Days)</div></td>
+                  <td><div class="tbl-details"><a href="#" class="btn btn-sm btn-info btn-bordered">Manage</a></div></td> 
+                </tr>
+               <?php endforeach; ?>
+              </tbody>
+            </table>
+            <?php else: ?>
+			    <p><?php echo $this->__('You have no customized product!'); ?></p>
+			<?php endif ?>
+            
+            
+            <h4 class="page-t">Past Orders</h4>
+            <table class="tbl-craftmen font-lato">
+              <thead>
+                <tr>
+                  <th>Order Details</th>
+                  <th>Order Details</th>
+                  <th>Customer</th>
+                  <th>Payment</th>
+                  <th>Billing</th>
+                  <th>Important Dates</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td data-th="Order Details"><div class="tbl-details">Order #40328<br>T-shirt Print</div></td>
+                  <td data-th="Order Details"><div class="tbl-details">Black Tshirt, Male, Medium<br>Material: 100% Cotton</div></td>
+                  <td data-th="Customer"><div class="tbl-details">Pramila Mehta<br></div></td>
+                  <td data-th="Payment"><div class="tbl-details">Rs. 490<br>Unpaid (COD)</div></td>
+                  <td data-th="Billing"><div class="tbl-details">Not Generated<br></td>
+                  <td data-th="Important Dates"><div class="tbl-details">Delivered by 27 Dec 2015<br><span class="text-grey">Posted on 20 Dec 2015</span></div></td> 
+                </tr>
+                <tr>
+                  <td data-th="Order Details"><div class="tbl-details">Order #40328<br>T-shirt Print</div></td>
+                  <td data-th="Order Details"><div class="tbl-details">Black Tshirt, Male, Medium<br>Material: 100% Cotton</div></td>
+                  <td data-th="Customer"><div class="tbl-details">Pramila Mehta<br></div></td>
+                  <td data-th="Payment"><div class="tbl-details">Rs. 490<br>Unpaid (COD)</div></td>
+                  <td data-th="Billing"><div class="tbl-details">Not Generated<br></td>
+                  <td data-th="Important Dates"><div class="tbl-details">Delivered by 27 Dec 2015<br><span class="text-grey">Posted on 20 Dec 2015</span></div></td> 
+                </tr>
+                <tr>
+                  <td data-th="Order Details"><div class="tbl-details">Order #40328<br>T-shirt Print</div></td>
+                  <td data-th="Order Details"><div class="tbl-details">Black Tshirt, Male, Medium<br>Material: 100% Cotton</div></td>
+                  <td data-th="Customer"><div class="tbl-details">Pramila Mehta<br></div></td>
+                  <td data-th="Payment"><div class="tbl-details">Rs. 490<br>Unpaid (COD)</div></td>
+                  <td data-th="Billing"><div class="tbl-details">Not Generated<br></td>
+                  <td data-th="Important Dates"><div class="tbl-details">Delivered by 27 Dec 2015<br><span class="text-grey">Posted on 20 Dec 2015</span></div></td> 
+                </tr>
+              </tbody>
+            </table>
+            </div>
+            </div>
+          </div>
+
+
+
+<div class="page-title">
+    <h1><?php echo $this->__('My customized design') ?></h1>
+</div>
+<?php if($collection->getSize()): ?>
+<table class="data-table" id="pdc_design_list">
+    <thead>
+        <tr>
+            <th><?php echo $this->__('Design Preview') ?></th>
+            <th><?php echo $this->__('Design Details') ?></th>
+            <th><span class="nobr"><?php echo $this->__('Created Time') ?></span></th>
+            <th><?php echo $this->__('Action') ?></th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php $_odd = ''; ?>
+        <?php foreach ($collection as $_obj): ?>
+        <tr>
+            <?php
+            $thumbnails = Mage::helper("pdp")->getThumbnailImage($_obj->getFilename());
+            $productId = $_obj->getProductId();
+            $designLink = $this->getDesignLink($_obj->getId(), $productId);
+            ?>
+            <td>
+                <div class="design-preview">
+                    <ul>
+                        <?php foreach($thumbnails as $thumbnail) : ?>
+                        <li>
+                            <p style="text-align: left;"><?php echo $thumbnail['name'] ?></p>
+                            <div class="pdc-svg-preview" style="border: 1px solid #ccc;line-height: 100%;margin: 5px 0; width: 200px;"><?php echo $thumbnail['image'] ?></div>
+                        
+                        </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+			</td>
+			<td class="design-detail-row-<?php echo $_obj->getId() ?>">
+                <p><span class="design-title"><?php echo ($_obj->getDesignTitle())? $_obj->getDesignTitle() : $this->__("Untitled");  ?></span></p>
+                <p><?php echo nl2br($_obj->getDesignNote()) ?></p>
+                <div class="edit-item" style="display: none;">
+                    <p>
+                        <span><?php echo $this->__("Design Name") ?></span><br/>
+                        <input type="text" class="edit-design-title" value="<?php echo $_obj->getDesignTitle() ?>" id="design_title_<?php echo $_obj->getId() ?>"/>
+                    </p>
+                    <p>    
+                        <span><?php echo $this->__("Design Description") ?></span><br/>
+                        <textarea class="edit-design-description"><?php echo $_obj->getDesignNote() ?></textarea>
+                    </p>
+                </div>
+                <br/>
+                <p>
+                    <button class="edit-design button edit-mode"><?php echo $this->__("Edit Details") ?></button>
+                    <button type="button" rel="<?php echo $_obj->getId() ?>" class="button save-mode save-design-details" style="display: none;"><?php echo $this->__("Save Details") ?></button>
+                    <button type="button" class="button save-mode cancel-edit" style="display: none;"><?php echo $this->__("Cancel") ?></button>
+                </p>
+            </td>
+            <td><?php echo $_obj->getCreatedTime() ?></td>
+			<td>
+                <p><a target="_blank" href="<?php echo $designLink ?>"><?php echo $this->__("Edit") ?></a></p>
+                <p><a id="delete_<?php echo $_obj->getId() ?>" onclick="deleteDesign(this)"><?php echo $this->__("Delete") ?></a></p>
+            </td>
+        </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+<input type="hidden" value="<?php echo Mage::helper("pdp")->getPdpBaseUrl() ?>" id="base_url"/>
+<script type="text/javascript" src="<?php echo $this->getJsUrl('pdp/jquery/jquery-1.10.2.min.js') ?>"></script>
+<script type="application/javascript">
+    var designDetails = jQuery.noConflict();
+    designDetails(function($) {
+        $(document).on("click", ".edit-design", function() {
+            var rowElement = $(this).closest("td");
+            rowElement.find(".edit-item").show();
+            rowElement.find(".save-mode").show();
+            rowElement.find(".edit-mode").hide();
+        });
+        $(document).on("click", ".cancel-edit", function() {
+            var rowElement = $(this).closest("td");
+            rowElement.find(".edit-item").hide();
+            rowElement.find(".save-mode").hide();
+            rowElement.find(".edit-mode").show();
+        });
+        $(document).on("click", ".save-design-details", function() {
+            var rowElement = $(this).closest("td");
+            var designTitle = rowElement.find(".edit-design-title").val(),
+                designDes = rowElement.find(".edit-design-description").val(),
+                designId = $(this).attr("rel");
+            window.location = $("#base_url").val() + "pdp/customerdesign/updateDesignDetails/id/" + designId + "/title/" + designTitle + "/note/" + designDes; 
+        });
+    });
+</script>
+<script type="text/javascript">decorateTable('pdc_design_list');</script>
+<?php echo $this->getPagerHtml(); ?>
+<?php else: ?>
+    <p><?php echo $this->__('You have no customized product!'); ?></p>
+<?php endif ?>
+<script>
+	var deleteLink = "<?php echo Mage::helper("pdp")->getPdpBaseurl() . "pdp/customerdesign/delete/id/" ?>";
+	function deleteDesign(item) {
+		if(!confirm("<?php echo $this->__("Are you sure?") ?>")) {
+			return false;
+		}
+		var itemId = item.id.replace("delete_", "");
+		window.location = deleteLink + itemId;
+	}
+</script>

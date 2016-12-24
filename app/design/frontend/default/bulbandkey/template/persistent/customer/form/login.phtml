@@ -1,0 +1,137 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2006-2015 X.commerce, Inc. (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Customer login form template
+ *
+ * @see app/design/frontend/base/default/template/customer/form/login.phtml
+ */
+/** @var $this Mage_Customer_Block_Form_Login */
+?>
+<!-- -->
+						<!-- LOGIN -->
+						<div class="col-md-6 col-sm-12">
+							<div class="box-static box-border-top form-wrap">
+								<div class="box-title margin-bottom-10 login-title">
+									<h2 class="f-title size-20">I'm a returning customer</h2>
+								</div>
+								<?php echo $this->getMessagesBlock()->toHtml() ?>
+							    <form class="sky-form" action="<?php echo $this->getPostActionUrl() ?>" method="post" id="login-form">
+							        <?php echo $this->getBlockHtml('formkey'); ?>
+							        <div class="clearfix">
+
+										<!-- Email -->
+										<div class="form-group">
+											<label>Email</label>
+											<label for="email" class="input margin-bottom-10">
+												<i class="ico-append fa fa-envelope"></i>
+												<input type="text" name="login[username]" value="<?php echo $this->escapeHtml($this->getUsername()) ?>" id="email" class="input-text required-entry validate-email" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Email Address')) ?>" />
+												<b class="tooltip tooltip-bottom-right">Needed to verify your account</b>
+											</label>
+										</div>
+
+										<!-- Password -->
+										<div class="form-group">
+											<label>Password</label>
+											<label for="pass" class="input margin-bottom-10">
+												<i class="ico-append fa fa-lock"></i>
+												<input type="password" name="login[password]" class="input-text required-entry validate-password" id="pass" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Password')) ?>" />
+												<b class="tooltip tooltip-bottom-right">Type your account password</b>
+											</label>
+										</div>
+										<?php echo $this->getChildHtml('form.additional.info'); ?>
+							            <?php echo $this->getChildHtml('persistent.remember.me'); ?>
+							           <?php echo $this->getChildHtml('persistent.remember.me.tooltip'); ?>             
+							                        
+									</div>
+									<div class="row">
+										<div class="col-md-6 col-sm-6 col-xs-6">
+											<!-- Inform Tip -->                                        
+											<div class="form-tip pt-20">
+												<a href="<?php echo $this->getForgotPasswordUrl() ?>" class="no-text-decoration size-13 margin-top-10 block"><?php echo $this->__('Forgot Your Password?') ?></a>
+											</div>
+										</div>
+										<div class="col-md-6 col-sm-6 col-xs-6 text-right">
+											<button type="submit" class="btn btn-primary" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Login')) ?>" name="send" id="send2"><i class="fa fa-check"></i><?php echo $this->__('Login') ?></button>
+										</div>
+									</div>
+
+							        <?php if (Mage::helper('checkout')->isContextCheckout()): ?>
+							            <input name="context" type="hidden" value="checkout" />
+							        <?php endif; ?>
+							    </form>
+							    <script type="text/javascript">
+							    //<![CDATA[
+							        var dataForm = new VarienForm('login-form', true);
+							    //]]>
+							    </script>
+
+								<hr />
+
+								<div class="text-center">
+									<div class="margin-bottom-20">&ndash; OR Sign Up With &ndash;</div>
+									<div class="row">
+										<div class="col-sm-3 col-xs-3">
+										<a onclick="showLESocialPopup('<?php echo $this->getUrl('le_sociallogin/facebook/request', array('mainw_protocol'=>'http')) ?>', 500, 270);" class="btn btn-block btn-social-new btn-facebook margin-top-10">
+											<i class="fa fa-facebook"></i>
+										</a>
+										</div>
+										<div class="col-sm-3 col-xs-3">
+										<a onclick="showLESocialPopup('<?php echo $this->getUrl('le_sociallogin/twitter/request', array('mainw_protocol'=>'http')) ?>', 500, 270);" class="btn btn-block btn-social-new btn-twitter margin-top-10">
+											<i class="fa fa-twitter"></i>
+										</a>
+										</div>
+										<div class="col-sm-3 col-xs-3">
+										<a onclick="showLESocialPopup('<?php echo $this->getUrl('le_sociallogin/google/request', array('mainw_protocol'=>'http')) ?>', 500, 270);" class="btn btn-block btn-social-new btn-google margin-top-10">
+											<i class="fa fa-google"></i>
+										</a>
+										</div>
+										<div class="col-sm-3 col-xs-3">
+										<a onclick="showLESocialPopup('<?php echo $this->getUrl('le_sociallogin/linkedin/request', array('mainw_protocol'=>'http')) ?>', 500, 270);" class="btn btn-block btn-social-new btn-linkedin margin-top-10">
+											<i class="fa fa-linkedin"></i>
+										</a>
+										</div>
+									</div>
+								</div>
+
+							</div>
+
+						</div>
+						<!-- /LOGIN -->
+
+
+						<!-- REGISTER -->
+						<div class="col-md-6 col-sm-12 right-block acc-rt">
+							<h2 class="margin-bottom-10 text-info"><?php echo $this->__('New Customers') ?></h2>
+							<p><?php echo $this->__('By creating an account with our website, you will be able to move through the checkout process faster, store multiple shipping addresses, view and track your orders in your account and more.') ?></p>
+							<button type="button" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Create an Account')) ?>" class="btn btn-primary margin-bottom-20" onclick="window.location='<?php echo Mage::helper('persistent')->getCreateAccountUrl($this->getCreateAccountUrl()) ?>';"><?php echo $this->__('Create an Account') ?></button>
+							<hr>
+							<h2 class="margin-bottom-10 margin-top-20 text-info"><?php echo $this->__('New Vendors') ?></h2>
+							<p><?php echo $this->__('By creating an account with our website, you will be able to showcase your products and accept Orders for custom products, bid on various projects posted by the customers.') ?></p>
+							<button type="button" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Request an Account')) ?>" class="btn btn-primary" onclick="window.location='<?php echo $this->getUrl('vendors/vendor/create') ?>';"><?php echo $this->__('Request an Account') ?></button>
+						</div>
+						<!-- /REGISTER -->

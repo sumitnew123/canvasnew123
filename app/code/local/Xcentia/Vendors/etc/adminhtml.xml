@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Xcentia_Vendors extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       Xcentia
+ * @package        Xcentia_Vendors
+ * @copyright      Copyright (c) 2016
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+-->
+<config>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <xcentia_vendors translate="title" module="xcentia_vendors">
+                                        <title>Vendors</title>
+                                    </xcentia_vendors>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                    <xcentia_vendors translate="title" module="xcentia_vendors">
+                        <title>Vendors</title>
+                        <children>
+                            <vendor translate="title" module="xcentia_vendors">
+                                <title>Vendor</title>
+                                <sort_order>0</sort_order>
+                            </vendor>
+                            <vendor_comments translate="title" module="xcentia_vendors">
+                                <title>Manage Vendor Comments</title>
+                                <sort_order>5</sort_order>
+                            </vendor_comments>
+                            <coverage translate="title" module="xcentia_vendors">
+                                <title>Coverage</title>
+                                <sort_order>10</sort_order>
+                            </coverage>
+                            <order translate="title" module="xcentia_vendors">
+                                <title>Order</title>
+                                <sort_order>20</sort_order>
+                            </order>
+							<contact translate="title" module="xcentia_vendors">
+                                <title>Contact</title>
+                                <sort_order>30</sort_order>
+                            </contact>
+                            <service translate="title" module="xcentia_vendors">
+                                <title>Service</title>
+                                <sort_order>30</sort_order>
+                            </service>
+                            <servicemap translate="title" module="xcentia_vendors">
+                                <title>Servicemap</title>
+                                <sort_order>40</sort_order>
+                            </servicemap>
+                        </children>
+                    </xcentia_vendors>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+    <menu>
+        <xcentia_vendors translate="title" module="xcentia_vendors">
+            <title>Vendors</title>
+            <sort_order>35</sort_order>
+            <children>
+                <vendor translate="title" module="xcentia_vendors">
+                    <title>Vendor</title>
+                    <action>adminhtml/vendors_vendor</action>
+                    <sort_order>0</sort_order>
+                </vendor>
+                <vendor_comments translate="title" module="xcentia_vendors">
+                    <title>Manage Vendor Comments</title>
+                    <action>adminhtml/vendors_vendor_comment</action>
+                    <sort_order>4</sort_order>
+                </vendor_comments>
+                <coverage translate="title" module="xcentia_vendors">
+                    <title>Coverage</title>
+                    <action>adminhtml/vendors_coverage</action>
+                    <sort_order>10</sort_order>
+                </coverage>
+                <order translate="title" module="xcentia_vendors">
+                    <title>Order</title>
+                    <action>adminhtml/vendors_order</action>
+                    <sort_order>20</sort_order>
+                </order>
+				 <contact translate="title" module="xcentia_vendors">
+                    <title>Contact</title>
+                    <action>adminhtml/vendors_contact</action>
+                    <sort_order>30</sort_order>
+                </contact>
+                <service translate="title" module="xcentia_vendors">
+                    <title>Service</title>
+                    <action>adminhtml/vendors_service</action>
+                    <sort_order>30</sort_order>
+                </service>
+                <servicemap translate="title" module="xcentia_vendors">
+                    <title>Servicemap</title>
+                    <action>adminhtml/vendors_servicemap</action>
+                    <sort_order>40</sort_order>
+                </servicemap>
+            </children>
+        </xcentia_vendors>
+    </menu>
+</config>

@@ -1,0 +1,61 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2006-2015 X.commerce, Inc. (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Product list toolbar
+ *
+ * @see Mage_Catalog_Block_Product_List_Toolbar
+ */
+?>
+<?php if($this->getCollection()->getSize()): ?>
+<div id="page-menu" class="page-menu-transparent noborder">
+	<div class="menu-sort">
+		<nav>
+		<ul class="list-inline categories-menu">
+			<!--categories menutab-->
+			<li class="pull-left padding-zero dropdown"><a class="dropdown-toggle" href="#section_1" id="categorydropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Catagories<i class="fa fa-sliders"></i> </a>
+				<ul class="dropdown-menu dropdown-categories" aria-labelledby="categorydropdown">
+					<?php echo Mage::helper('catalog/category')->getCategoryMenu(27) ?>
+				</ul>
+			</li>
+			<?php
+				$dirIcon = ($this->getCurrentDirection()=='desc')? 'fa-long-arrow-up':'fa-long-arrow-down';
+				$dir = ($this->getCurrentDirection()=='desc')? 'asc':'desc';
+			 ?>
+			<!--categories menutab-->
+			<li class="pull-left"><a href="#section_2"><?php echo $this->__('%s items found', $this->getTotalNum()) ?></a></li>
+			<li class="pull-right"><?php if($this->isOrderCurrent('created_at')): ?><a href="<?php echo $this->getOrderUrl('created_at', $dir) ?>">Date<i class="fa <?php echo $dirIcon ?>"></i><?php else: ?><a href="<?php echo $this->getOrderUrl('created_at', 'asc') ?>">Date<i class="fa fa-exchange fa-rotate-90"></i><?php endif; ?></a></li>
+			<li class="pull-right"><?php if($this->isOrderCurrent('name')): ?><a href="<?php echo $this->getOrderUrl('name', $dir) ?>">Name<i class="fa <?php echo $dirIcon ?>"></i><?php else: ?><a href="<?php echo $this->getOrderUrl('name', 'asc') ?>">Name<i class="fa fa-exchange fa-rotate-90"></i><?php endif; ?></a></li>
+			<li class="pull-right"><?php if($this->isOrderCurrent('price')): ?><a href="<?php echo $this->getOrderUrl('price', $dir) ?>">Price<i class="fa <?php echo $dirIcon ?>"></i><?php else: ?><a href="<?php echo $this->getOrderUrl('price', 'asc') ?>">Price<i class="fa fa-exchange fa-rotate-90"></i><?php endif; ?></a></li>
+			<li class="pull-right">Sort By</li>
+			
+		</ul>
+		</nav>
+		<!-- /page menu -->
+	</div>
+</div>
+<?php endif ?>

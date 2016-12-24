@@ -1,0 +1,48 @@
+<?php
+/**
+ * Xcentia_Messages extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       Xcentia
+ * @package        Xcentia_Messages
+ * @copyright      Copyright (c) 2016
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+/**
+ * Attachment view template
+ *
+ * @category    Xcentia
+ * @package     Xcentia_Messages
+ * @author      Ultimate Module Creator
+ */
+?>
+<?php $_attachment = $this->getCurrentAttachment();?>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<div class="page-title attachment-title">
+    <h1><?php echo $_attachment->getName(); ?></h1>
+</div>
+<div class="attachment-view">
+    <div class="attachment-name">
+        <?php echo Mage::helper('xcentia_messages')->__('Name');?>:<?php echo $_attachment->getName();?>
+
+    </div>
+    <div class="attachment-file">
+            <?php if ($_attachment->getFile()) :?>
+        <a href="<?php echo Mage::helper('xcentia_messages/attachment')->getFileBaseUrl().$_attachment->getFile();?>">
+            <span><?php echo basename($_attachment->getFile())?></span>
+        </a>
+    <?php endif;?>
+
+    </div>
+    <div class="attachment-msg_id">
+        <?php echo Mage::helper('xcentia_messages')->__('Message Id');?>:<?php echo $_attachment->getMsgId();?>
+
+    </div>
+
+</div>

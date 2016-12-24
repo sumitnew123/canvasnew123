@@ -1,0 +1,72 @@
+<?php
+/**
+ * Xcentia_Vendors extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       Xcentia
+ * @package        Xcentia_Vendors
+ * @copyright      Copyright (c) 2016
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+/**
+ * Vendor view template
+ *
+ * @category    Xcentia
+ * @package     Xcentia_Vendors
+ * @author      Ultimate Module Creator
+ */
+?>
+<?php $_vendor = $this->getCurrentVendor();?>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<div class="" id="profile">
+    
+     
+
+        <div class="container margin-top-40">
+        <div class="row cover-img" style="background-image:url('<?php echo Mage::helper('xcentia_vendors/vendor_image')->init($_vendor, 'cover'); ?>');">
+          <div class="col-md-4 col-sm-4">
+            <img class="img-responsive vendor-logo" src="<?php echo Mage::helper('xcentia_vendors/vendor_image')->init($_vendor, 'logo'); ?>" alt="image">
+            <div class="vtag">
+            <h2><?php echo $_vendor->getTitle();?></h2>
+            <p><?php echo $_vendor->getTagline();?></p>
+            </div><!-- vtag -->
+          </div>
+        </div>
+      </div>
+  
+    <div class="container padding-top-40">
+    <div class="row">
+    	<div class="col-md-11 col-sm-11 padding-0 padding-bottom-20">
+      		<h4 class="nomargin">About</h4>  
+    	</div>
+    </div>
+    <div class="row bg-white padding-top-20 padding-bottom-20 padding-left-10 padding-right-10">
+      <div class="col-md-9 col-sm-9">
+          <?php echo $_vendor->getAbout();?>
+      </div>
+      <div class="col-md-3 col-sm-3">
+        Email: <a href="mailto:<?php echo $_vendor->getEmail();?>"><?php echo $_vendor->getEmail();?></a><br/>
+        Phone: <a href="tel:<?php echo $_vendor->getPhone();?>"><?php echo $_vendor->getPhone();?></a><br/>
+        Area: <a href="http://maps.google.com/maps?q=<?php echo $_vendor->getLatitude();?>,<?php echo $_vendor->getLongitude();?>" target="_blank">		<?php echo $_vendor->getAddress1();?>,
+			 <?php echo $_vendor->getAddress2();?>, <?php echo $_vendor->getCity();?>
+			</a>
+      </div>  
+    </div>
+    
+    <div class="row">
+    	<div class="col-md-11 col-sm-11 padding-0 padding-bottom-20 padding-top-20">
+      		<h4 class="nomargin">Featured Products</h4>  
+    	</div>
+    	<div class="col-sm-12">
+    		<?php echo $this->getChildHtml('featured') ?>
+    	</div>
+    </div>
+    
+  </div>
+</div>

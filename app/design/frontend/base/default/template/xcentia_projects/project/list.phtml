@@ -1,0 +1,139 @@
+<?php 
+/**
+ * Xcentia_Projects extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       Xcentia
+ * @package        Xcentia_Projects
+ * @copyright      Copyright (c) 2016
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+/**
+ * Project list template
+ *
+ * @category    Xcentia
+ * @package     Xcentia_Projects
+ * @author      Ultimate Module Creator
+ */
+?>
+<div class="padding-zero normal-title">
+  <div class="container">
+     <h1>Projects</h1>
+  </div>
+</div>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<?php $_projects = $this->getProjects(); ?>
+<div class="container">
+   <!-- main container-->
+   <div class="row">
+      <div class="col-md-12 col-sm-12">
+         <div id="page-menu" class="page-menu-transparent noborder">
+            <div class="menu-sort">
+               <nav >
+                  
+                  <ul class="list-inline menu-scrollTo categories-menu">
+                     <!--categories menutab-->
+                     <li class="pull-left padding-zero dropdown">
+                        <a class="dropdown-toggle" href="#section_1" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Catagories<i class="fa fa-sliders"></i> </a>
+                        <ul class="dropdown-menu dropdown-categories" aria-labelledby="dropdownMenu1">
+                           <?php echo Mage::helper('catalog/category')->getCategoryMenu(28, true, '', true, false) ?>
+                        </ul>
+                     </li>
+                     <!--categories menutab-->
+                     <li class="pull-left"><a href="#section_2"><?php echo $_projects->getSize() ?> items found</a></li>
+                     <!--<li class="pull-right"><a href="#section_3">Date<i class="fa fa-long-arrow-down"></i> </a></li>
+                     <li class="pull-right"><a href="#section_4">Name<i class="fa fa-long-arrow-down"></i></a></li>
+                     <li class="pull-right"><a href="#">Price<i class="fa fa-long-arrow-down"></i> </a></li>-->
+                  </ul>
+               </nav>
+               <!-- /page menu --> 
+            </div>
+         </div>
+	
+	</div>
+   </div>
+   <script type="text/javascript">
+	setInterval(function(){ jQuery('li.dropdown').show(); }, 10);
+   </script>
+   <div class="row">
+      <div class="col-md-12 col-sm-12 margin-bottom-40">
+      	<?php if ($_projects->getSize() > 0) :?>
+         <table class="tbl-craftmen font-lato">
+           <thead>
+             <tr>
+               <th colspan="2">Project Details</th>
+               <th>Description</th>
+               <th>Budget</th>
+               <th>Lowest Bid</th>
+               <th>End Time</th>
+               <th></th>
+             </tr>
+           </thead>
+           <tbody>
+           	<?php foreach ($_projects as $_project) : ?>
+             <tr>
+               <td><?php echo Mage::helper('xcentia_projects')->getProjectImage($_project) ?></td>
+               <td data-th="Project Details" width="20%"><div class="tbl-details">Project #<?php echo $_project->getId() ?><br><?php echo $_project->getName();?></div></td>
+               <td data-th="Description"><div class="tbl-details"><?php $options = json_decode($_project->getOptions()) ?><?php foreach($options as $opname => $opval) { echo $opname.': '.$opval.'<br>'; } ?></div></td>
+               <td data-th="Budget"><div class="tbl-details"><?php echo Mage::helper('core')->currency($_project->getBudget()) ?></div></td>
+               <td data-th="Lowest Bid"><div class="tbl-details"><?php echo ($_project->getLowestBid()) ? Mage::helper('core')->currency($_project->getLowestBid()) : 'no bids yet' ?></div></td>
+               <td data-th="End Time"><div class="tbl-details"><?php echo Mage::helper('core')->formatDate($_project->getBidEnd(), Mage_Core_Model_Locale::FORMAT_TYPE_MEDIUM, false) ?></div></td>
+               <td><div class="tbl-details"><a href="<?php echo $_project->getProjectUrl()?>" class="btn btn-sm btn-info btn-bordered">View Details</a></div></td> 
+             </tr>
+            <?php endforeach;?>
+           </tbody>
+         </table>
+         <p><div id="loadmore"><?php if($_projects->getSize() > $_projects->count() ) { ?><button class="btn btn-sm btn-info btn-bordered">Load More ... </button><?php } ?></div></p>
+         <?php else : ?>
+		    <p><?php echo Mage::helper('xcentia_projects')->__('There are no projects at this moment');?></p>
+		<?php endif;?>
+      </div>
+   </div>
+   <!-- main container--> 
+</div>
+<?php $urls = parse_url( $this->helper('core/url')->getCurrentUrl() ); ?>
+<script type="text/javascript">
+	var page = 1;
+	var pageurl = '<?php echo $this->getUrl('*/*/ajaxlist') ?>';
+	var pause = false;
+	jQuery(document).ready(function($){
+		$('#loadmore button').click(function(){
+			if(pause == false) {
+				pause = true;
+				page++;
+				$.get( pageurl + "?<?php echo (empty($urls['query']) ? '':$urls['query'].'&' )?>page="+ page, function( data ) {
+					$(".tbl-craftmen tbody").append(data);
+					pause = false;
+				});
+				if(page*10 >= <?php echo $_projects->getSize()?>) {
+					$('#loadmore').hide();
+				}
+			}
+		});
+	});
+	function elementInViewport(el) {
+	  var top = el.offsetTop;
+	  var left = el.offsetLeft;
+	  var width = el.offsetWidth;
+	  var height = el.offsetHeight;
+
+	  while(el.offsetParent) {
+	    el = el.offsetParent;
+	    top += el.offsetTop;
+	    left += el.offsetLeft;
+	  }
+
+	  return (
+	    top < (window.pageYOffset + window.innerHeight) &&
+	    left < (window.pageXOffset + window.innerWidth) &&
+	    (top + height) > window.pageYOffset &&
+	    (left + width) > window.pageXOffset
+	  );
+	}
+</script>

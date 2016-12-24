@@ -1,0 +1,173 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Xcentia_Vendors extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       Xcentia
+ * @package        Xcentia_Vendors
+ * @copyright      Copyright (c) 2016
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+-->
+<config>
+    <api2>
+        <resource_groups>
+            <xcentia_vendors translate="title" module="xcentia_vendors">
+                <title>Vendors</title>
+                <sort_order>120</sort_order>
+                <children>
+                    <xcentia_vendors_vendor translate="title" module="xcentia_vendors">
+                        <title>Vendor</title>
+                        <sort_order>0</sort_order>
+                    </xcentia_vendors_vendor>
+                    <xcentia_vendors_coverage translate="title" module="xcentia_vendors">
+                        <title>Coverage</title>
+                        <sort_order>10</sort_order>
+                    </xcentia_vendors_coverage>
+                    <xcentia_vendors_order translate="title" module="xcentia_vendors">
+                        <title>Order</title>
+                        <sort_order>20</sort_order>
+                    </xcentia_vendors_order>
+
+                </children>
+            </xcentia_vendors>
+        </resource_groups>
+        <resources>
+            <xcentia_vendors_vendor translate="title" module="xcentia_vendors">
+                <group>xcentia_vendors_vendor</group>
+                <model>xcentia_vendors/api2_vendor</model>
+                <working_model>xcentia_vendors/vendor</working_model>
+                <title>Vendor</title>
+                <sort_order>0</sort_order>
+                <privileges>
+                    <admin>
+                        <create>1</create>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                    <customer>
+                        <retrieve>1</retrieve>
+                    </customer>
+                    <guest>
+                        <retrieve>1</retrieve>
+                    </guest>
+                </privileges>
+                <attributes translate="entity_id title tagline logo cover about phone address1 address2 country state city status meta_title meta_keywords meta_description allow_comment" module="xcentia_vendors">
+                    <entity_id>Id</entity_id>
+                    <title>Title</title>
+                    <tagline>Tagline</tagline>
+                    <logo>Logo</logo>
+                    <cover>Cover Photo</cover>
+                    <about>About</about>
+                    <phone>Phone</phone>
+                    <address1>Address Line 1</address1>
+                    <address2>Address Line 2</address2>
+                    <country>Country</country>
+                    <state>State</state>
+                    <city>City</city>
+                    <status>Enabled</status>
+                    <meta_title>Meta title</meta_title>
+                    <meta_keywords>Meta keywords</meta_keywords>
+                    <meta_description>Meta description</meta_description>
+                    <allow_comment>Allow Comment</allow_comment>
+                </attributes>
+                <routes>
+                    <route_entity>
+                        <route>/vendors_vendors/:id</route>
+                        <action_type>entity</action_type>
+                    </route_entity>
+                    <route_collection>
+                        <route>/vendors_vendors</route>
+                        <action_type>collection</action_type>
+                    </route_collection>
+                </routes>
+                <versions>1</versions>
+            </xcentia_vendors_vendor>
+            <xcentia_vendors_coverage translate="title" module="xcentia_vendors">
+                <group>xcentia_vendors_coverage</group>
+                <model>xcentia_vendors/api2_coverage</model>
+                <working_model>xcentia_vendors/coverage</working_model>
+                <title>Coverage</title>
+                <sort_order>10</sort_order>
+                <privileges>
+                    <admin>
+                        <create>1</create>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                    <customer>
+                        <retrieve>1</retrieve>
+                    </customer>
+                    <guest>
+                        <retrieve>1</retrieve>
+                    </guest>
+                </privileges>
+                <attributes translate="entity_id city state country status" module="xcentia_vendors">
+                    <entity_id>Id</entity_id>
+                    <city>City</city>
+                    <state>State</state>
+                    <country>Country</country>
+                    <status>Enabled</status>
+                </attributes>
+                <routes>
+                    <route_entity>
+                        <route>/vendors_coverages/:id</route>
+                        <action_type>entity</action_type>
+                    </route_entity>
+                    <route_collection>
+                        <route>/vendors_coverages</route>
+                        <action_type>collection</action_type>
+                    </route_collection>
+                </routes>
+                <versions>1</versions>
+            </xcentia_vendors_coverage>
+            <xcentia_vendors_order translate="title" module="xcentia_vendors">
+                <group>xcentia_vendors_order</group>
+                <model>xcentia_vendors/api2_order</model>
+                <working_model>xcentia_vendors/order</working_model>
+                <title>Order</title>
+                <sort_order>20</sort_order>
+                <privileges>
+                    <admin>
+                        <create>1</create>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                    <customer>
+                        <retrieve>1</retrieve>
+                    </customer>
+                    <guest>
+                        <retrieve>1</retrieve>
+                    </guest>
+                </privileges>
+                <attributes translate="entity_id order_id status" module="xcentia_vendors">
+                    <entity_id>Id</entity_id>
+                    <order_id>Order Id</order_id>
+                    <status>Enabled</status>
+                </attributes>
+                <routes>
+                    <route_entity>
+                        <route>/vendors_orders/:id</route>
+                        <action_type>entity</action_type>
+                    </route_entity>
+                    <route_collection>
+                        <route>/vendors_orders</route>
+                        <action_type>collection</action_type>
+                    </route_collection>
+                </routes>
+                <versions>1</versions>
+            </xcentia_vendors_order>
+
+        </resources>
+    </api2>
+</config>

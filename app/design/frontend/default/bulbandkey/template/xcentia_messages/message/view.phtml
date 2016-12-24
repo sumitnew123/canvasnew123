@@ -1,0 +1,98 @@
+<?php
+/**
+ * Xcentia_Messages extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       Xcentia
+ * @package        Xcentia_Messages
+ * @copyright      Copyright (c) 2016
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+/**
+ * Message view template
+ *
+ * @category    Xcentia
+ * @package     Xcentia_Messages
+ * @author      Ultimate Module Creator
+ */
+?>
+<?php $_message = $this->getCurrentMessage();?>
+<?php echo $this->getMessagesBlock()->getGroupedHtml();
+$messages=$this->getAllMessages($_message->getParentId());
+$customer=Mage::getSingleton('customer/session')->getCustomer(); ?>
+<div class="page-title message-title">
+    <h1><?php echo $_message->getSubject(); ?></h1>
+</div>
+<?php foreach($messages as $message){ ?>
+	<div class="message-view">
+		<?php
+			if($message->getOwner()=='1'){
+					$cust=Mage::getModel('customer/customer')->load($message->getCustId());
+					$firstname=$cust->getFirstname();
+					$lastname=$cust->getLastname();
+			}else{
+					$cust=Mage::getModel('customer/customer')->load($message->getVendorId());
+					$firstname=$cust->getFirstname();
+					$lastname=$cust->getLastname();
+			}
+		?>
+		<div class="<?php if($customer->getId()==$cust->getId()){ ?>me<?php }else{?>user<?php } ?>">
+			<div class="message-from">
+				<?php echo $firstname." ".$lastname."<br>"; ?>
+			</div>
+			<div class="message-subject">
+				<?php echo $message->getCreatedAt()."<br>";?>
+			</div>
+			<div class="message-body">
+				<p><?php echo $message->getBody();?></p>
+			</div>
+		</div>
+	</div>
+
+<?php } ?>
+	<a href="<?php echo $this->getUrl('messages/message'); ?>">
+		<button type="button"   class="button">
+			<span><span><?php echo $this->__('Back') ?></span></span>
+		</button>
+	</a>
+	<button type="button" class="button ask_que">
+		<span><span><?php echo $this->__('Send Reply') ?></span></span>
+	</button>
+<div id="ask_data" style="display: none;">
+				<div class="modal_header">
+					<h4 class="modal-title">Send Reply</h4>
+					<span class="wk_close">x</span>
+					<span class="wk_clear"></span>
+				</div>
+				<form action="<?php echo $this->getUrl('messages/message/reply'); ?>" method="post" id="ask_form">
+					<input type="hidden" name="id" id="message_id" value="<?php echo $message->getId(); ?>" />
+					<div class="modal-body form-list">
+						<label class="required" for="name"><em>*</em>Your Message :</label>
+						<textarea style="width:100%;" class="queryquestion wk_contact_input_fields required-entry" name="body" required></textarea>
+					</div>
+					<div class="modal_footer">
+						<input type="submit" class="wk_btn wk_btn_primary clickask" id="askbtn" value="Submit">
+						<span class="wk_clear"></span>
+					</div>
+				</form>
+</div>
+<script>
+	jQuery('document').ready(function($){
+				$('.ask_que').click(function(){
+					$('#ask_form input,#ask_form textarea').removeClass('error_border');
+					$('.page').css('opacity','0.4');
+					$('#ask_data').show();
+				});
+				$('.wk_close').click(function(){
+					$('.page').css('opacity','1');
+					$('#resetbtn').trigger('click');
+					$('#ask_data').hide();
+				});
+		});
+</script>

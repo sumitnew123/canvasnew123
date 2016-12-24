@@ -1,0 +1,86 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2006-2015 X.commerce, Inc. (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+ 
+<div class="white-bg">
+	<div class="margin-top-20"></div>
+	<div class="row">
+		<div class="col-md-8">
+			<div class="row">
+				<div class="col-md-4"><p>Full Name :</p></div>
+				<div class="col-md-8"><p><?php echo $this->escapeHtml($this->getCustomer()->getName()) ?></p></div>
+				<div class="col-md-4"><p>Email :</p></div>
+				<div class="col-md-8"><p><?php echo $this->escapeHtml($this->getCustomer()->getEmail()) ?></p></div>
+				<div class="col-md-4"><p>Phone :</p></div>
+				<div class="col-md-8"><p><?php echo $this->escapeHtml($this->getCustomer()->getPhone()) ?></p></div>
+				<div class="col-md-6"><a href="<?php echo $this->getUrl('customer/account/edit') ?>" class="btn btn-sm btn-default btn-bordered"> <span>Edit</span> </a></div>
+			</div>
+		</div>
+		<div class="col-md-4">
+ 		<div class="upl-right"> 
+			<div class="upl-image">
+				<div class="profilepicbutton x1">
+					<div class="content"> 
+						<div id="photo_container" class="brw-content">
+						<span class="upload_btn-img"><img alt="" src="<?php echo Netgo_Customerpic_Block_Customerpic_Photo::getCustomerPhoto(); ?>" />
+						<span class="upload_btn_img" onclick="show_popup('popup_upload')"><span class="ed-txt">Upload</span></span>
+						</span>  
+						</div>
+					</div>
+				</div> 
+			</div> 
+		</div>
+		<div id="popup_upload">
+			<div class="form_upload">
+				<span class="close" onclick="close_popup('popup_upload')">x</span>
+				<h2>Upload photo</h2>
+				<form action="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB); ?>netgo/customerpic/upload" method="post" enctype="multipart/form-data" target="upload_frame" onsubmit="submit_photo('<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB); ?>')">
+					<input type="file" name="photo" id="photo" class="file_input">
+		            <div id="loading_progress"></div>
+					<input type="submit" value="Upload photo" id="upload_btn">
+				</form>
+				<iframe name="upload_frame" class="upload_frame"></iframe>
+			</div>
+		</div> 
+		<div id="popup_crop">
+			<div class="form_crop">
+				<span class="close" onclick="close_popup('popup_crop')">x</span>
+				<h2>Crop photo</h2> 
+				<img id="cropbox" /> 
+				<form>
+					<input type="hidden" id="x" name="x" />
+					<input type="hidden" id="y" name="y" />
+					<input type="hidden" id="w" name="w" />
+					<input type="hidden" id="h" name="h" />
+					<input type="hidden" id="photo_url" name="photo_url" />
+					<input type="button" value="Crop Image" id="crop_btn" onclick="crop_photo('<?php echo $thumb_width; ?>', '<?php echo $thumb_height; ?>')" />
+				</form>
+			</div>
+		</div>
+		</div>
+	   
+    </div>
+</div>

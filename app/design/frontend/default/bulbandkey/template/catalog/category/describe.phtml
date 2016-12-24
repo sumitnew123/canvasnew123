@@ -1,0 +1,132 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2006-2015 X.commerce, Inc. (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Category view template
+ *
+ * @see Mage_Catalog_Block_Category_View
+ */
+?>
+<?php
+$_helper    = $this->helper('catalog/output');
+$_category  = $this->getCurrentCategory();
+$_imgHtml   = '';
+if ($_imgUrl = $_category->getImageUrl()) {
+	$_imgHtml = '<p class="category-image"><img src="'.$_imgUrl.'" alt="'.$this->escapeHtml($_category->getName()).'" title="'.$this->escapeHtml($_category->getName()).'" /></p>';
+	$_imgHtml = $_helper->categoryAttribute($_category, $_imgHtml, 'image');
+}
+?>
+
+<section class="padding-zero">
+<div class="padding-zero normal-title">
+  <div class="container">
+     <h1>Describe</h1>
+  </div>
+</div>
+<div class="container">
+
+	<div class="row description-container">
+		<!-- <div class="col-md-12 col-sm-12 padding-zero">
+			<div class="col-md-8 col-sm-8 padding-zero">
+
+
+				<div class="heading">
+					<h3>Search what you want, our craftsmen will help you make it.</h3>
+				</div>
+			</div>
+			<div class="col-md-4 col-sm-4 padding-zero">
+				<div class="search-box-describe-container">
+					<div class="search-box" style="display: block;">
+						<div class="search-item">
+							<h6>Search</h6>
+							<form action="page-search-result-1.html" method="get">
+						</div>
+						<div class="input-group">
+							<input type="text" name="src" placeholder="What do you want?"
+								class="form-control">
+						</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div> -->
+		<!-- <div class="col-md-3 col-sm-3  col-xs-12 padding-zero">
+			
+			<div class="side-nav">
+				<div class="side-nav-head">
+					<button class="fa fa-bars"></button>
+				</div>
+				<div class="scrollbar" id="style-3">
+					<div class="force-overflow">
+						<ul class="list-group list-unstyled describe-left-navigation">
+							<li class="list-group-item"><a href="<?php echo $this->getUrl() ?>describe.html">ALL</a>
+							</li>
+						</ul>
+						<?php echo Mage::helper('catalog/category')->getCategoryMenu(28, false, ' class="list-group list-unstyled describe-left-navigation"') ?>
+					</div>
+				</div>
+			</div>
+		</div> -->
+		
+		<div id="page-menu" class="page-menu-transparent noborder">
+			<div class="menu-sort">
+				<nav>
+				<ul class="list-inline categories-menu">
+					<!--categories menutab-->
+					<li class="pull-left padding-zero dropdown"><a class="dropdown-toggle" href="#section_1" id="categorydropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Catagories<i class="fa fa-sliders"></i> </a>
+						<ul class="dropdown-menu dropdown-categories" aria-labelledby="categorydropdown">
+							<?php echo Mage::helper('catalog/category')->getCategoryMenu(28) ?>
+						</ul>
+					</li>
+					<li class="pull-left"><a href="#section_2"><?php echo $_category->getProductCount() ?> items found</a></li>				
+				</ul>
+				</nav>
+				<!-- /page menu -->
+			</div>
+		</div>
+
+
+		<div class="col-md-12 col-xs-12 padding-zero ">
+			<div class="">
+				<div class="description-content-right">
+					<p>Use our Do-it-Yourself Tools to customise Products</p>
+					<div class="describe-container">
+						<?php if(Mage::app()->getRequest()->getParam('id', 0) == 28) {
+								echo Mage::helper('catalog/category')->getDescribeCategory();
+							} else {
+								echo $this->getProductListHtml();
+							} ?>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</section>
+<script type="text/javascript">
+	setInterval(function(){ jQuery('li.dropdown').show(); }, 10);
+</script>

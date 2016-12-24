@@ -1,0 +1,139 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2014 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Customer login form template
+ *
+ * @see app/design/frontend/base/default/template/customer/form/login.phtml
+ */
+/** @var $this Mage_Customer_Block_Form_Login */
+?>
+<div class="col-md-6 col-sm-12 SignUpForm">
+    <div class="HighlightPoint Heading">
+        <div class="iconLeft"><img src="<?php echo $this->getSkinUrl('images/icon-user2.gif'); ?>" alt=""></div>
+        <div class="textRight"><span class="head"><?php echo $this->__('Registered Customers') ?></span><span class="desc"><?php echo $this->__('If you have an account with us, please log in.') ?></span></div>
+    </div>
+	 <?php if(Mage::getStoreConfig('le_sociallogin/general/showonloginpage')== 'top'){
+        $_social = $this->getLayout()->createBlock('le_sociallogin/button');
+        echo $_social->setTemplate('le_sociallogin/button.phtml')->toHtml(); } ?>
+    <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+	<?php /* Extensions placeholder */ ?>
+    <?php echo $this->getChildHtml('customer.form.login.extra')?>
+    <form action="<?php echo $this->getPostActionUrl() ?>" method="post" id="login-form">
+        <?php echo $this->getBlockHtml('formkey'); ?>
+        <div class="col2-set">
+            <div>
+                <div class="content">
+                    <ul class="form-list">
+                        <li>
+                            <label for="email" class="required"><em>*</em><?php echo $this->__('Email Address') ?></label>
+                            <div class="input-box">
+                                <input type="text" name="login[username]" value="<?php echo $this->escapeHtml($this->getUsername()) ?>" id="email" class="input-text required-entry validate-email" title="<?php echo $this->__('Email Address') ?>" />
+                            </div>
+                        </li>
+                        <li>
+                            <label for="pass" class="required"><em>*</em><?php echo $this->__('Password') ?></label>
+                            <div class="input-box">
+                                <input type="password" name="login[password]" class="input-text required-entry validate-password" id="pass" title="<?php echo $this->__('Password') ?>" />
+                            </div>
+                        </li>
+                        <?php echo $this->getChildHtml('form.additional.info'); ?>
+						
+						 <?php
+                    if(Mage::getStoreConfig('le_sociallogin/general/showonloginpage') == 'inloginbox'){ ?>
+                        <style type="text/css">
+                            .le-social-button-login .le-icon-social{
+                                float: left;
+                            }
+                        </style>
+                        <?php
+                        $block = new LitExtension_SocialLogin_Block_Button();
+                        $check_show_social = Mage::helper('le_sociallogin')->checkShowSociallogin();
+                        if($check_show_social == true && Mage::getSingleton('customer/session')->IsLoggedIn() == false): ?>
+                            <link type="text/css" rel="stylesheet" media="screen" href="<?php echo $block->getSkinUrl('le_sociallogin/css/style.css');?>"/>
+                            <script type="text/javascript" src="<?php echo $block->getSkinUrl('le_sociallogin/js/sociallogin.js');?>"></script>
+                            <div class="le-socialconnect-social">
+                                <p><?php echo $this->__('You can login using your social network account.') ?></p>
+                                <div class="le-social-button-login">
+                                    <?php
+                                    if($block->getButtons()){
+                                        foreach($block->getButtons() as $button){
+                                            echo $button->render();
+                                        }
+                                    }
+                                    ?>
+                                </div>
+                            </div>
+                        <?php endif;
+                    } ?>
+                        <?php echo $this->getChildHtml('persistent.remember.me'); ?>
+                    </ul>
+                    <?php echo $this->getChildHtml('persistent.remember.me.tooltip'); ?>
+                    <p class="required"><?php echo $this->__('* Required Fields') ?></p>
+                </div>
+            </div>
+        </div>
+        <div class="col2-set">
+            <div>
+                <div class="buttons-set">
+                    <a href="<?php echo $this->getForgotPasswordUrl() ?>" class="f-left"><?php echo $this->__('Forgot Your Password?') ?></a>
+                    <button type="submit" class="button" title="<?php echo $this->__('Login') ?>" name="send" id="send2"><span><span><?php echo $this->__('Login') ?></span></span></button>
+                </div>
+            </div>
+        </div>
+        <?php if (Mage::helper('checkout')->isContextCheckout()): ?>
+            <input name="context" type="hidden" value="checkout" />
+        <?php endif; ?>
+    </form>
+	 <?php if(Mage::getStoreConfig('le_sociallogin/general/showonloginpage')== 'belowloginbox'){
+        $_social = $this->getLayout()->createBlock('le_sociallogin/button');
+        echo $_social->setTemplate('le_sociallogin/button.phtml')->toHtml(); } ?>
+    <script type="text/javascript">
+    //<![CDATA[
+        var dataForm = new VarienForm('login-form', true);
+    //]]>
+    </script>
+</div>
+<div class="col-md-6 col-sm-12 RightFeatures">
+        	<div class="head"><?php echo $this->__('Demyto Offers you:') ?></div>
+            <div class="HighlightPoint">
+            	<div class="iconLeft"><img src="<?php echo $this->getSkinUrl('images/icon-user.gif'); ?>" alt=""></div>
+                <div class="textRight"><span class="head"><?php echo $this->__('Sign up for Free!') ?></span><span class="desc"><?php echo $this->__('Lorem ipsum dolor sit amet, consectetur adipiscing elit') ?></span></div>
+            </div>
+            <div class="HighlightPoint">
+            	<div class="iconLeft"><img src="<?php echo $this->getSkinUrl('images/icon-car.gif'); ?>" alt=""></div>
+                <div class="textRight"><span class="head"><?php echo $this->__('Find Nearest Dealer by location') ?></span><span class="desc"><?php echo $this->__('Lorem ipsum dolor sit amet, consectetur adipiscing elit') ?></span></div>
+            </div>
+            <div class="HighlightPoint">
+            	<div class="iconLeft"><img src="<?php echo $this->getSkinUrl('images/icon-accessories.gif'); ?>" alt=""></div>
+                <div class="textRight"><span class="head"><?php echo $this->__('Buy Accessories') ?></span><span class="desc"><?php echo $this->__('Lorem ipsum dolor sit amet, consectetur adipiscing elit') ?></span></div>
+            </div>
+            <div class="HighlightPoint">
+            	<div class="iconLeft"><img src="<?php echo $this->getSkinUrl('images/icon-book-service.gif'); ?>" alt=""></div>
+                <div class="textRight"><span class="head"><?php echo $this->__('Book an Service Appointment') ?></span><span class="desc"><?php echo $this->__('Lorem ipsum dolor sit amet, consectetur adipiscing elit') ?></span></div>
+            </div>
+        </div>

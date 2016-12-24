@@ -1,0 +1,64 @@
+<?php
+/**
+ * Xcentia_Messages extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       Xcentia
+ * @package        Xcentia_Messages
+ * @copyright      Copyright (c) 2016
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+/**
+ * Message view template
+ *
+ * @category    Xcentia
+ * @package     Xcentia_Messages
+ * @author      Ultimate Module Creator
+ */
+?>
+<?php $_message = $this->getCurrentMessage();?>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<div class="page-title message-title">
+    <h1><?php echo $_message->getSubject(); ?></h1>
+</div>
+<div class="message-view">
+    <div class="message-subject">
+        <?php echo Mage::helper('xcentia_messages')->__('Subject');?>:<?php echo $_message->getSubject();?>
+
+    </div>
+    <div class="message-cust_id">
+        <?php echo Mage::helper('xcentia_messages')->__('Customer Id');?>:<?php echo $_message->getCustId();?>
+
+    </div>
+    <div class="message-vendor_id">
+        <?php echo Mage::helper('xcentia_messages')->__('Vendor Id');?>:<?php echo $_message->getVendorId();?>
+
+    </div>
+    <div class="message-owner">
+        <?php echo Mage::helper('xcentia_messages')->__("Owner");?>:<?php echo Mage::getSingleton('xcentia_messages/message_attribute_source_owner')->getOptionText($_message->getOwner());?>
+
+    </div>
+    <div class="message-body">
+        <?php echo Mage::helper('xcentia_messages')->__('Message Body');?>:<?php echo $_message->getBody();?>
+
+    </div>
+    <div class="message-is_read">
+        <?php echo Mage::helper('xcentia_messages')->__('Read');?>:<?php echo $_message->getIsRead();?>
+
+    </div>
+    <div class="message-parent_id">
+        <?php echo Mage::helper('xcentia_messages')->__('Parent Id');?>:<?php echo $_message->getParentId();?>
+
+    </div>
+    <div class="message-has_attachment">
+        <?php echo Mage::helper('xcentia_messages')->__('Attachments');?>:<?php echo $_message->getHasAttachment();?>
+
+    </div>
+
+</div>

@@ -1,0 +1,94 @@
+<?php 
+/**
+ * Xcentia_Projects extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       Xcentia
+ * @package        Xcentia_Projects
+ * @copyright      Copyright (c) 2016
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+/**
+ * Project list template
+ *
+ * @category    Xcentia
+ * @package     Xcentia_Projects
+ * @author      Ultimate Module Creator
+ */
+?>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<?php $_projects = $this->getProjects(); ?>
+<div class="container tab-pane" id="Projects">
+	<div class="row">
+        <div class="col-sm-12 col-md-12 col-xs-12">
+		<?php if($_projects->getSize()): ?>
+            <h4 class="page-t">Your Active Projects (<?php echo $_projects->getSize() ?>)</h4>
+            <table class="tbl-craftmen font-lato">
+              <thead>
+                <tr>
+                  <th>Project Details</th>
+                  <th>Description</th>
+                  <th>Number of Bids</th>
+                  <th>Lowest Bid</th>
+                  <th>Bid End Time</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+              <?php foreach ($_projects as $_project): ?>
+                <tr>
+                  <td data-th="Project Details"><div class="tbl-details">Project #<?php echo $_project->getId() ?><br><?php echo $_project->getName() ?></div></td>
+                  <td data-th="Description"><div class="tbl-details"><?php $options = json_decode($_project->getOptions()) ?><?php foreach($options as $opname => $opval) { echo $opname.': '.$opval.'<br>'; } ?></div></td>
+                  <td data-th="Number of Bids"><div class="tbl-details"><?php echo $_project->getTotalBids() ?></div></td>
+                  <td data-th="Lowest Bid"><div class="tbl-details"><?php echo $_project->getLowestBid() ?></div></td>
+                  <td data-th="End Time"><div class="tbl-details"><?php echo $_project->getBidEnd() ?></div></td>
+                  <td><div class="tbl-details"><a href="<?php echo $this->getUrl('projects/project/manage', array('id'=>$_project->getId())) ?>" class="btn btn-sm btn-info btn-bordered">Manage</a></div></td> 
+                </tr>
+               <?php endforeach; ?>
+              </tbody>
+            </table>
+            <?php else: ?>
+		    <p><?php echo $this->__('You have no Active Projects!'); ?></p>
+		<?php endif ?>
+        
+        <?php $_projects = $this->getPastProjects(); ?>
+            <?php if($_projects->getSize()): ?>
+            <h4 class="page-t">Past Projects</h4>
+            <table class="tbl-craftmen font-lato">
+              <thead>
+                <tr>
+                  <th>Project Details</th>
+                  <th>Description</th>
+                  <th>Vendor</th>
+                  <th>Cost</th>
+                  <th>Expected Delivery</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+              	<?php foreach ($_projects as $_project): ?>
+                <tr>
+                  <td data-th="Project Details"><div class="tbl-details">Project #<?php echo $_project->getId() ?><br><?php echo $_project->getName() ?></div></td>
+                  <td data-th="Description"><div class="tbl-details"><?php $options = json_decode($_project->getOptions()) ?><?php foreach($options as $opname => $opval) { echo $opname.': '.$opval.'<br>'; } ?></div></td>
+                  <td data-th="Vendor"><div class="tbl-details"><?php echo Mage::getModel('xcentia_vendors/vendor')->load($_project->getWinner())->getTitle() ?></div></td>
+                  <td data-th="Lowest Bid"><div class="tbl-details"><?php echo $_project->getWinningBid() ?></div></td>
+                  <td data-th="End Time"><div class="tbl-details"><?php echo $_project->getExpected() ?></div></td>
+                  <td><div class="tbl-details"><a href="<?php echo $this->getUrl('projects/project/manage', array('id'=>$_project->getId())) ?>" class="btn btn-sm btn-info btn-bordered">Manage</a></div></td> 
+                </tr>
+                <?php endforeach; ?>
+                
+              </tbody>
+            </table>
+            <?php else: ?>
+		    <p><?php echo $this->__('You have no non Active Projects!'); ?></p>
+			<?php endif ?>
+            </div>
+            </div>
+          </div>
+

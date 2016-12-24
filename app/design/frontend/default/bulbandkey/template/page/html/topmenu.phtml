@@ -1,0 +1,135 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2006-2015 X.commerce, Inc. (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Top menu for store
+ *
+ * @see Mage_Page_Block_Html_Topmenu
+ */
+?>
+<?php /*$_menu = $this->getHtml('level-top') ?>
+<?php if($_menu): ?>
+<div class="nav-container">
+    <ul id="nav">
+        <?php echo $_menu ?>
+    </ul>
+</div>
+<?php endif; */ ?>
+
+<div id="sidepanel" class="sidepanel-light">
+			<a id="sidepanel_close" href="#"><!-- close -->
+				<i class="glyphicon glyphicon-remove"></i>
+			</a>
+
+			<div class="sidepanel-content">
+				<h2 class="sidepanel-title">Explore Smarty</h2>
+
+				<!-- SIDE NAV -->
+				<ul class="list-group">
+
+					<li class="list-group-item">
+						<a href="#">
+							<i class="ico-category et-heart"></i>  
+							ABOUT US
+						</a>
+					</li>
+					<li class="list-group-item list-toggle"><!-- add "active" to stay open on page load -->
+						<a data-toggle="collapse" data-parent="#sidebar-nav" href="#collapse-1" class="collapsed"> 
+							<i class="ico-dd icon-angle-down"><!-- Drop Down Indicator --></i>
+							<i class="ico-category et-strategy"></i>
+							PORTFOLIO
+						</a>
+						<ul id="collapse-1" class="list-unstyled collapse"><!-- add "in" to stay open on page load -->
+							<li><a href="#"><i class="fa fa-angle-right"></i> 1 COLUMN</a></li>
+							<li class="active">
+								<span class="badge">New</span>
+								<a href="#"><i class="fa fa-angle-right"></i> 2 COLUMNS</a>
+							</li>
+							<li><a href="#"><i class="fa fa-angle-right"></i> 3 COLUMNS</a></li>
+						</ul>
+					</li>
+					<li class="list-group-item list-toggle"><!-- add "active" to stay open on page load -->                
+						<a data-toggle="collapse" data-parent="#sidebar-nav" href="#collapse-2" class="collapsed"> 
+							<i class="ico-dd icon-angle-down"><!-- Drop Down Indicator --></i>
+							<i class="ico-category et-trophy"></i>
+							PORTFOLIO
+						</a>
+						<ul id="collapse-2" class="list-unstyled collapse"><!-- add "in" to stay open on page load -->
+							<li><a href="#"><i class="fa fa-angle-right"></i> SLIDER</a></li>
+							<li class="active"><a href="#"><i class="fa fa-angle-right"></i> HEADERS</a></li>
+							<li><a href="#"><i class="fa fa-angle-right"></i> FOOTERS</a></li>
+						</ul>
+					</li>
+					<li class="list-group-item">
+						<a href="#">
+							<i class="ico-category et-happy"></i>  
+							BLOG
+						</a>
+					</li>
+					<li class="list-group-item">
+						<a href="#">
+							<i class="ico-category et-beaker"></i> 
+							FEATURES
+						</a>
+					</li>
+					<li class="list-group-item">
+						<a href="#">
+							<i class="ico-category et-map-pin"></i> 
+							CONTACT
+						</a>
+					</li>
+
+				</ul>
+				<!-- /SIDE NAV -->
+
+				<!-- social icons -->
+				<div class="text-center margin-bottom-30">
+
+					<a href="#" class="social-icon social-icon-sm social-facebook" data-toggle="tooltip" data-placement="top" title="Facebook">
+						<i class="icon-facebook"></i>
+						<i class="icon-facebook"></i>
+					</a>
+
+					<a href="#" class="social-icon social-icon-sm social-twitter" data-toggle="tooltip" data-placement="top" title="Twitter">
+						<i class="icon-twitter"></i>
+						<i class="icon-twitter"></i>
+					</a>
+
+					<a href="#" class="social-icon social-icon-sm social-linkedin" data-toggle="tooltip" data-placement="top" title="Linkedin">
+						<i class="icon-linkedin"></i>
+						<i class="icon-linkedin"></i>
+					</a>
+
+					<a href="#" class="social-icon social-icon-sm social-rss" data-toggle="tooltip" data-placement="top" title="RSS">
+						<i class="icon-rss"></i>
+						<i class="icon-rss"></i>
+					</a>
+
+				</div>
+				<!-- /social icons -->
+			</div>
+		</div>

@@ -1,0 +1,224 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2006-2014 X.commerce, Inc. (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Edit customer address template
+ *
+ * @see Mage_Customer_Block_Address_Edit
+ */
+?>
+<div class="col-md-12 col-sm-12">
+	<div class="box-static box-transparent box-bordered padding-30">
+		<div class="box-title margin-bottom-30">
+			<h2 class="size-20"><?php echo $this->getTitle() ?></h2>
+		</div>
+		<form class="nomargin sky-form" action="<?php echo $this->getSaveUrl() ?>" method="post" id="form-validate">
+			<?php echo $this->getBlockHtml('formkey')?>
+    		<input type="hidden" name="success_url" value="<?php echo $this->getSuccessUrl() ?>" />
+    		<input type="hidden" name="error_url" value="<?php echo $this->getErrorUrl() ?>" />
+			<fieldset>
+				<div class="row">
+					<div class="form-group">
+						<div class="col-md-4 col-sm-6">
+							<label>First Name </label>
+							<label class="input margin-bottom-10">
+								<i class="ico-append fa fa-user"></i>
+								<input class="required-entry" type="text" id="firstname" name="firstname" value="<?php echo $this->escapeHtml($this->getAddress()->getFirstname()) ?>" title="First Name" maxlength="255" class="input-text required-entry">
+								<b class="tooltip tooltip-bottom-right">Your First Name</b>
+							</label>
+						</div>
+						<div class="col-md-4 col-sm-6">
+							<label>Middle Name/Initial</label>
+							<label class="input margin-bottom-10">
+								<i class="ico-append fa fa-user"></i>
+								<input type="text" id="middlename" name="middlename" value="<?php echo $this->escapeHtml($this->getAddress()->getMiddlename()) ?>" title="Middle Name/Initial" maxlength="255" class="input-text">
+								<b class="tooltip tooltip-bottom-right">Your Middle Name/Initial</b>
+							</label>
+						</div>
+						<div class="col-md-4 col-sm-6">
+							<label for="register:last_name">Last Name</label>
+							<label class="input margin-bottom-10">
+								<i class="ico-append fa fa-user"></i>
+								<input class="required-entry" type="text" id="lastname" name="lastname" value="<?php echo $this->escapeHtml($this->getAddress()->getLastname()) ?>" title="Last Name" maxlength="255" class="input-text required-entry">
+								<b class="tooltip tooltip-bottom-right">Your Last Name</b>
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="row">	
+					<div class="form-group">
+						<div class="col-md-4 col-sm-6">
+							<label>Company</label>
+							<label class="input margin-bottom-10">
+								<i class="ico-append fa fa-building-o"></i>
+								<input type="text" id="company" name="company" value="<?php echo $this->escapeHtml($this->getAddress()->getCompany()) ?>" title="Company" maxlength="255" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('company') ?>">
+								<b class="tooltip tooltip-bottom-right">Your Company</b>
+							</label>
+						</div>
+						<div class="col-md-4 col-sm-6">
+							<label>Telephone</label>
+							<label class="input margin-bottom-10">
+								<i class="ico-append fa fa-phone"></i>
+								<input class="required-entry" type="text" id="telephone" name="telephone" value="<?php echo $this->escapeHtml($this->getAddress()->getTelephone()) ?>" title="Telephone" maxlength="255" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('telephone') ?>">
+								<b class="tooltip tooltip-bottom-right">Telephone</b>
+							</label>
+						</div>
+						<div class="col-md-4 col-sm-6">
+							<label for="register:last_name">Fax</label>
+							<label class="input margin-bottom-10">
+								<i class="ico-append fa fa-fax"></i>
+								<input type="text" id="fax" name="fax" value="<?php echo $this->escapeHtml($this->getAddress()->getFax()) ?>" title="Fax" maxlength="255" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('fax') ?>">
+								<b class="tooltip tooltip-bottom-right">Your Fax</b>
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<?php $_streetValidationClass = $this->helper('customer/address')->getAttributeValidationClass('street'); ?>
+					<div class="form-group">
+						<div class="col-md-4 col-sm-6">
+							<label>Street Address 1</label>
+							<label class="input margin-bottom-10">
+								<i class="ico-append fa fa-road"></i>
+								<input class="required-entry" type="text" id="street_1" name="street[]" value="<?php echo $this->escapeHtml($this->getAddress()->getStreet(1)) ?>" title="Street Address 1" maxlength="255" class="input-text <?php echo $_streetValidationClass ?>">
+								<b class="tooltip tooltip-bottom-right">Your Street Address 1</b>
+							</label>
+						</div>
+					<?php $_streetValidationClass = trim(str_replace('required-entry', '', $_streetValidationClass)); ?>
+						<div class="col-md-4 col-sm-6">
+							<label>Street Address 2</label>
+							<label class="input margin-bottom-10">
+								<i class="ico-append fa fa-road"></i>
+								<input class="required-entry" type="text" id="street_2" name="street[]" value="<?php echo $this->escapeHtml($this->getAddress()->getStreet(2)) ?>" title="Street Address 2" maxlength="255" class="input-text <?php echo $_streetValidationClass ?>">
+								<b class="tooltip tooltip-bottom-right">Street Address 2</b>
+							</label>
+						</div>
+						<div class="col-md-4 col-sm-6">
+							<label for="register:last_name">Zip/Postal Code</label>
+							<label class="input margin-bottom-10">
+								<i class="ico-append fa fa-map"></i>
+								<input class="required-entry" type="text" id="postcode" name="postcode" value="<?php echo $this->escapeHtml($this->getAddress()->getPostcode()) ?>" title="Zip/Postal Code" maxlength="255" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('postcode') ?>">
+								<b class="tooltip tooltip-bottom-right">Your Zip/Postal Code</b>
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="row sky-dropdown">	
+					<div class="form-group">
+						<div class="col-md-4 col-sm-6">
+							<label>Country</label>
+							<label class="input margin-bottom-10">
+								<?php echo $this->getCountryHtmlSelect() ?>
+								<b class="tooltip tooltip-bottom-right">Your Country</b>
+							</label>
+						</div>
+						<div class="col-md-4 col-sm-6">
+							<label>State</label>
+							<label class="input margin-bottom-10">
+								<select id="region_id" name="region_id" title="<?php echo $this->__('State') ?>" class="validate-select" style="display:none;">
+		                           <option value=""><?php echo $this->__('Please select region, state or province') ?></option>
+		                        </select>
+		                        <script type="text/javascript">
+		                        //<![CDATA[
+		                            $('region_id').setAttribute('defaultValue',  "<?php echo $this->getAddress()->getRegionId() ?>");
+		                        //]]>
+		                        </script>
+		                        <input type="text" id="region" name="region" value="<?php echo $this->escapeHtml($this->getAddress()->getRegion()) ?>"  title="<?php echo $this->__('State') ?>" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('region') ?>" />
+								<b class="tooltip tooltip-bottom-right">State</b>
+							</label>
+						</div>
+						<div class="col-md-4 col-sm-6">
+							<label for="register:city">City</label>
+							<label class="input margin-bottom-10">
+								<input type="text" name="city" value="<?php echo $this->escapeHtml($this->getAddress()->getCity()) ?>"  title="<?php echo $this->__('City') ?>" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('city') ?>" id="city" />
+								<b class="tooltip tooltip-bottom-right">Your City</b>
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+				<div class="col-md-12">
+					<div class="form-group">
+						<div class="col-md-4 col-sm-6">
+							<?php if($this->canSetAsDefaultBilling()): ?>
+			                    <label class="checkbox nomargin" for="primary_billing"><input type="checkbox" id="primary_billing" name="default_billing" value="1" title="<?php echo $this->__('Use as My Default Billing Address') ?>" class="checkbox" /><i></i><?php echo $this->__('Use as my default billing address') ?></label>
+			                <?php else: ?>
+			                    <input type="hidden" name="default_billing" value="1" />
+			                <?php endif; ?>
+						</div>
+						<div class="col-md-4 col-sm-6">
+							<?php if($this->canSetAsDefaultShipping()): ?>
+			                    <label class="checkbox nomargin" for="primary_shipping"><input type="checkbox" id="primary_shipping" name="default_shipping" value="1" title="<?php echo $this->__('Use as My Default Shipping Address') ?>" class="checkbox" /><i></i><?php echo $this->__('Use as my default shipping address') ?></label>
+			                <?php else: ?>
+			                    <input type="hidden" name="default_shipping" value="1" />
+			                <?php endif; ?>
+						</div>
+					</div>
+				</div>
+			</div>
+			</fieldset>
+			<div class="row">
+				<div class="col-md-12 text-right">
+					<button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Save Address</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+    var dataForm = new VarienForm('form-validate', true);
+    new RegionUpdater('country', 'region', 'region_id', <?php echo $this->helper('directory')->getRegionJson() ?>, undefined, 'zip');
+//]]>
+</script>
+<script type="text/javascript">
+    //<![CDATA[
+    CITIES_ACTION = "<?php echo $this->getUrl('citydropdown/index/cities'); ?>";
+
+    var normalImput = '<input type="text" name="city" value="<?php echo $this->escapeHtml($this->getAddress()->getCity()) ?>"  title="<?php echo $this->__('City') ?>" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('city') ?>" id="city" />'
+
+    document.observe("dom:loaded", function() {
+        <?php if($this->getAddress()->getRegionId()): ?>
+        var action = CITIES_ACTION;
+        var selectCountry = $('country').value;
+        var stateId = $('region_id').value;
+        var selectedCity = '<?php echo $this->escapeHtml($this->getAddress()->getCity()) ?>';
+        getAjaxReqestCustomer(action, selectCountry, stateId, normalImput,selectedCity)
+        //$('city').setValue('<?php echo $this->escapeHtml($this->getAddress()->getCity()) ?>');
+        <?php endif?>
+    });
+
+    Event.observe($('region_id'), 'change', function (event) {
+        var selectedCity = false;
+        var action = CITIES_ACTION;
+        var selectCountry = $('country').value;
+        var stateId = $('region_id').value;
+        getAjaxReqestCustomer(action, selectCountry, stateId, normalImput,selectedCity)
+    });
+    //]]>
+</script>

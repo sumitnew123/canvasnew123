@@ -1,0 +1,151 @@
+<?php
+/**
+ * Create account form template
+ * 
+ * @category    design
+ * @package     base_default
+ * @author      Clarion Magento Team
+ */
+?>
+<?php
+/**
+ * Create account form template
+ *
+ * @var $this Mage_Customer_Block_Form_Register
+ */
+?>
+
+<!-- REGISTER -->
+<div class="col-md-8 col-sm-7">
+
+	<div class="box-static box-transparent box-bordered padding-30">
+
+		<div class="box-title margin-bottom-30">
+			<h2 class="size-20"><?php echo $this->__('Create an Account') ?></h2>
+		</div>
+		<?php echo $this->getChildHtml('form_fields_before')?>
+    	<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+    	<?php /* Extensions placeholder */ ?>
+    	<?php echo $this->getChildHtml('customer.form.register.extra')?>
+    	<form class="nomargin sky-form" action="<?php echo $this->getPostActionUrl() ?>" method="post" id="form-validate">
+			<fieldset>
+				<input type="hidden" name="success_url" value="<?php echo $this->getSuccessUrl() ?>" />
+            	<input type="hidden" name="error_url" value="<?php echo $this->getErrorUrl() ?>" />
+            	<input type="hidden" name="form_key" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" />
+				<div class="row">
+					<div class="form-group">
+						<div class="col-md-6 col-sm-6">
+							<label>First Name *</label>
+							<label class="input margin-bottom-10">
+								<i class="ico-append fa fa-user"></i>
+								<input type="text" id="firstname" name="firstname" value="<?php echo $this->escapeHtml($this->getFormData()->getFirstname()) ?>" title="First Name" maxlength="255" class="input-text required-entry">
+								<b class="tooltip tooltip-bottom-right">Your First Name</b>
+							</label>
+						</div>
+
+						<div class="col-md-6 col-sm-6">
+							<label for="register:last_name">Last Name *</label>
+							<label class="input margin-bottom-10">
+								<i class="ico-append fa fa-user"></i>
+								<input type="text" id="lastname" name="lastname" value="<?php echo $this->escapeHtml($this->getFormData()->getLastname()) ?>" title="Last Name" maxlength="255" class="input-text required-entry">
+								<b class="tooltip tooltip-bottom-right">Your Last Name</b>
+							</label>
+						</div>
+
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group">
+
+						<div class="col-md-6 col-sm-6">
+							<label for="email_address">Email *</label>
+							<label class="input margin-bottom-10">
+								<i class="ico-append fa fa-envelope"></i>
+								<input type="text" name="email" id="email_address" value="<?php echo $this->escapeHtml($this->getFormData()->getEmail()) ?>" class="input-text required-entry">
+								<b class="tooltip tooltip-bottom-right">Your Email</b>
+							</label>
+						</div>
+
+						<div class="col-md-6 col-sm-6">
+							<label for="register:phone">Phone</label>
+							<label class="input margin-bottom-10">
+								<i class="ico-append fa fa-phone"></i>
+								<input type="tel" name="tel" id="tel" value="" class="input-text required-entry" minLength="10" maxLength="10">
+								<input type="hidden" name="phone" id="phone" value="<?php echo $this->escapeHtml($this->getFormData()->getPhone()) ?>">
+								<b class="tooltip tooltip-bottom-right">Your Phone (required)</b>
+							</label>
+						</div>
+
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group">
+
+						<div class="col-md-6 col-sm-6">
+							<label for="register:pass1">Password *</label>
+							<label class="input margin-bottom-10">
+								<i class="ico-append fa fa-lock"></i>
+								<input type="password" name="password" id="password" title="<?php echo $this->__('Password') ?>" class="input-text required-entry validate-password" />
+								<b class="tooltip tooltip-bottom-right">Min. 6 characters</b>
+							</label>
+						</div>
+
+						<div class="col-md-6 col-sm-6">
+							<label for="register:pass2">Password Again *</label>
+							<label class="input margin-bottom-10">
+								<i class="ico-append fa fa-lock"></i>
+								<input type="password" name="confirmation" title="<?php echo $this->__('Confirm Password') ?>" id="confirmation" class="input-text required-entry validate-cpassword" />
+								<b class="tooltip tooltip-bottom-right">Type the password again</b>
+							</label>
+						</div>
+
+					</div>
+				</div>
+				<?php echo $this->getChildHtml('form.additional.info'); ?>
+				<hr />
+				<?php if ($this->isNewsletterEnabled()): ?>
+                <label class="checkbox nomargin"><input type="checkbox" name="is_subscribed" title="<?php echo $this->__('Sign Up for Newsletter') ?>" value="1" id="is_subscribed"<?php if($this->getFormData()->getIsSubscribed()): ?> checked="checked"<?php endif; ?> class="checkbox" /><i></i><?php echo $this->__('Sign Up for Newsletter') ?></label>
+                    <?php echo $this->getChildHtml('customer.form.register.newsletter')?>
+                <?php endif ?>
+				<label class="checkbox nomargin"><input class="checked-agree" type="checkbox" name="checkbox"><i></i>I agree to the <a href="<?php echo $this->getUrl('terms-of-service') ?>" data-target="_blank" target="_blank">Terms of Service</a></label>
+
+			</fieldset>
+
+			<div class="row">
+				<div class="col-md-12">
+					<button type="button" id="submit_register" class="btn btn-primary" ><i class="fa fa-check"></i> REGISTER</button>
+				</div>
+			</div>
+
+		</form>
+		
+	</div>
+
+</div>
+
+<div class="col-sm-5 col-md-4">
+	<h2 class="margin-bottom-10 margin-top-20 text-info"><?php echo $this->__('New Vendors') ?></h2>
+	<p><?php echo $this->__('By creating an account with our website, you will be able to showcase your products and accept Orders for custom products, bid on various projects posted by the customers.') ?></p>
+	<button type="button" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Request an Account')) ?>" class="btn btn-primary" onclick="window.location='<?php echo $this->getUrl('vendors/vendor/create') ?>';"><?php echo $this->__('Request an Account') ?></button>
+</div>
+<!-- /REGISTER -->
+						
+    <script type="text/javascript">
+    jQuery(document).ready(function($){
+    	$("#tel").intlTelInput({ preferredCountries: [ "in", "us" ],});
+    	$("#tel").intlTelInput("setNumber", "<?php echo substr($this->escapeHtml($this->getFormData()->getPhone()), -10); ?>");
+    	
+		$('.required-entry').addClass('required');
+		jQuery.validator.addMethod('intlphone', function(value) { return (value.match(/^((\+)?[1-9]{1,2})?([-\s\.])?((\(\d{1,4}\))|\d{1,4})(([-\s\.])?[0-9]{1,12}){1,2}(\s*(ext|x)\s*\.?:?\s*([0-9]+))?$/)); }, 'Please enter a valid phone number');
+		$('#form-validate').validate();
+		$('#submit_register').click(function(){
+			$('#phone').val( '+' + $("#tel").intlTelInput("getSelectedCountryData").dialCode + ' ' + $("#tel").val() );
+			console.log( $("#tel").intlTelInput("getSelectedCountryData") );
+			if($('#form-validate').valid()) {
+				$('#form-validate').submit();
+			}
+		});
+    });
+    </script>

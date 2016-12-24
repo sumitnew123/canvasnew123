@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Xcentia_Projects extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       Xcentia
+ * @package        Xcentia_Projects
+ * @copyright      Copyright (c) 2016
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+--> 
+<layout>
+    <adminhtml_projects_project_index>
+        <reference name="menu">
+            <action method="setActive">
+                <menupath>xcentia_projects/project</menupath>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="xcentia_projects/adminhtml_project" name="project" />
+
+        </reference>
+    </adminhtml_projects_project_index>
+    <adminhtml_projects_project_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="xcentia_projects/adminhtml_project_grid" name="project_grid"/>
+        </block>
+    </adminhtml_projects_project_grid>
+    <!-- Project add/edit action -->
+    <adminhtml_projects_project_edit>
+        <update handle="editor"/>
+        <reference name="menu">
+            <action method="setActive">
+                <menupath>xcentia_projects/project</menupath>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="xcentia_projects/adminhtml_project_edit" name="project_edit"></block>
+        </reference>
+        <reference name="left">
+            <block type="xcentia_projects/adminhtml_project_edit_tabs" name="project_tabs"></block>
+        </reference>
+    </adminhtml_projects_project_edit>
+
+    <adminhtml_projects_bid_index>
+        <reference name="menu">
+            <action method="setActive">
+                <menupath>xcentia_projects/bid</menupath>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="xcentia_projects/adminhtml_bid" name="bid" />
+
+        </reference>
+    </adminhtml_projects_bid_index>
+    <adminhtml_projects_bid_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="xcentia_projects/adminhtml_bid_grid" name="bid_grid"/>
+        </block>
+    </adminhtml_projects_bid_grid>
+    <!-- Bid add/edit action -->
+    <adminhtml_projects_bid_edit>
+        <update handle="editor"/>
+        <reference name="menu">
+            <action method="setActive">
+                <menupath>xcentia_projects/bid</menupath>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="xcentia_projects/adminhtml_bid_edit" name="bid_edit"></block>
+        </reference>
+        <reference name="left">
+            <block type="xcentia_projects/adminhtml_bid_edit_tabs" name="bid_tabs"></block>
+        </reference>
+    </adminhtml_projects_bid_edit>
+
+</layout>

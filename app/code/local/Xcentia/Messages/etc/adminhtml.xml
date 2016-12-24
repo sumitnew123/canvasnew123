@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Xcentia_Messages extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       Xcentia
+ * @package        Xcentia_Messages
+ * @copyright      Copyright (c) 2016
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+-->
+<config>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <xcentia_messages translate="title" module="xcentia_messages">
+                                        <title>Messages</title>
+                                    </xcentia_messages>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                    <xcentia_messages translate="title" module="xcentia_messages">
+                        <title>Messages</title>
+                        <children>
+                            <message translate="title" module="xcentia_messages">
+                                <title>Message</title>
+                                <sort_order>0</sort_order>
+                            </message>
+                            <attachment translate="title" module="xcentia_messages">
+                                <title>Attachment</title>
+                                <sort_order>10</sort_order>
+                            </attachment>
+                        </children>
+                    </xcentia_messages>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+    <menu>
+        <xcentia_messages translate="title" module="xcentia_messages">
+            <title>Messages</title>
+            <sort_order>0</sort_order>
+            <children>
+                <message translate="title" module="xcentia_messages">
+                    <title>Message</title>
+                    <action>adminhtml/messages_message</action>
+                    <sort_order>0</sort_order>
+                </message>
+                <attachment translate="title" module="xcentia_messages">
+                    <title>Attachment</title>
+                    <action>adminhtml/messages_attachment</action>
+                    <sort_order>10</sort_order>
+                </attachment>
+            </children>
+        </xcentia_messages>
+    </menu>
+</config>

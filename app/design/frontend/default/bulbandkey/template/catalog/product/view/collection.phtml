@@ -1,0 +1,49 @@
+<?php $_helper = $this->helper('catalog/output'); ?>
+<?php $_product = $this->getProduct(); ?>
+<?php $dealer = Mage::getModel('xcentia_vendors/vendor')->load($_product->getDealerId()) ?>
+	<div class="project-details">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 col-sm-12">
+					<!-- left text -->
+					<div class="tittle">
+						<p>
+							<a href="<?php echo $this->getUrl() ?>">Home</a> / <a href="<?php echo $this->getUrl() ?>collections.html">Collections</a>
+						</p>
+						
+					</div>
+					<!-- /left text -->
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<section class="nopadding">
+	<div class="container">
+		<div class="row nomargin bg-white">
+			<!-- LEFT -->
+			<div class="col-md-5 col-sm-5 nopadding nomargin">
+				<!--<img id="main-product-image" class="img-responsive" src="<?php //echo $this->helper('catalog/image')->init($_product, 'image')->keepFrame(false)->resize(600) ?>" alt="image" />-->
+				<?php echo $this->getChildHtml('media') ?>
+			</div>
+			<!-- RIGHT -->
+			<div class="col-md-7 col-sm-7 nopadding nomargin">
+				<div class="product-description">
+					<div class="padding-20">
+						<h2 class="font-lato nomargin"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h2>
+						<p class="font-lato size-20">Hand-crafted by <a target="_blank" href="<?php echo $this->getUrl('vendors/vendor/view',array('id'=>$dealer->getId())); ?>"><?php echo $dealer->getTitle() ?></a></p>
+						<p class="font-lato size-20"><?php echo $_product->getShortDescription() ?></p>
+						<p class="font-lato size-20"><?php echo $_helper->productAttribute($_product, nl2br($_product->getDescription()), 'description') ?></p>
+						<div class="product-description-content">
+							<div class="font-lato price size-30"><?php echo Mage::helper('core')->currency($_product->getPrice(), true, false) ?></div>
+							<a href="<?php echo Mage::helper('checkout/cart')->getAddUrl($_product); ?>" class="navigate font-lato price size-20 normal-line-height"> <span>Purchase</span><br />
+								<i class="fa fa-long-arrow-right size-30 normal-line-height"></i>
+							</a>
+							<?php //echo $this->getChildHtml('addtocart') ?>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</section>

@@ -1,0 +1,53 @@
+<?php
+$productId = $this->getProductId();
+$product = Mage::getModel('catalog/product')->load($productId);
+$baseUrl = Mage::helper("pdp")->getPdpBaseUrl();
+$pdpDesignInfo = $this->getPdpDesignInfo();
+//If redesign request, pass the redesign id to iframe
+$redesign = "";
+if(isset($this->_params["redesign"]) && $this->_params["redesign"]) {
+    $redesign = "redesign/" . $this->_params["redesign"] . "/";
+} 
+//For share request
+$shareParam = "";
+if(isset($this->_params["share"]) && $this->_params["share"]) {
+    $shareParam = "share/" . $this->_params["share"] . "/";
+}
+
+$dimentionParam = "";
+if(isset($this->_params["w"]) && $this->_params["w"] && isset($this->_params["h"]) && $this->_params["h"]) {
+    $dimentionParam = "width/" . $this->_params["w"] . "/height/" . $this->_params["h"] . "/";
+}
+
+
+$iframeUrl = $baseUrl . "pdp/view/getIframe/product-id/" . $productId . "/json/" . $pdpDesignInfo['extra_options'] . "/" . $redesign . $shareParam . $dimentionParam;
+?>
+<style type="text/css">
+#pdc_iframe {
+	background: rgba(0, 0, 0, 0) none repeat scroll 0 0; 
+	border: 0px solid transparent;
+	margin: auto;
+	/*position: absolute; 
+	top: -100000px;
+	z-index: 100000;*/
+}
+</style>
+<!-- >iframe id="pdc_iframe" src="<?php echo $iframeUrl ?>"></iframe -->
+<script type="text/javascript">		
+	var pdcIframe = document.getElementById("pdc_iframe");
+	pdcIframe.src = "<?php echo $iframeUrl ?>";
+	document.getElementById("design_product_<?php echo $this->getProductId() ?>").addEventListener("click", function(){
+		pdcIframe.contentDocument.getElementById('get_design_content').click();
+	});
+	document.getElementById("design_project_<?php echo $this->getProductId() ?>").addEventListener("click", function(){
+		pdcIframe.contentDocument.getElementById('get_design_content').click();
+		jQuery('#pdc_iframe').show();
+		jQuery('#create-project-section').hide();
+	});
+	<?php if($product->getAttributeSetId() == 9) { ?>
+	jQuery('#pdc_iframe').load(function(){
+		pdcIframe.contentDocument.getElementById('get_design_content').click();
+	});
+	
+	<?php } ?>
+</script>

@@ -1,0 +1,98 @@
+<?php
+/**
+ * Create account form template
+ * 
+ * @category    design
+ * @package     base_default
+ * @author      Clarion Magento Team
+ */
+?>
+<?php
+/**
+ * Create account form template
+ *
+ * @var $this Mage_Customer_Block_Form_Register
+ */
+?>
+<?php $vendor = $this->getCurrentVendor(); ?>
+<!-- REGISTER -->
+<div class="col-md-12">
+	<div class="box-static box-transparent box-bordered padding-30">
+		<div class="box-title margin-bottom-30">
+			<h2 class="size-20"><?php echo $this->__('Edit Vendor Cover and Logo') ?></h2>
+		</div>
+		<?php echo $this->getChildHtml('form_fields_before')?>
+    	<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+    	<?php /* Extensions placeholder */ ?>
+    	<?php echo $this->getChildHtml('customer.form.register.extra')?>
+    	<form class="nomargin sky-form" action="<?php echo $this->getUrl('vendors/account/editcoverPost') ?>" method="post" id="form-validate" enctype="multipart/form-data">
+			<fieldset>
+            	<input type="hidden" name="form_key" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" />
+				<div class="row">
+					<div class="form-group">
+						<div class="col-md-6 col-sm-6">
+							<label for="register:logo">Logo Image <small>(JPG, JPEG, PNG, JIF, SVG)</small></label>
+							<label class="input margin-bottom-10">
+								<input type="file" name="logo" id="logo">
+							</label>
+							<img class="vendor-logo" src="<?php echo Mage::helper('xcentia_vendors/vendor_image')->init($vendor, 'logo')->keepframe(false)->resize(100); ?>" alt="image">
+						</div>
+					
+						<div class="col-md-6 col-sm-6">
+							<label for="register:cover">Profile Cover Image <small>(JPG, JPEG, PNG, JIF, SVG)</small></label>
+							<label class="input margin-bottom-10">
+								<input type="file" name="cover" id="cover">
+							</label>
+							<img class="vendor-logo" src="<?php echo Mage::helper('xcentia_vendors/vendor_image')->init($vendor, 'cover')->keepframe(false)->resize(100); ?>" alt="image">
+						</div>
+					</div>
+				</div>
+				
+			</fieldset>
+
+			<div class="row">
+				<div class="col-md-12">
+					<button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> SAVE DETAILS</button>
+				</div>
+			</div>
+
+		</form>
+		
+	</div>
+
+</div>
+<!-- /REGISTER -->
+
+
+<script type="text/javascript">
+//<![CDATA[
+    var dataForm = new VarienForm('form-validate', true);
+    new RegionUpdater('country', 'region', 'region_id', <?php echo $this->helper('directory')->getRegionJson() ?>, undefined, 'zip');
+//]]>
+</script>
+<script type="text/javascript">
+    //<![CDATA[
+    CITIES_ACTION = "<?php echo $this->getUrl('citydropdown/index/cities'); ?>";
+
+    var normalImput = '<input type="text" name="city" value="<?php echo $this->escapeHtml($vendor->getCity()) ?>"  title="<?php echo $this->__('City') ?>" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('city') ?>" id="city" />'
+
+    document.observe("dom:loaded", function() {
+        <?php if($vendor->getState()): ?>
+        var action = CITIES_ACTION;
+        var selectCountry = $('country').value;
+        var stateId = $('region_id').value;
+        var selectedCity = '<?php echo $this->escapeHtml($vendor->getCity()) ?>';
+        getAjaxReqestCustomer(action, selectCountry, stateId, normalImput,selectedCity)
+        //$('city').setValue('<?php echo $this->escapeHtml($vendor->getCity()) ?>');
+        <?php endif?>
+    });
+
+    Event.observe($('region_id'), 'change', function (event) {
+        var selectedCity = false;
+        var action = CITIES_ACTION;
+        var selectCountry = $('country').value;
+        var stateId = $('region_id').value;
+        getAjaxReqestCustomer(action, selectCountry, stateId, normalImput,selectedCity)
+    });
+    //]]>
+</script>

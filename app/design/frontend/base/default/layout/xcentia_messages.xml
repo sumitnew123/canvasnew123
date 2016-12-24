@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Xcentia_Messages extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       Xcentia
+ * @package        Xcentia_Messages
+ * @copyright      Copyright (c) 2016
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+-->
+<layout>
+    
+    <xcentia_messages_message_index translate="label" module="xcentia_messages">
+        <label>Messages list</label>
+        <update handle="page_two_columns_left" />
+        <reference name="content">
+            <block type="xcentia_messages/message_list" name="message_list" template="xcentia_messages/message/list.phtml" />
+        </reference>
+    </xcentia_messages_message_index>
+    <xcentia_messages_attachment_index translate="label" module="xcentia_messages">
+        <label>Attachments list</label>
+        <update handle="page_two_columns_left" />
+        <reference name="content">
+            <block type="xcentia_messages/attachment_list" name="attachment_list" template="xcentia_messages/attachment/list.phtml" />
+        </reference>
+    </xcentia_messages_attachment_index>
+    <xcentia_messages_message_view translate="label" module="xcentia_messages">
+        <label>Message view page</label>
+        <update handle="page_two_columns_left" />
+        <reference name="content">
+            <block type="xcentia_messages/message_view" name="message_view" template="xcentia_messages/message/view.phtml" />
+            <block type="xcentia_messages/message_attachment_list" name="message.attachment_list" as="message_messages" template="xcentia_messages/message/attachment/list.phtml" />
+        </reference>
+    </xcentia_messages_message_view>
+    <xcentia_messages_attachment_view translate="label" module="xcentia_messages">
+        <label>Attachment view page</label>
+        <update handle="page_two_columns_left" />
+        <reference name="content">
+            <block type="xcentia_messages/attachment_view" name="attachment_view" template="xcentia_messages/attachment/view.phtml" />
+        </reference>
+    </xcentia_messages_attachment_view>
+</layout>

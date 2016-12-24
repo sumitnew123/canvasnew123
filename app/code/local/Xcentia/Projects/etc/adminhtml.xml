@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Xcentia_Projects extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       Xcentia
+ * @package        Xcentia_Projects
+ * @copyright      Copyright (c) 2016
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+-->
+<config>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <xcentia_projects translate="title" module="xcentia_projects">
+                                        <title>Projects</title>
+                                    </xcentia_projects>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                    <xcentia_projects translate="title" module="xcentia_projects">
+                        <title>Projects</title>
+                        <children>
+                            <project translate="title" module="xcentia_projects">
+                                <title>Project</title>
+                                <sort_order>0</sort_order>
+                            </project>
+                            <bid translate="title" module="xcentia_projects">
+                                <title>Bid</title>
+                                <sort_order>10</sort_order>
+                            </bid>
+                        </children>
+                    </xcentia_projects>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+    <menu>
+        <xcentia_projects translate="title" module="xcentia_projects">
+            <title>Projects</title>
+            <sort_order>25</sort_order>
+            <children>
+                <project translate="title" module="xcentia_projects">
+                    <title>Project</title>
+                    <action>adminhtml/projects_project</action>
+                    <sort_order>0</sort_order>
+                </project>
+                <bid translate="title" module="xcentia_projects">
+                    <title>Bid</title>
+                    <action>adminhtml/projects_bid</action>
+                    <sort_order>10</sort_order>
+                </bid>
+            </children>
+        </xcentia_projects>
+    </menu>
+</config>

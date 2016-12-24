@@ -1,0 +1,103 @@
+<?php
+/**
+ * Xcentia_Messages extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       Xcentia
+ * @package        Xcentia_Messages
+ * @copyright      Copyright (c) 2016
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+/**
+ * Message view template
+ *
+ * @category    Xcentia
+ * @package     Xcentia_Messages
+ * @author      Ultimate Module Creator
+ */
+?>
+<?php $_message = $this->getCurrentMessage();?>
+<?php echo $this->getMessagesBlock()->getGroupedHtml();
+ $_currentUrl = Mage::helper('core/url')->getCurrentUrl();
+$data = $this->getRequest()->getParams();
+  $sellers=Mage::getModel("customer/customer")
+				->getCollection()
+				->addFieldToFilter('group_id',array('eq'=>2));
+$customer = Mage::getSingleton('customer/session')->getCustomer();
+ ?>
+<div class="message-view">
+	<div class="user-details message-section">
+		<ul class="nav nav-tabs">
+			<li <?php if($_currentUrl==$this->getUrl('messages/message')){?>class="active" <?php } ?>><a href="<?php echo $this->getUrl('messages/message');?>">Inbox</a></li>
+			<li <?php if($_currentUrl==$this->getUrl('messages/message/new')){?>class="active" <?php } ?>><a href="<?php echo $this->getUrl('messages/message/new');?>">Compose Mail</a></li>
+		</ul>
+	</div>
+    <h1><?php echo Mage::helper('xcentia_messages')->__('Compose Mail') ?></h1>
+	<form method="post" action="<?php echo $this->getUrl('messages/message/save'); ?>" enctype="multipart/form-data">
+		<?php if(isset($data['vid']) && $data['vid']!=''){ ?>
+			<input type="hidden" name="vendor_id" value="<?php echo $data['vid']; ?>" />
+		<?php }else{ 
+			if($customer->getGroupId()!='2'){ ?>
+				<div class="form-group col-md-6">
+					<label for="company"><?php echo Mage::helper('xcentia_messages')->__('Select Vendor');?></label>	
+					<select name="vendor_id" class="form-control" required>
+						<option>Select Vendor</option>
+						<?php foreach($sellers as $seller){ ?>
+							<option value="<?php echo $seller->getId();?>"><?php echo $seller->getFirstname()." ".$seller->getLastname();?></option>
+						<?php } ?>
+					</select>
+				</div>
+				<br clear="all" />
+			<?php } ?>
+		<?php } if(isset($data['cid']) && $data['cid']!=''){ ?>
+			<input type="hidden" name="cust_id" value="<?php echo $data['cid']; ?>" />
+		<?php }else{ 
+		if($customer->getGroupId()!='2'){ ?>
+				<input type="hidden" name="cust_id" value="<?php echo $customer->getId(); ?>" />
+		<?php } } ?>
+		<div class="form-group col-md-6">
+			<label for="company"><?php echo Mage::helper('xcentia_messages')->__('Subject');?></label>	
+			<input type="text" name="subject"  title="" value="" class="form-control input-text" required />
+		</div>
+		<br clear="all" />
+		<div class="form-group col-md-6">
+			<label for="company"><?php echo Mage::helper('xcentia_messages')->__('Attachments');?></label>	
+			<input type="file" name="attachment[]"  title=""  class="form-control" />
+		</div>
+		<div class="form-group col-md-6">
+			<label for="company">&nbsp;</label>	
+			<button type="button"  class="button add-more"><?php echo $this->__('Add more') ?></button>
+		</div>
+		<div class="form-group col-md-12 msg-box">
+			<label for="company"><?php echo Mage::helper('xcentia_messages')->__('Message');?></label>	
+			<textarea rows="5"  name="body"  title="body" class="form-control input-text" required></textarea>
+		</div>
+		<div class="form-group col-md-12" >
+			<button type="submit"  class="button"><span><span><?php echo $this->__('Send Message') ?></span></span></button>
+		</div>
+	</form>
+</div>
+<script>
+jQuery(document).ready(function($){
+	var cnt=0;
+	$(".add-more").click(function(){ cnt++;
+		var html='<div id="attach'+cnt+'"><div class="form-group col-md-6" >';	
+		html+='<input type="file" name="attachment[]"  title=""  class="form-control" />';
+		html+='</div><button type="button" removeatr="attach'+cnt+'" class="button remove add-more">';
+		html+='<?php echo $this->__('Remove') ?></button><br clear="all"/></div>';
+		$(".msg-box").before(html);
+		$(".remove").click(function(){ 
+			var atr=$(this).attr("removeatr");
+			$("#"+atr).hide();
+			(this).hide();
+		});
+	});
+	
+});
+</script>

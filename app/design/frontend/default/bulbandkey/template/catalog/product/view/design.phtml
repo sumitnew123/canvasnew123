@@ -1,0 +1,280 @@
+<?php $_helper = $this->helper('catalog/output'); ?>
+<?php $_product = $this->getProduct(); ?>
+
+	<div class="project-details">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 col-sm-12">
+					<!-- left text -->
+					<div class="tittle">
+						<p>
+							<a href="<?php echo $this->getUrl() ?>">Home</a> / <a href="<?php echo $this->getUrl() ?>describe.html">Describe your idea</a> / Describe
+						</p>
+						<h3>Create Project</h3>
+					</div>
+					<!-- /left text -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid padding-0">
+		<div class="row">
+			<div class="col-md-12 col-sm-12">
+				<iframe id="pdc_iframe" src="" class="describe-tool"></iframe>
+			</div>
+		</div>
+	</div>
+
+	<section class="nopadding" id="create-project-section" style="display:none;">
+		
+				<div class="container">
+				<div class="row margin-left-0 margin-right-0 margin-top-20">
+				
+					<!-- LEFT -->
+					<div class="col-md-4 col-sm-4">
+						<div class="row bg-white padding-top-10 padding-bottom-10">
+							<div class="col-md-12 product-image-main">
+								<h2 class="font-lato nomargin"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h2>
+								<div id="main-product-image">
+								<img class="img-responsive" src="<?php echo $this->helper('catalog/image')->init($_product, 'image')->keepFrame(false)->resize(600) ?>" alt="image" />
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- RIGHT -->
+					<div class="col-md-8 col-sm-8">
+					<form action="<?php echo $this->getUrl('projects/project/create') ?>" method="post" id="create_project_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+					<div class="row">
+					<div class="error col-md-12"><span></span></div>
+					<div class="col-md-6 col-sm-6 col-xs-12">
+							
+					        <?php echo $this->getBlockHtml('formkey') ?>
+					        <div class="no-display">
+					            <input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
+					            <input type="hidden" name="related_product" id="related-products-field" value="" />
+					            <input type="hidden" name="type" value="design" />
+					            <input type="hidden" name="save" value="0" id="save_for_future" />
+					        </div>
+        					<div class="form-group">
+		                    	<label>Project Name</label>
+		                        <input name="project_name" value="" title="Project Name is Required" placeholder="" id="project_name" type="text" class="form-control required-entry">
+		                    </div>
+		                    
+		                    <div class="form-group">
+		                    	<label>Budget <small>(per piece)</small></label>
+		                        <input name="budget" value="" title="Budget is Required" id="budget" placeholder="Expected price per piece?" type="text" class="form-control required-entry">
+		                    </div>
+		                    <div class="form-group">
+		                    	<label>Expected Time <small>(By when do you want it delivered?)</small></label>
+		                    	<div class="row">
+		                    		<div class="col-md-6"><input title="Please select Travel Date, should be greater than Bid end Date" id="expected-date" type="date" value="" class="form-control margin-bottom-10 required-entry" name="expected[date]"></div>
+		                    		<div class="col-md-6"><input type="time" value="<?php echo date("H:i", Mage::getModel('core/date')->timestamp()); ?>" class="form-control required-entry" name="expected[time]"></div>
+		                    	</div>
+		                    </div>
+		                    <div class="form-group">
+		                    	<label>Bid Close Time <small>(By when will you accepts bids?)</small></label>
+		                    	<div class="row">
+		                    		<div class="col-md-6"><input title="Please select Bid End Date, should be greater than today" type="date" id="bid_end-date" value="" class="form-control required-entry" name="bid_end[date]"></div>
+		                    		<div class="col-md-6"><input type="time" value="<?php echo date("H:i", Mage::getModel('core/date')->timestamp()); ?>" class="form-control required-entry" name="bid_end[time]"></div>
+		                    	</div>
+		                    </div>
+							<?php echo $this->getChildHtml('design_button') ?>
+							</form>
+	
+					</div>
+					<div class="col-md-6 col-sm-6 col-xs-12">
+		                    <?php //if($_product->getSku() == 'tshirt') {
+		                    if(strpos($_product->getSku(), 'tshirt') !== false) {
+		                    ?>
+		                    <div class="form-group">
+		                    	<label class="radio-inline">
+							      <input type="radio" name="size_options" value="sizeandquanity" checked>Sizes and Quantity
+							    </label>
+							    <label class="radio-inline">
+							      <input type="radio" name="size_options" value="nameandnumbers">Name and Numbers 
+							    </label>
+    							<div class="size_options_wrappers row" id="sizeandquanity-wrapper">
+			                    	<div class="input-group col-xs-2">
+									    <span class="input-group-addon">S</span>
+									    <input type="text" class="form-control" id="size-s" name="size[S]" value="0">
+									</div>
+									<div class="input-group col-xs-2">
+									    <span class="input-group-addon">M</span>
+									    <input type="text" class="form-control" id="size-s" name="size[M]" value="0">
+									</div>
+									<div class="input-group col-xs-2">
+									    <span class="input-group-addon">L</span>
+									    <input type="text" class="form-control" id="size-s" name="size[L]" value="0">
+									</div>
+									<div class="input-group col-xs-3">
+									    <span class="input-group-addon">XL</span>
+									    <input type="text" class="form-control" id="size-s" name="size[XL]" value="0">
+									</div>
+									<div class="input-group col-xs-3">
+									    <span class="input-group-addon">XXL</span>
+									    <input type="text" class="form-control" id="size-s" name="size[XXL]" value="0">
+									</div>
+		                      	</div>
+		                      	<div class="size_options_wrappers" id="nameandnumbers-wrapper" style="display:none;">
+		                      		<div class="input-group" id="namenumber-1">
+									    <input type="text" placeholder="Name" class="form-control size-option-name" name="name[]" value="">
+									    <input type="text" placeholder="Number" class="form-control size-option-number" name="number[]" value="">
+									    <select name="size[]" class="form-control size-option-size">
+									    	<option value="">-- Size --</option>
+									    	<option value="L" price="0">L </option>
+									    	<option value="M" price="0">M </option>
+									    	<option value="S" price="0">S </option>
+									    	<option value="XL" price="0">XL</option>
+									    	<option value="XXL" price="0">XXL</option>
+									    </select>
+									    <span class="input-group-btn">
+									    	<button class="btn btn-secondary removenamenumber" type="button" number="1" ><i class="fa fa-minus-square fa-2x" aria-hidden="true"></i></button>
+									    </span>
+									</div>
+									<div class="input-group" id="namenumber-2">
+									    <input type="text" placeholder="Name" class="form-control size-option-name" name="name[]" value="">
+									    <input type="text" placeholder="Number" class="form-control size-option-number" name="number[]" value="">
+									    <select name="size[]" class="form-control size-option-size">
+									    	<option value="">-- Size --</option>
+									    	<option value="L" price="0">L </option>
+									    	<option value="M" price="0">M </option>
+									    	<option value="S" price="0">S </option>
+									    	<option value="XL" price="0">XL</option>
+									    	<option value="XXL" price="0">XXL</option>
+									    </select>
+									    <span class="input-group-btn">
+									    	<button class="btn btn-secondary removenamenumber" type="button" number="1" ><i class="fa fa-minus-square fa-2x" aria-hidden="true"></i></button>
+									    </span>
+									</div>
+									<div class="input-group" id="namenumber-3">
+									    <input type="text" placeholder="Name" class="form-control size-option-name" name="name[]" value="">
+									    <input type="text" placeholder="Number" class="form-control size-option-number" name="number[]" value="">
+									    <select name="size[]" class="form-control size-option-size">
+									    	<option value="">-- Size --</option>
+									    	<option value="L" price="0">L </option>
+									    	<option value="M" price="0">M </option>
+									    	<option value="S" price="0">S </option>
+									    	<option value="XL" price="0">XL</option>
+									    	<option value="XXL" price="0">XXL</option>
+									    </select>
+									    <span class="input-group-btn">
+									    	<button class="btn btn-secondary removenamenumber" type="button" number="1" ><i class="fa fa-minus-square fa-2x" aria-hidden="true"></i></button>
+									    </span>
+									</div>
+									<div id="additional-namenumbers"></div>
+									 <div class="form-group">
+				                    	<label>Add more <button class="btn btn-secondary" id="addnamenumber" type="button"><i class="fa fa-plus-square fa-2x" aria-hidden="true"></i></button></label>
+				                    </div>
+		                      	</div>
+		                    </div>
+		                    <?php } else { ?>
+		                    <div class="form-group">
+		                    	<label>Quantity</label>
+		                        <input name="quantity" value="" title="Quantity is Required" id="quantity" placeholder="How many pieces do you want?" type="text" class="form-control required-entry">
+		                    </div>
+		                    <?php } ?>
+		                    {CONTAINER1}
+					</div>
+					</div>
+					<div class="row">
+					<div class="col-md-4 col-sm-4 col-xs-12 text-left">
+						<a class="btn btn-sm btn-info btn-bordered pull-left" id="design_project_<?php echo $_product->getId() ?>">Edit your design</a>
+					</div>
+					<div class="col-md-8 col-sm-8 col-xs-12 text-left">
+						<a href="#" class="btn btn-sm btn-info btn-bordered margin-right-0 margin-left-10" id="submit_project">
+                           <span>Choose a Craftsman</span>
+                        </a>
+						<a href="#" class="btn btn-sm btn-info btn-bordered" id="save_project">
+                           <span>Save for future</span>
+                        </a>
+                        
+					</div>
+				</div>
+					</form>
+					</div>
+					</div>
+					
+				</div>
+				
+				
+				</div>
+				
+			</section>
+
+	<script type="text/javascript">
+	jQuery(document).ready(function($){
+		$('.required-entry').addClass('required');
+		$.validator.addMethod("dateGreaterThanDate", function (value, element, parameter) {
+            return value > parameter.val();
+        }, "Values must match");
+        $.validator.addMethod("dateGreaterThanToday", function (value, element, parameter) {
+            return new Date(value) > new Date();
+        }, "Values must match");
+        
+        $('#create_project_form').validate({
+			rules: {
+				origin: "required",
+				destination: "required",
+				'expected[date]' : {
+						required: true,
+						dateGreaterThanDate: $('#bid_end-date'),
+					},
+				'bid_end[date]' : {
+					required: true,
+					dateGreaterThanToday: $('#today-date'),
+				}
+			  },
+			  invalidHandler: function(event, validator) {
+				    // 'this' refers to the form
+				    var errors = validator.numberOfInvalids();
+				    if (errors) {
+				      var message = errors == 1
+				        ? 'You missed 1 field. It has been highlighted'
+				        : 'You missed ' + errors + ' fields. They have been highlighted';
+				      $("div.error span").html(message);
+				      $("div.error").show();
+				    } else {
+				      $("div.error").hide();
+				    }
+				  }
+		 });
+
+	  
+	$('#submit_project').click(function(){
+		if($('#create_project_form').valid()) {
+			$('#create_project_form').submit();
+		}
+	});
+	
+		$('#save_project').click(function(){
+			$('#save_for_future').val('1');
+			if($('#create_project_form').valid()) {
+				$('#create_project_form').submit();
+			}
+			//$('#create_project_form').submit();
+			/*if(dealerProductForm.validator && dealerProductForm.validator.validate()){
+				dealerProductForm.form.submit();
+	        } else {
+				alert('Please fill all the fields properly');
+	        }*/
+		});
+
+		$('input[name=size_options]').on('click', function() {
+			$('.size_options_wrappers').hide();
+			$('#'+$('input[name=size_options]:checked').val()+'-wrapper').show();
+		});
+		var namenumbercount = 3;
+		$('#addnamenumber').click(function(){
+			namenumbercount++;
+			$('#additional-namenumbers').append('<div class="input-group" id="namenumber-'+namenumbercount+'"><input type="text" placeholder="Name" class="form-control size-option-name" name="name[]" value=""><input type="text" placeholder="Number" class="form-control size-option-number" name="number[]" value=""><select name="size[]" class="form-control size-option-size"><option value="">-- Size --</option><option value="L" price="0">L </option><option value="M" price="0">M </option><option value="S" price="0">S </option><option value="XL" price="0">XL</option><option value="XXL" price="0">XXL</option></select><span class="input-group-btn"><button class="btn btn-secondary removenamenumber" number="'+namenumbercount+'" type="button"><i class="fa fa-minus-square fa-2x" aria-hidden="true"></i></button></span></div>');
+			$('.removenamenumber').unbind();
+			$('.removenamenumber').click(function(){
+				$('#namenumber-'+$(this).attr('number')).remove();
+			});
+		});
+    });
+	</script>
+	<style>
+		.design-btn {display:none}
+	</style>

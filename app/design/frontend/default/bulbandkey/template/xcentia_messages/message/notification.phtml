@@ -1,0 +1,144 @@
+<?php 
+/**
+ * Xcentia_Messages extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       Xcentia
+ * @package        Xcentia_Messages
+ * @copyright      Copyright (c) 2016
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+/**
+ * Message list template
+ *
+ * @category    Xcentia
+ * @package     Xcentia_Messages
+ * @author      Ultimate Module Creator
+ */
+?>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<?php $_messages = $this->getMessages(); 
+$_notifications = $this->getNotifications();
+ $_currentUrl = Mage::helper('core/url')->getCurrentUrl();?>
+<div class="message-view">
+	<h1><?php echo Mage::helper('xcentia_messages')->__('Notification') ?><hr /></h1>
+	
+<?php if ($_messages->getSize() > 0) :?>
+    <?php //echo $this->getPagerHtml(); ?>
+   <div class="message-list-container col-md-6">
+   <h3><?php echo Mage::helper('xcentia_messages')->__('Project') ?></h3>
+	  <div class="notificationlist">
+    <?php foreach ($_messages as $_message) : ?>
+		<div class="message-list-item">
+			 <a href="<?php echo $this->getUrl('messages/message/view',array("id"=>$_message->getId())); ?>">
+			 <?php 
+				if($_message->getOwner()=='1'){
+					$cust=Mage::getModel('customer/customer')->load($_message->getCustId());
+					$customerData = Mage::getModel('customer/customer')->load($_message->getCustId())->getData();
+					$img = ($customerData['profile_photo'] != '') ? $customerData['profile_photo'] : '';
+					 
+				}else{
+					$cust=Mage::getModel('customer/customer')->load($_message->getVendorId());
+					$customerData = Mage::getModel('customer/customer')->load($_message->getVendorId())->getData();
+					$img = ($customerData['profile_photo'] != '') ? $customerData['profile_photo'] : '';
+					 
+				}
+				?>
+				<img src="<?php echo Mage::getBaseUrl('media').'profile/'.$img ?>" width="60" height="60" alt="profile image" />
+				<?php echo $_message->getSubject();?><?php echo ' '.$_message->getCreatedAt();?></a><br />
+				<?php echo $_message->getBody();?>
+			<br clear="all"/>
+		</div>
+		<br />
+    <?php endforeach;?> 
+	   <div id="loadmore1"><?php if($_messages->getSize() > $_messages->count() ) { ?><button class="btn btn-sm btn-info btn-bordered">Load More ... </button><?php } ?></div> 
+	</div>
+    </div>
+	<div class="message-list-container col-md-6">
+	<h3><?php echo Mage::helper('xcentia_messages')->__('Messages') ?></h3> 
+ <div class="notificationlist1">
+    <?php foreach ($_notifications as $_notification) : ?>
+         <div class="message-list-item">
+		
+			 <a href="<?php echo $this->getUrl('messages/message/view',array("id"=>$_notification->getId())); ?>">
+				
+			 <?php 
+				if($_notification->getOwner()=='1'){
+					$cust=Mage::getModel('customer/customer')->load($_notification->getCustId());
+					$customerData = Mage::getModel('customer/customer')->load($_notification->getCustId())->getData();
+					$img = ($customerData['profile_photo'] != '') ? $customerData['profile_photo'] : '';
+					 
+				}else{
+					$cust=Mage::getModel('customer/customer')->load($_notification->getVendorId());
+					$customerData = Mage::getModel('customer/customer')->load($_notification->getVendorId())->getData();
+					$img = ($customerData['profile_photo'] != '') ? $customerData['profile_photo'] : '';
+					 
+				}
+				?>
+				<img src="<?php echo Mage::getBaseUrl('media').'profile/'.$img ?>" width="60" height="60" alt="profile image" />
+				<?php echo $_notification->getSubject();?><?php echo ' '.$_notification->getCreatedAt();?></a><br /> 
+				<?php echo $_notification->getBody();?>
+			
+			  
+			<br clear="all"/>
+       
+		 </div>
+    <?php endforeach;?>	
+	 <div id="loadmore3"><?php if($_notifications->getSize() > $_notifications->count() ) { ?><button class="btn btn-sm btn-info btn-bordered">Load More ... </button><?php } ?></div>
+	</div>
+	</div>
+	<div class="clearfix"></div>
+ 
+<?php else : ?>
+    <?php echo Mage::helper('xcentia_messages')->__('There are no messages at this moment');?>
+<?php endif;?>
+</div>
+ 
+ <?php $urls = parse_url( $this->helper('core/url')->getCurrentUrl() ); ?>
+<script type="text/javascript">
+	var page = 1;
+	var pageurl = '<?php echo $this->getUrl('*/*/ajaxlist') ?>';
+	var pause = false;
+	
+	var page2 = 1;
+	var pageurl2 = '<?php echo $this->getUrl('*/*/ajaxmessageslist') ?>';
+	var pause2 = false;
+	
+	jQuery(document).ready(function($){
+		$('#loadmore1 button').click(function(){
+			if(pause == false) {
+				pause = true;
+				page++;
+				$.get( pageurl + "?<?php echo (empty($urls['query']) ? '':$urls['query'].'&' )?>page="+ page, function( data ) {
+					$(".notificationlist").append(data);
+					pause = false;
+				});
+				if(page*10 >= <?php echo $_messages->getSize() ?>) {
+					$('#loadmore1').hide();
+					$('p.laoder').hide();
+				} 
+			}
+		});
+		$('#loadmore3 button').click(function(){
+			if(pause2 == false) {
+				pause2 = true;
+				page2++;
+				$.get( pageurl2 + "?<?php echo (empty($urls['query']) ? '':$urls['query'].'&' )?>page="+ page2, function( data ) {
+					$(".notificationlist1").append(data);
+					pause2 = false;
+				});
+				if(page2*10 >= <?php echo $_notifications->getSize() ?>) {
+					$('#loadmore3').hide();
+					$('p.laoder2').hide();
+				} 
+			}
+		});
+	});
+	 
+</script>

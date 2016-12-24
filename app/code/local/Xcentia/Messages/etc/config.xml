@@ -1,0 +1,143 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Xcentia_Messages extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       Xcentia
+ * @package        Xcentia_Messages
+ * @copyright      Copyright (c) 2016
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+-->
+<config>
+    <modules>
+        <Xcentia_Messages>
+            <version>1.0.1</version>
+        </Xcentia_Messages>
+    </modules>
+    <global>
+        <resources>
+            <xcentia_messages_setup>
+                <setup>
+                    <module>Xcentia_Messages</module>
+                    <class>Xcentia_Messages_Model_Resource_Setup</class>
+                </setup>
+            </xcentia_messages_setup>
+        </resources>
+        <blocks>
+            <xcentia_messages>
+                <class>Xcentia_Messages_Block</class>
+            </xcentia_messages>
+        </blocks>
+        <helpers>
+            <xcentia_messages>
+                <class>Xcentia_Messages_Helper</class>
+            </xcentia_messages>
+        </helpers>
+		<template>
+			<email>
+				<message_template module="xcentia_messages">
+					<label>Message</label>
+					<file>messages/msg.html</file>
+					<type>html</type>
+				</message_template>
+				<reply_message_template module="xcentia_messages">
+					<label>Message</label>
+					<file>messages/reply_msg.html</file>
+					<type>html</type>
+				</reply_message_template>
+			</email>
+		</template>
+        <models>
+            <xcentia_messages>
+                <class>Xcentia_Messages_Model</class>
+                <resourceModel>xcentia_messages_resource</resourceModel>
+            </xcentia_messages>
+            <xcentia_messages_resource>
+                <class>Xcentia_Messages_Model_Resource</class>
+                <entities>
+                    <message>
+                        <table>xcentia_messages_message</table>
+                    </message>
+                    <attachment>
+                        <table>xcentia_messages_attachment</table>
+                    </attachment>
+                </entities>
+            </xcentia_messages_resource>
+        </models>
+    </global>
+    <adminhtml>
+        <layout>
+            <updates>
+                <xcentia_messages>
+                    <file>xcentia_messages.xml</file>
+                </xcentia_messages>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Xcentia_Messages>
+                    <files>
+                        <default>Xcentia_Messages.csv</default>
+                    </files>
+                </Xcentia_Messages>
+            </modules>
+        </translate>
+    </adminhtml>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Xcentia_Messages before="Mage_Adminhtml">Xcentia_Messages_Adminhtml</Xcentia_Messages>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <frontend>
+        <routers>
+            <xcentia_messages>
+                <use>standard</use>
+                <args>
+                    <module>Xcentia_Messages</module>
+                    <frontName>messages</frontName>
+                </args>
+            </xcentia_messages>
+        </routers>
+        <layout>
+            <updates>
+                <xcentia_messages>
+                    <file>xcentia_messages.xml</file>
+                </xcentia_messages>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Xcentia_Messages>
+                    <files>
+                        <default>Xcentia_Messages.csv</default>
+                    </files>
+                </Xcentia_Messages>
+            </modules>
+        </translate>
+    </frontend>
+    <default>
+        <xcentia_messages>
+            <message>
+                <breadcrumbs>1</breadcrumbs>
+            </message>
+            <attachment>
+                <breadcrumbs>1</breadcrumbs>
+                <meta_title>Attachments</meta_title>
+            </attachment>
+        </xcentia_messages>
+    </default>
+</config>

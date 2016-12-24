@@ -1,0 +1,44 @@
+<?php $services = $this->getServices();?>
+<?php if ($services->count() > 0) :?>
+<div class="container">
+	<div class="row">
+		<div class="col-md-6 col-sm-12 padding-0">
+			<div class="col-md-11 col-sm-11 padding-0">
+				<h4 class="nomargin"><?php echo Mage::helper('catalog')->__('Specialist Services Offered') ?></h4>  
+			</div>
+			<div class="col-sm-12 bg-white padding-20">
+				<div class="item">
+			<?php foreach ($services as $service) : ?>
+				<button type="button" class="btn btn-primary"><?php echo $service->getTitle();?></button>
+			<?php endforeach; ?>
+				</div>
+			</div>
+		</div>
+		<?php 
+			$customer = Mage::getSingleton('customer/session')->getCustomer();
+			$contacts = Mage::getResourceModel('xcentia_vendors/contact_collection')
+							 ->addFieldToFilter('status', 1)
+							 ->addFieldToFilter('vendor_id',$customer->getId());
+			$contacts->setOrder('entity_id', 'asc');  
+		?>
+		<?php if($contacts->getSize()>0){ ?>
+			<div class="col-md-6 col-sm-12 padding-0">
+				<div class="col-md-11 col-sm-11 padding-0">
+					<h4 class="nomargin"><?php echo Mage::helper('catalog')->__('Additional Contact List') ?></h4>  
+				</div>
+				<?php foreach ($contacts as $_contact) : ?>
+					<div class="col-md-6">
+						<?php echo $_contact->getName();?><br />
+						<a href="mailto:<?php echo $_contact->getEmail();?>"><?php echo $_contact->getEmail();?></a><br />
+						<a href="tel:<?php echo $_contact->getMobile();?>"><?php echo $_contact->getMobile();?></a>
+					</div>
+				<?php endforeach;?>
+			</div>
+		<?php } ?>
+	</div>
+</div>
+
+<div class="box-collateral box-products box-up-sell">
+    
+</div>
+<?php endif;?>

@@ -1,0 +1,124 @@
+<?php 
+/**
+ * Wa_dealer extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category   	Wa
+ * @package		Wa_dealer
+ * @copyright  	Copyright (c) 2013
+ * @license		http://opensource.org/licenses/mit-license.php MIT License
+ */
+/**
+ * Page list template
+ *
+ * @category	Wa
+ * @package		Wa_dealer
+ * @author Ultimate Module Creator
+ */
+?>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<?php $_products = $this->getProducts(); ?>
+
+<div class="container tab-pane" id="Produtservices">
+         <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 my-account-search-tag ">
+            <h4 class="page-t pull-left">Service Offered</h4>
+            <a href="#addcat" class="btn btn-sm btn-info btn-bordered pull-left" data-toggle="collapse">Add</a> 
+              <!-- Bordered Medium -->
+              <input type="text" id="services" class="form-control c-form-control" value="" style="display: none;">
+            </div>
+            <div id="addcat" class="col-xs-12 col-sm-12 col-md-6 collapse">
+            	<div class="row">
+            		<div class="col-md-8">
+	            		<select name="services_ids" id="services_ids" class="form-control required-entry">
+	                	<?php echo $this->getServices(); ?>
+	                </select>
+                </div>
+            		<div class="col-md-4"><button type="button" id="addcatgory" class="btn btn-sm btn-info btn-bordered">Add This</button></div>
+            	</div>
+            </div>
+         </div>
+         <script type="text/javascript">
+         	jQuery(document).ready(function($){
+         		$('input#services').tagsinput({
+         			freeInput: false,
+         			itemValue: function(item) {
+         			    return item.text;
+         			}
+         		});
+         		<?php $services = $this->getVendorServices(); ?>
+         		<?php foreach($services as $service):?>
+         		$('input#services').tagsinput('add', { id:<?php echo $service->getId() ?> , text: '<?php echo $service->getTitle(); ?>' });
+         		<?php endforeach; ?>
+         		
+         		$('input#services').on('beforeItemRemove', function(event) {
+         		   var tag = event.item;
+         		  	$.ajax({
+         			  url: "<?php echo $this->getUrl('*/*/removeservices') ?>id/"+tag.id,
+         			  cache: false
+         			});
+         		});
+         		$('#addcatgory').click(function(){
+         			$('input#services').tagsinput('add', { id: $("#services_ids option:selected").val(), text: $("#services_ids option:selected").text() });
+         			;
+         			$.ajax({
+           			  url: "<?php echo $this->getUrl('*/*/addservices') ?>id/"+$("#services_ids option:selected").val(),
+           			  cache: false
+           			});
+                });
+             });
+         </script>
+         <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-12 prod_for_sale">
+                <h4 class="nomargin ">Products For Sale</h4>
+                <a href="<?php echo $this->getUrl('*/*/new')?>" class="btn btn-sm btn-info btn-bordered">Add</a> 
+              </div>
+              <!-- Bordered Small --> 
+            </div>
+            <div class="row">
+            <div class="col-lg-12">
+				<?php echo $this->getPagerHtml(); ?>
+			</div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+              <?php if ($_products->getSize() > 0) :?>
+            <table class="tbl-craftmen font-lato">
+              <thead>
+                <tr>
+                  <th colspan="2">Product Details</th>
+                  <th>Description</th>
+                  <th>Price</th>
+                  <th>Quantity in Stock</th>
+                  <th>Status</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+              	<?php foreach ($_products as $_product) : ?>
+                <tr class="alert">
+                	<td width="100"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->keepFrame(false)->resize(100); ?>" class="img-responsive"></td>
+                  	<td><?php echo $_product->getName(); ?></td>
+					<td><?php echo $_product->getShortDescription(); ?></td>
+					<td><?php echo Mage::helper('core')->currency($_product->getPrice(), true, false); ?></td>
+					<td><?php echo (int)Mage::getModel('cataloginventory/stock_item')->loadByProduct($_product)->getQty(); ?></td>
+					<td><?php echo ($_product->getStatus()==1) ? 'Enable':'Disable'; ?></td>
+					<td class="options-width">
+					<a href="<?php echo $this->getUrl('*/*/featured', array('id'=>$_product->getId(), 'make'=> $_product->getIsFeatured() ? 'no':'yes' ));?>" title="<?php echo $_product->getIsFeatured() ? 'Unfeature this product':'Make featured product'?>"><span class="fa-stack"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-star<?php echo $_product->getIsFeatured() ? '':'-o'?> fa-stack-1x"></i></span></a>
+					<a href="<?php echo $this->getUrl('*/*/edit', array('id'=>$_product->getId()));?>" title="Edit"><span class="fa-stack"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-pencil-square-o fa-stack-1x"></i></span></a>
+					<a onclick="return confirm('Are you sure want to delete the product <?php echo $_product->getName(); ?>');" href="<?php echo $this->getUrl('*/*/delete', array('id'=>$_product->getId()));?>" title="Delete"><span class="fa-stack"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-times fa-stack-1x"></i></span></a>
+					</td>
+                </tr>
+                <?php endforeach;?>
+              </tbody>
+            </table>
+            
+            <?php else : ?>
+				<?php echo Mage::helper('xcentia_vendors')->__('There are no products at this moment');?>
+			<?php endif;?>
+            </div></div>
+            </div>

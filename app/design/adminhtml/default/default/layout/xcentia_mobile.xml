@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Xcentia_Mobile extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       Xcentia
+ * @package        Xcentia_Mobile
+ * @copyright      Copyright (c) 2016
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+--> 
+<layout>
+    <adminhtml_mobile_device_index>
+        <reference name="menu">
+            <action method="setActive">
+                <menupath>xcentia_mobile/device</menupath>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="xcentia_mobile/adminhtml_device" name="device" />
+
+        </reference>
+    </adminhtml_mobile_device_index>
+    <adminhtml_mobile_device_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="xcentia_mobile/adminhtml_device_grid" name="device_grid"/>
+        </block>
+    </adminhtml_mobile_device_grid>
+    <!-- Device add/edit action -->
+    <adminhtml_mobile_device_edit>
+        <update handle="editor"/>
+        <reference name="menu">
+            <action method="setActive">
+                <menupath>xcentia_mobile/device</menupath>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="xcentia_mobile/adminhtml_device_edit" name="device_edit"></block>
+        </reference>
+        <reference name="left">
+            <block type="xcentia_mobile/adminhtml_device_edit_tabs" name="device_tabs"></block>
+        </reference>
+    </adminhtml_mobile_device_edit>
+
+</layout>

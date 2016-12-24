@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Xcentia_Projects extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       Xcentia
+ * @package        Xcentia_Projects
+ * @copyright      Copyright (c) 2016
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+-->
+<layout>
+    
+    <xcentia_projects_project_index translate="label" module="xcentia_projects">
+        <label>Projects list</label>
+        <reference name="root">
+            <action method="setTemplate"><template>page/collections.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="xcentia_projects/project_list" name="project_list" template="xcentia_projects/project/list.phtml" />
+        </reference>
+    </xcentia_projects_project_index>
+    <xcentia_projects_project_view translate="label" module="xcentia_projects">
+        <reference name="root">
+            <action method="setTemplate"><template>page/collections.phtml</template></action>
+        </reference>>
+        <reference name="content">
+            <block type="xcentia_projects/project_view" name="project_view" template="xcentia_projects/project/view.phtml" />
+            <block type="xcentia_projects/project_bid_list" name="project.bid_list" as="project_bids" template="xcentia_projects/project/bid/list.phtml" />
+        </reference>
+    </xcentia_projects_project_view>
+    
+    <xcentia_projects_project_vendors translate="label" module="xcentia_projects">
+        <label>Project view page</label>
+        <reference name="root">
+            <action method="setTemplate"><template>page/collections.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="xcentia_projects/project_vendors" name="project_view" template="xcentia_projects/project/vendors.phtml" />
+        </reference>
+    </xcentia_projects_project_vendors>
+    
+    
+    <xcentia_projects_project_customer translate="label" module="xcentia_projects">
+        <label>Projects list</label>
+        <update handle="customer_account"/>
+        <reference name="content">
+            <block type="xcentia_projects/project_customer" name="project_list" template="xcentia_projects/project/customer.phtml" />
+        </reference>
+    </xcentia_projects_project_customer>
+    
+    <xcentia_projects_project_vendor translate="label" module="xcentia_projects">
+        <label>Projects list</label>
+        <update handle="customer_account"/>
+        <reference name="content">
+            <block type="xcentia_projects/project_vendor" name="project_list" template="xcentia_projects/project/vendor.phtml" />
+        </reference>
+    </xcentia_projects_project_vendor>
+    
+    <xcentia_projects_project_manage translate="label" module="xcentia_projects">
+        <label>Projects list</label>
+        <update handle="customer_account"/>
+        <reference name="head">
+            <action method="addCss"><stylesheet>css/chat-style.css</stylesheet></action>
+            <action method="addItem"><type>skin_js</type><name>js/scripts.js</name><params/></action>
+            <action method="addItem"><type>js_css</type><name>jquery/uploadfile.css</name></action>
+            <action method="addJs"><script>jquery/jquery.uploadfile.min.js</script><params><![CDATA[name="home_upload"]]></params></action>
+        </reference>
+        <reference name="content">
+            <block type="xcentia_projects/project_manage" name="project_manage" template="xcentia_projects/project/manage.phtml" />
+        </reference>
+    </xcentia_projects_project_manage>
+</layout>

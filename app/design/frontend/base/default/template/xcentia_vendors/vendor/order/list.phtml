@@ -1,0 +1,39 @@
+<?php 
+/**
+ * Xcentia_Vendors extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       Xcentia
+ * @package        Xcentia_Vendors
+ * @copyright      Copyright (c) 2016
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+/**
+ * Vendor Order list template
+ *
+ * @category    Xcentia
+ * @package     Xcentia_Vendors
+ * @author      Ultimate Module Creator
+ */
+?>
+<?php $_orders = $this->getOrders(); ?>
+<?php if ($_orders->getSize() > 0) :?>
+<div class="order-title">
+    <h2><?php echo Mage::helper('xcentia_vendors')->__('Orders') ?></h2>
+</div>
+<div class="orders-list-container">
+    <?php foreach ($_orders as $_order) : ?>
+        <div class="order-list-item">
+            <a href="<?php echo $_order->getOrderUrl()?>">
+                <?php echo $_order->getOrderId();?>
+            </a><br />
+        </div>
+    <?php endforeach;?>
+</div>
+<?php endif;?>

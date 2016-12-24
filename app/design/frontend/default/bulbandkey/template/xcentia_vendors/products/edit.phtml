@@ -1,0 +1,202 @@
+<?php 
+/**
+ * Wa_dealer extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category   	Wa
+ * @package		Wa_dealer
+ * @copyright  	Copyright (c) 2013
+ * @license		http://opensource.org/licenses/mit-license.php MIT License
+ */
+/**
+ * Page view template
+ *
+ * @category	Wa
+ * @package		Wa_dealer
+ * @author Ultimate Module Creator
+ */
+?>
+<?php $_product = $this->getCurrentPage();?>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<div class="row">
+	<div class="col-lg-12">
+		<h1 class="page-header"><?php echo ($_product->getName()) ? $this->__('Edit Product - ') . $_product->getName() : $this->__('Add New Product'); ?></h1>
+	</div>
+	<!-- /.col-lg-12 -->
+</div>
+<div class="row">
+	<form role="form" action="<?php echo $this->getUrl('vendors/products/save') ?>" method="post" id="dealer_product_form">
+		<input type="hidden" name="id" value="<?php echo $_product->getId() ?>" />
+	    <?php if(!$_product->getName()) { ?><input type="hidden" name="type" value="<?php echo Mage::registry('new_product_attribute_set') ?>" /><?php } ?>
+		<div class="col-lg-12">
+			<div class="panel panel-default">
+            	<div class="panel-heading"><?php echo $this->__('Product Information') ?></div>
+                <div class="panel-body">
+                	<div class="form-group">
+                    	<label><?php echo $this->__('Product Name') ?></label>
+                        <input name="name" value="<?php echo $this->htmlEscape($_product->getName()) ?>" title="<?php echo $this->__('Product Name') ?>" id="name" type="text" class="form-control required-entry" />
+                    </div>
+                    <div class="form-group">
+                    	<label><?php echo $this->__('Short Description') ?></label>
+                        <textarea name="short_description" class="form-control required-entry" id="short_description" cols="3" rows="3"><?php echo $_product->getShortDescription() ?></textarea>
+                    	<p>To be used in listing pages</p>
+                    </div>
+                    <div class="form-group">
+                    <label for="description"><?php echo $this->__('Description') ?></label>
+                        <textarea name="description" class="form-control required-entry editor" id="description" cols="3" rows="3"><?php echo $_product->getDescription() ?></textarea>
+                     
+                    </div>
+                </div>
+             </div>
+		</div>
+		<div class="col-lg-6">
+			<div class="panel panel-default">
+            	<div class="panel-heading"><?php echo $this->__('Other Information') ?></div>
+                <div class="panel-body">
+                	
+                    <div class="form-group">
+                    	<label for="category_ids"><?php echo $this->__('Categories') ?></label>
+                       		<select name="category_ids[]" id="category_ids" class="form-control required-entry" multiple="multiple" size="7">
+                       			<?php echo $this->getTreeCategories($_product->getCategoryIds(), 27); ?>
+                       		</select>
+                       		<p>you can select multiple categories</p>
+                    </div>
+                    <div class="form-group input-group">
+                    	<span class="input-group-addon"><?php echo Mage::app()->getLocale()->currency( Mage::app()->getStore()->getCurrentCurrencyCode() )->getSymbol()?></span>
+                        <input name="price" value="<?php echo $this->htmlEscape(number_format((float)$_product->getPrice(), 2, '.', '')) ?>" title="<?php echo $this->__('Price') ?>" id="price" type="text" class="form-control required-entry" />
+                        <span class="input-group-addon">Price</span>
+                    </div>
+                    <div class="form-group input-group">
+                    	<span class="input-group-addon"><i class="fa fa-cube"></i></span>
+                        <input name="weight" value="<?php echo $this->htmlEscape(number_format((float)$_product->getWeight(), 2, '.', '')) ?>" title="<?php echo $this->__('Weight') ?>" id="weight" type="text" class="form-control required-entry" />
+                        <span class="input-group-addon">Weight in KG</span>
+                    </div>
+                    <div class="form-group">
+                    	<label for="status"><?php echo $this->__('Status') ?><?php echo $_product->getStatus() ?></label>
+                       		<select name="status" id="status" class="form-control required-entry">
+                       			<option value="1" <?php echo ($_product->getStatus() == 1) ? 'selected="selected"' : ''; ?>>Enabled</option>
+                       			<option value="2" <?php echo ($_product->getStatus() == 2) ? 'selected="selected"' : ''; ?>>Disabled</option>
+                       		</select>
+                    </div>
+                    <div class="form-group">
+                    	<?php $stock = Mage::getModel('cataloginventory/stock_item')->loadByProduct($_product);?>
+                    	<label for="qty"><?php echo $this->__('Stock Quantity:') ?></label>
+                        <input name="qty" value="<?php echo $this->htmlEscape((int)$stock->getQty()) ?>" title="<?php echo $this->__('Stock Quantity') ?>" id="qty" type="text" class="form-control required-entry" />
+                    </div>
+                    <div class="form-group">
+                    	<label for="is_in_stock"><?php echo $this->__('Stock Status:') ?></label>
+                       		<select name="is_in_stock" id="is_in_stock" class="form-control required-entry">
+                       			<option value="1" <?php echo ($stock->getIsInstock() == 1) ? 'selected="selected"' : ''; ?>>In Stock</option>
+                       			<option value="0" <?php echo ($stock->getIsInstock() == 0) ? 'selected="selected"' : ''; ?>>Out of Stock</option>
+                       		</select>
+                    </div>
+                    <div class="form-group">
+                    	<label for="tax_class_id"><?php echo $this->__('Tax Class:') ?></label>
+                       		<select name="tax_class_id" id="tax_class_id" class="form-control required-entry">
+                       			<option value="">-- Please Select --</option>
+                       			<option <?php echo ($_product->getClassId() == 0) ? 'selected="selected"' : ''; ?> value="0">None</option>
+                       			<?php 
+                       				$taxes = $this->getTaxClasses();
+                       				foreach($taxes as $tax) {
+                       					echo '<option value="'.$tax->getClassId().'" '.(($_product->getTaxClassId() == $tax->getClassId()) ? 'selected="selected"' : '').'>'.$tax->getClassName().'</option>';
+                       				}
+                       			?>
+                       		</select>
+                    </div>
+                    <div class="form-group">
+                    	<label for="is_featured"><?php echo $this->__('Show as Featured Product:') ?></label>
+                       		<select name="is_featured" id="is_featured" class="form-control required-entry">
+                       			<option value="0" <?php echo ($_product->getIsFeatured() == 0) ? 'selected="selected"' : ''; ?>>No</option>
+                       			<option value="1" <?php echo ($_product->getIsFeatured() == 1) ? 'selected="selected"' : ''; ?>>Yes</option>
+                       		</select>
+                    </div>
+                </div>
+            </div>
+            
+		</div>
+		<div class="col-lg-6">
+			<div class="panel panel-default">
+            	<div class="panel-heading"><?php echo $this->__('Product Images:') ?></div>
+                <div class="panel-body">
+                	<div id="mulitplefileuploader">Click here to select Images</div>
+		         	<div id="uploadstatus"></div>
+		         	<input type="hidden" name="images" id="images" value="" />
+		         	<div class="product-images row">
+		         		
+		         		<?php 
+		         			$images = $_product->getMediaGalleryImages();
+		         			if($images->count() > 0) echo '<span>Tick the images you want to delete</span><br>';
+		         			foreach($images as $_image) {
+		         		?><div class="col-lg-4">
+		         			<img src="<?php echo $this->helper('catalog/image')->init($_product, 'image', $_image->getFile())->resize(100);?>"/>
+		         			<input type="checkbox" name="remove_image[]" value="<?php echo $_image->getFile()?>">
+		         		  </div>
+		         		<?php
+		         			}
+		         		?>
+		         	</div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+            	<div class="panel-heading"><?php echo $this->__('Specifications') ?></div>
+                <div class="panel-body">
+                	<?php echo $this->getChildHtml('specifications');?>
+                </div>
+            </div>
+            <div class="panel panel-default">
+            	<div class="panel-heading"><?php echo $this->__('Meta Information:') ?></div>
+                <div class="panel-body">
+					<div class="form-group">
+                       <label for="meta_title"><?php echo $this->__('Meta Title:') ?></label>
+                       <input name="meta_title" id="meta_title" type="text" value="<?php echo $this->htmlEscape($_product->getMetaTitle()) ?>" class="form-control required-entry" />
+					</div>
+					<div class="form-group">
+	                    <label for="meta_keyword"><?php echo $this->__('Meta Keywords:') ?></label>
+	                    <textarea name="meta_keyword" class="form-control required-entry" id="meta_keyword" cols="3" rows="3"><?php echo $_product->getMetaKeyword() ?></textarea>
+					</div>
+					<div class="form-group">
+	                    <label for="meta_description"><?php echo $this->__('Meta Description:') ?></label>
+	                    <textarea name="meta_description" class="form-control required-entry" id="meta_description" cols="3" rows="3"><?php echo $_product->getMetaDescription() ?></textarea>
+	                </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Save Product</button>
+        </div>
+	</form>
+</div>
+
+
+    <script type="text/javascript">
+    //<![CDATA[
+        var dealerProductForm = new VarienForm('dealer_product_form');
+        dealerProductForm = function() {
+            if(this.validator.validate()) {
+                this.form.submit();
+            }
+        }.bind(dealerProductForm);
+    //]]>
+        jQuery(document).ready(function($) {
+			tinymce.init({selector:'textarea#description'});
+        	var settings = {
+        		url: "<?php echo $this->getUrl('vendors/products/iupload') ?>",
+        		method: "POST",
+        		allowedTypes:"jpg,png,gif",
+        		fileName: "image",
+        		multiple: true,
+        		onSuccess:function(files,data,xhr) {
+            		$('#images').val($('#images').val() + data + ';');
+        			$("#uploadstatus").html("<font color='green'>Upload is success</font>");
+        		},
+        		onError: function(files,status,errMsg) {
+        			$("#uploadstatus").html("<font color='red'>Upload is Failed</font>");
+        		}
+        	}
+        	$("#mulitplefileuploader").uploadFile(settings);
+        });
+    </script>

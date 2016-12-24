@@ -1,0 +1,276 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Xcentia_Vendors extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       Xcentia
+ * @package        Xcentia_Vendors
+ * @copyright      Copyright (c) 2016
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+--> 
+<layout>
+    <adminhtml_vendors_vendor_index>
+        <reference name="menu">
+            <action method="setActive">
+                <menupath>xcentia_vendors/vendor</menupath>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="xcentia_vendors/adminhtml_vendor" name="vendor" />
+
+        </reference>
+    </adminhtml_vendors_vendor_index>
+    <adminhtml_vendors_vendor_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="xcentia_vendors/adminhtml_vendor_grid" name="vendor_grid"/>
+        </block>
+    </adminhtml_vendors_vendor_grid>
+    <!-- Vendor add/edit action -->
+    <adminhtml_vendors_vendor_edit>
+        <update handle="editor"/>
+        <reference name="menu">
+            <action method="setActive">
+                <menupath>xcentia_vendors/vendor</menupath>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="xcentia_vendors/adminhtml_vendor_edit" name="vendor_edit"></block>
+        </reference>
+        <reference name="left">
+            <block type="xcentia_vendors/adminhtml_vendor_edit_tabs" name="vendor_tabs"></block>
+        </reference>
+    </adminhtml_vendors_vendor_edit>
+	<adminhtml_vendors_vendor_new>
+        <update handle="editor"/>
+        <reference name="menu">
+            <action method="setActive">
+                <menupath>xcentia_vendors/vendor</menupath>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="xcentia_vendors/adminhtml_vendor_edit" name="vendor_edit"></block>
+        </reference>
+        <reference name="left">
+            <block type="xcentia_vendors/adminhtml_vendor_edit_tabs" name="vendor_tabs"></block>
+        </reference>
+    </adminhtml_vendors_vendor_new>
+    
+    <adminhtml_vendors_coverage_index>
+        <reference name="menu">
+            <action method="setActive">
+                <menupath>xcentia_vendors/coverage</menupath>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="xcentia_vendors/adminhtml_coverage" name="coverage" />
+
+        </reference>
+    </adminhtml_vendors_coverage_index>
+    <adminhtml_vendors_coverage_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="xcentia_vendors/adminhtml_coverage_grid" name="coverage_grid"/>
+        </block>
+    </adminhtml_vendors_coverage_grid>
+    <!-- Coverage add/edit action -->
+    <adminhtml_vendors_coverage_edit>
+        <update handle="editor"/>
+        <reference name="menu">
+            <action method="setActive">
+                <menupath>xcentia_vendors/coverage</menupath>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="xcentia_vendors/adminhtml_coverage_edit" name="coverage_edit"></block>
+        </reference>
+        <reference name="left">
+            <block type="xcentia_vendors/adminhtml_coverage_edit_tabs" name="coverage_tabs"></block>
+        </reference>
+    </adminhtml_vendors_coverage_edit>
+
+    <adminhtml_vendors_order_index>
+        <reference name="menu">
+            <action method="setActive">
+                <menupath>xcentia_vendors/order</menupath>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="xcentia_vendors/adminhtml_order" name="order" />
+
+        </reference>
+    </adminhtml_vendors_order_index>
+    <adminhtml_vendors_order_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="xcentia_vendors/adminhtml_order_grid" name="order_grid"/>
+        </block>
+    </adminhtml_vendors_order_grid>
+    <!-- Order add/edit action -->
+    <adminhtml_vendors_order_edit>
+        <update handle="editor"/>
+        <reference name="menu">
+            <action method="setActive">
+                <menupath>xcentia_vendors/order</menupath>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="xcentia_vendors/adminhtml_order_edit" name="order_edit"></block>
+        </reference>
+        <reference name="left">
+            <block type="xcentia_vendors/adminhtml_order_edit_tabs" name="order_tabs"></block>
+        </reference>
+    </adminhtml_vendors_order_edit>
+
+    <adminhtml_vendors_vendor_categories>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="xcentia_vendors/adminhtml_vendor_edit_tab_categories" name="vendor.edit.tab.categories"/>
+        </block>
+    </adminhtml_vendors_vendor_categories>
+    <adminhtml_vendors_vendor_catalog_category_vendorsgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="xcentia_vendors/adminhtml_catalog_category_tab_vendor" name="category.edit.tab.vendor"/>
+        </block>
+    </adminhtml_vendors_vendor_catalog_category_vendorsgrid>
+    <adminhtml_vendors_vendor_comment_index>
+        <reference name="menu">
+            <action method="setActive">
+                <menupath>xcentia_vendors/vendor_comment</menupath>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="xcentia_vendors/adminhtml_vendor_comment" name="vendor_comment_grid"/>
+        </reference>
+    </adminhtml_vendors_vendor_comment_index>
+    <adminhtml_vendors_vendor_comment_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="xcentia_vendors/adminhtml_vendor_comment_grid" name="vendor_comment_grid"/>
+        </block>
+    </adminhtml_vendors_vendor_comment_grid>
+    <adminhtml_vendors_vendor_comment_edit>
+        <update handle="editor"/>
+        <reference name="menu">
+            <action method="setActive">
+                <menupath>xcentia_vendors/vendor_comment</menupath>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="xcentia_vendors/adminhtml_vendor_comment_edit" name="vendor_comment_edit"></block>
+        </reference>
+        <reference name="left">
+            <block type="xcentia_vendors/adminhtml_vendor_comment_edit_tabs" name="vendor_comment_tabs"></block>
+        </reference>
+    </adminhtml_vendors_vendor_comment_edit>
+	
+	<adminhtml_vendors_contact_index>
+        <reference name="menu">
+            <action method="setActive">
+                <menupath>xcentia_vendors/contact</menupath>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="xcentia_vendors/adminhtml_contact" name="contact" />
+
+        </reference>
+    </adminhtml_vendors_contact_index>
+    <adminhtml_vendors_contact_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="xcentia_vendors/adminhtml_contact_grid" name="contact_grid"/>
+        </block>
+    </adminhtml_vendors_contact_grid>
+    <!-- Contact add/edit action -->
+    <adminhtml_vendors_contact_edit>
+        <update handle="editor"/>
+        <reference name="menu">
+            <action method="setActive">
+                <menupath>xcentia_vendors/contact</menupath>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="xcentia_vendors/adminhtml_contact_edit" name="contact_edit"></block>
+        </reference>
+        <reference name="left">
+            <block type="xcentia_vendors/adminhtml_contact_edit_tabs" name="contact_tabs"></block>
+        </reference>
+    </adminhtml_vendors_contact_edit>
+    
+    <adminhtml_vendors_service_index>
+        <reference name="menu">
+            <action method="setActive">
+                <menupath>xcentia_vendors/service</menupath>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="xcentia_vendors/adminhtml_service" name="service" />
+
+        </reference>
+    </adminhtml_vendors_service_index>
+    <adminhtml_vendors_service_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="xcentia_vendors/adminhtml_service_grid" name="service_grid"/>
+        </block>
+    </adminhtml_vendors_service_grid>
+    <!-- Service add/edit action -->
+    <adminhtml_vendors_service_edit>
+        <update handle="editor"/>
+        <reference name="menu">
+            <action method="setActive">
+                <menupath>xcentia_vendors/service</menupath>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="xcentia_vendors/adminhtml_service_edit" name="service_edit"></block>
+        </reference>
+        <reference name="left">
+            <block type="xcentia_vendors/adminhtml_service_edit_tabs" name="service_tabs"></block>
+        </reference>
+    </adminhtml_vendors_service_edit>
+
+    <adminhtml_vendors_servicemap_index>
+        <reference name="menu">
+            <action method="setActive">
+                <menupath>xcentia_vendors/servicemap</menupath>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="xcentia_vendors/adminhtml_servicemap" name="servicemap" />
+
+        </reference>
+    </adminhtml_vendors_servicemap_index>
+    <adminhtml_vendors_servicemap_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="xcentia_vendors/adminhtml_servicemap_grid" name="servicemap_grid"/>
+        </block>
+    </adminhtml_vendors_servicemap_grid>
+    <!-- Servicemap add/edit action -->
+    <adminhtml_vendors_servicemap_edit>
+        <update handle="editor"/>
+        <reference name="menu">
+            <action method="setActive">
+                <menupath>xcentia_vendors/servicemap</menupath>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="xcentia_vendors/adminhtml_servicemap_edit" name="servicemap_edit"></block>
+        </reference>
+        <reference name="left">
+            <block type="xcentia_vendors/adminhtml_servicemap_edit_tabs" name="servicemap_tabs"></block>
+        </reference>
+    </adminhtml_vendors_servicemap_edit>
+    <adminhtml_vendors_service_categories>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="xcentia_vendors/adminhtml_service_edit_tab_categories" name="service.edit.tab.categories"/>
+        </block>
+    </adminhtml_vendors_service_categories>
+    <adminhtml_vendors_service_catalog_category_servicesgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="xcentia_vendors/adminhtml_catalog_category_tab_service" name="category.edit.tab.service"/>
+        </block>
+    </adminhtml_vendors_service_catalog_category_servicesgrid>
+    
+</layout>

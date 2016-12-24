@@ -1,0 +1,67 @@
+<?php 
+/**
+ * Xcentia_Vendors extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       Xcentia
+ * @package        Xcentia_Vendors
+ * @copyright      Copyright (c) 2016
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+/**
+ * Order list template
+ *
+ * @category    Xcentia
+ * @package     Xcentia_Vendors
+ * @author      Ultimate Module Creator
+ */
+?>
+<?php echo $this->getMessagesBlock()->toHtml() ?>
+<?php $_orders = $this->getOrders(); ?>
+<div class="container" id="Orders">
+<div class="row">
+<div class="col-sm-12 col-md-12 col-xs-12 ">
+    <h4 class="page-t inline-block">Active orders (<?php echo $_orders->count() ?>)</h4>
+    <a href="<?php echo $this->getUrl('vendors/order') ?>" class="btn btn-sm btn-info btn-bordered"><?php echo $this->__('View All Order') ?></a>
+    <?php if($_orders->getSize() > 0) { ?>
+    <table class="tbl-craftmen font-lato">
+      <thead>
+        <tr>
+          <th>Order Details</th>
+          <th>Product</th>
+          <th>Customer</th>
+          <th>Payment</th>
+          <th>Important Dates</th>
+          <th>&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php foreach ($_orders as $_order): ?>
+        <?php $items = $_order->getItems() ?>
+        <tr>
+          <td data-th="Order Details"><div class="tbl-details">Order #<?php echo $_order->getRealOrderId() ?><br/>Status: <?php echo $_order->getStatusLabel() ?></div></td>
+          <td data-th="Product"><div class="tbl-details"><?php $items = $this->getOrderItems($_order);
+                    foreach($items as $item) {
+                        echo $item->getName().'<br/>';
+                    } 
+            ?></div></td>
+          <td data-th="Customer"><div class="tbl-details"><?php echo $_order->getCustomerFirstname().' '.$_order->getCustomerLastname() ?><br><?php echo $_order->getCustomerEmail() ?></div></td>
+          <td data-th="Payment"><div class="tbl-details"><?php echo $_order->formatPrice($_order->getGrandTotal()) ?><br>Unpaid (COD)</div></td>
+          <td data-th="Important Dates"><div class="tbl-details">Delivered by <?php echo $this->formatDate($item->getDeliveryDate(),'long') ?><br><span class="text-grey">Posted on <?php echo $this->formatDate($_order->getCreatedAtStoreDate(),'long') ?></span></div></td> 
+          <td><div class="tbl-details"><a href="<?php echo $this->getViewUrl($_order) ?>" class="btn btn-sm btn-info btn-bordered"><?php echo $this->__('View Order') ?></a></div></td> 
+        </tr>
+        <?php endforeach; ?>
+      </tbody>
+    </table>
+    <?php } else { ?>
+        <p>Sorry, no Orders found.</p>
+    <?php } ?>
+</div>
+</div>
+</div>

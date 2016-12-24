@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Skumar_IndiaRegions>
+            <version>1.0.1</version>
+        </Skumar_IndiaRegions>
+    </modules>
+    <global>
+        <resources>
+            <indiaregions_setup>
+                <setup>
+                    <module>Skumar_IndiaRegions</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </indiaregions_setup>
+            <indiaregions_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </indiaregions_write>
+            <indiaregions_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </indiaregions_read>
+        </resources>
+    </global>
+</config>

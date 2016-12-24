@@ -1,0 +1,48 @@
+<?php
+/**
+ * Xcentia_Vendors extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       Xcentia
+ * @package        Xcentia_Vendors
+ * @copyright      Copyright (c) 2016
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+/**
+ * Contact view template
+ *
+ * @category    Xcentia
+ * @package     Xcentia_Vendors
+ * @author      Ultimate Module Creator
+ */
+?>
+<?php $_contact = $this->getCurrentContact();?>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<div class="page-title contact-title">
+    <h1><?php echo $_contact->getName(); ?></h1>
+</div>
+<div class="contact-view">
+    <div class="contact-name">
+        <?php echo Mage::helper('xcentia_vendors')->__('Name');?>:<?php echo $_contact->getName();?>
+
+    </div>
+    <div class="contact-email">
+        <?php echo Mage::helper('xcentia_vendors')->__('Email');?>:<?php echo $_contact->getEmail();?>
+
+    </div>
+    <div class="contact-mobile">
+        <?php echo Mage::helper('xcentia_vendors')->__('Mobile No');?>:<?php echo $_contact->getMobile();?>
+
+    </div>
+    <div class="contact-vendor_id">
+        <?php echo Mage::helper('xcentia_vendors')->__('Vendor Id');?>:<?php echo $_contact->getVendorId();?>
+
+    </div>
+
+</div>

@@ -1,0 +1,109 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2006-2015 X.commerce, Inc. (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php echo $this->getMessagesBlock()->toHtml() ?>
+<?php $_orders = $this->getOrders(); ?>
+
+<div class="container" id="Orders">
+<div class="row">
+<div class="col-sm-12 col-md-12 col-xs-12">
+    <h4 class="page-t">Active orders (<?php echo $_orders->count() ?>)</h4>
+    <?php if($_orders->getSize() > 0) { ?>
+    <table class="tbl-craftmen font-lato">
+      <thead>
+        <tr>
+          <th>Order Details</th>
+          <th>Product</th>
+          <th>Vendor</th>
+          <th>Payment</th>
+          <th>Important Dates</th>
+          <th>&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php foreach ($_orders as $_order): ?>
+        <?php $items = $_order->getItems() ?>
+        <?php $dealerOrder = Mage::getModel('xcentia_vendors/order')->load($_order->getId(), 'order_id'); ?>
+        <?php $vendor = Mage::getModel('xcentia_vendors/vendor')->load($dealerOrder->getVendorId()); ?>
+        <tr>
+          <td data-th="Order Details"><div class="tbl-details">Order #<?php echo $_order->getRealOrderId() ?><br/>Status: <?php echo $_order->getStatusLabel() ?></div></td>
+          <td data-th="Product"><div class="tbl-details"><?php $items = $this->getOrderItems($_order);
+                    foreach($items as $item) {
+                        echo $item->getName().'<br/>';
+                    } 
+            ?></div></td>
+          <td data-th="Customer"><div class="tbl-details"><?php echo $vendor->getTitle() ?><br><?php echo $vendor->getFirstname().' '.$vendor->getLastname() ?></div></td>
+          <td data-th="Payment"><div class="tbl-details"><?php echo $_order->formatPrice($_order->getGrandTotal()) ?><br>Unpaid (COD)</div></td>
+          <td data-th="Important Dates"><div class="tbl-details">Delivered by <?php echo $this->formatDate($item->getDeliveryDate(),'long') ?><br><span class="text-grey">Posted on <?php echo $this->formatDate($_order->getCreatedAtStoreDate(),'long') ?></span></div></td> 
+          <td><div class="tbl-details"><a href="<?php echo $this->getViewUrl($_order) ?>" class="btn btn-sm btn-info btn-bordered"><?php echo $this->__('View Order') ?></a></div></td> 
+        </tr>
+        <?php endforeach; ?>
+      </tbody>
+    </table>
+    <?php } else { ?>
+        <p>Sorry, no Orders found.</p>
+    <?php } ?>
+
+    <?php $_orders = $this->getCompletedOrders(); ?>
+    <h4 class="page-t">Past orders</h4>
+    <?php if($_orders->getSize() > 0) { ?>
+    <table class="tbl-craftmen font-lato">
+      <thead>
+        <tr>
+          <th>Order Details</th>
+          <th>Order Details</th>
+          <th>Vendor</th>
+          <th>Payment</th>
+          <th>Important Dates</th>
+          <th>&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php foreach ($_orders as $_order): ?>
+        <?php $items = $_order->getItems() ?>
+        <?php $dealerOrder = Mage::getModel('xcentia_vendors/order')->load($_order->getId(), 'order_id'); ?>
+        <?php $vendor = Mage::getModel('xcentia_vendors/vendor')->load($dealerOrder->getVendorId()); ?>
+        <tr>
+          <td data-th="Order Details"><div class="tbl-details">Order #<?php echo $_order->getRealOrderId() ?><br/>Status: <?php echo $_order->getStatusLabel() ?></div></td>
+          <td data-th="Order Details"><div class="tbl-details"><?php $items = $this->getOrderItems($_order);
+                    foreach($items as $item) {
+                        echo $item->getName().'<br/>';
+                    } 
+            ?></div></td>
+          <td data-th="Customer"><div class="tbl-details"><?php echo $vendor->getTitle() ?><br><?php echo $vendor->getFirstname().' '.$vendor->getLastname() ?></div></td>
+          <td data-th="Payment"><div class="tbl-details"><?php echo $_order->formatPrice($_order->getGrandTotal()) ?><br>Unpaid (COD)</div></td>
+          <td data-th="Important Dates"><div class="tbl-details">Delivered by <?php echo $this->formatDate($item->getDeliveryDate(),'long') ?><br><span class="text-grey">Posted on <?php echo $this->formatDate($_order->getCreatedAtStoreDate(),'long') ?></span></div></td>
+          <td><div class="tbl-details"><a href="<?php echo $this->getViewUrl($_order) ?>" class="btn btn-sm btn-info btn-bordered"><?php echo $this->__('View Order') ?></a></div></td>  
+        </tr>
+        <?php endforeach; ?>
+      </tbody>
+    </table>
+    <?php } else { ?>
+        <p>Sorry, no Orders found.</p>
+    <?php } ?>
+</div>
+</div>
+</div>

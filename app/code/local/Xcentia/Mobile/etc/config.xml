@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Xcentia_Mobile extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       Xcentia
+ * @package        Xcentia_Mobile
+ * @copyright      Copyright (c) 2016
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+-->
+<config>
+    <modules>
+        <Xcentia_Mobile>
+            <version>1.0.0</version>
+        </Xcentia_Mobile>
+    </modules>
+    <global>
+        <resources>
+            <xcentia_mobile_setup>
+                <setup>
+                    <module>Xcentia_Mobile</module>
+                    <class>Xcentia_Mobile_Model_Resource_Setup</class>
+                </setup>
+            </xcentia_mobile_setup>
+        </resources>
+        <blocks>
+            <xcentia_mobile>
+                <class>Xcentia_Mobile_Block</class>
+            </xcentia_mobile>
+        </blocks>
+        <helpers>
+            <xcentia_mobile>
+                <class>Xcentia_Mobile_Helper</class>
+            </xcentia_mobile>
+        </helpers>
+        <models>
+            <xcentia_mobile>
+                <class>Xcentia_Mobile_Model</class>
+                <resourceModel>xcentia_mobile_resource</resourceModel>
+            </xcentia_mobile>
+            <xcentia_mobile_resource>
+                <class>Xcentia_Mobile_Model_Resource</class>
+                <entities>
+                    <device>
+                        <table>xcentia_mobile_device</table>
+                    </device>
+                </entities>
+            </xcentia_mobile_resource>
+        </models>
+    </global>
+    <adminhtml>
+        <layout>
+            <updates>
+                <xcentia_mobile>
+                    <file>xcentia_mobile.xml</file>
+                </xcentia_mobile>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Xcentia_Mobile>
+                    <files>
+                        <default>Xcentia_Mobile.csv</default>
+                    </files>
+                </Xcentia_Mobile>
+            </modules>
+        </translate>
+    </adminhtml>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Xcentia_Mobile before="Mage_Adminhtml">Xcentia_Mobile_Adminhtml</Xcentia_Mobile>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <frontend>
+        <routers>
+            <xcentia_mobile>
+                <use>standard</use>
+                <args>
+                    <module>Xcentia_Mobile</module>
+                    <frontName>mobile</frontName>
+                </args>
+            </xcentia_mobile>
+        </routers>
+        <layout>
+            <updates>
+                <xcentia_mobile>
+                    <file>xcentia_mobile.xml</file>
+                </xcentia_mobile>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Xcentia_Mobile>
+                    <files>
+                        <default>Xcentia_Mobile.csv</default>
+                    </files>
+                </Xcentia_Mobile>
+            </modules>
+        </translate>
+    </frontend>
+</config>

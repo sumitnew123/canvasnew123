@@ -1,0 +1,78 @@
+<?php
+/**
+ * Xcentia_Vendors extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       Xcentia
+ * @package        Xcentia_Vendors
+ * @copyright      Copyright (c) 2016
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+/**
+ * Vendor comments list template
+ *
+ * @category    Xcentia
+ * @package     Xcentia_Vendors
+ * @author      Ultimate Module Creator
+ */
+?>
+<div class="container padding-top-40">
+    <div class="row">
+    	<div class="col-md-11 col-sm-11 padding-0">
+      		<h4 class="nomargin">Rating and Reviews</h4>  
+    	</div>
+<?php $_vendor = $this->getVendor();
+$cust_id = Mage::getSingleton('customer/session')->getId();  ?>
+<?php if ($_vendor->getAllowComments()) : ?>
+    	<div class="col-md-12 col-md-12 white-bg">
+      		<h4 class="nomargin">Rating</h4>
+      		<?php $_comments = $this->getComments(); ?>
+      		<?php $average = $this->getAverageRating($_comments); ?>
+      		<p><?php echo round($average, 2) ?> stars over the past 12 months (<?php echo $_comments->getSize() ?> ratings)</p>
+      		<div class="tbl-details"><div style="color:#ffcf52" class="rating rating-<?php echo ceil($average) ?> size-20 width-200"></div></div>
+      		<h4 class="nomargin">Reviews</h4>
+		    <?php if (count($_comments)) : ?>
+		        <div class="box-collateral box-reviews" id="vendor-reviews">
+                <?php foreach ($_comments as $_comment):?>
+                	<div class="comment-rating"><?php echo $_comment->getRating() ?>/5</div>
+                    <div class="comment-short" id="comment-short-<?php echo $_comment->getId() ?>"><strong><?php echo $this->escapeHtml($_comment->getTitle()) ?></strong> - <?php echo Mage::helper('core/string')->truncate(nl2br($this->escapeHtml($_comment->getComment())),130) ?> <a href="#" class="readmore" comment="<?php echo $_comment->getId() ?>"> more</a></div>
+                    <div class="comment-full collapse" id="comment-full-<?php echo $_comment->getId() ?>"><strong><?php echo $this->escapeHtml($_comment->getTitle()) ?></strong> - <?php echo nl2br($this->escapeHtml($_comment->getComment())) ?> <a href="#" class="readless" comment="<?php echo $_comment->getId() ?>"> less</a></div>
+                    <div class="author"><?php echo $this->__('%s, %s', $this->escapeHtml($_comment->getName()), $this->formatDate($_comment->getCreatedAt(), 'long'))?></div>
+					<?php if($_vendor->getCustomerId()==$cust_id){ ?>
+					<a href="<?php echo $this->getUrl('vendors/vendor/abusepost/id/'.$_comment->getId()) ?>">Report as abuse</a>
+					<?php } ?>
+                <br><?php endforeach; ?>
+		        </div>
+		    <?php endif;?>
+		    <div class="col-md-8 col-sm-8 col-xs-12 text-left padding-20">
+				<a class="btn btn-sm btn-info btn-bordered pull-left" id="write_review">Write a Review</a>
+			</div>
+    	</div>
+    
+    <?php echo $this->getChildHtml('comment_form') ?>
+<?php endif;?>
+	</div>
+</div>
+<script>
+	jQuery(document).ready(function($){
+		$('.readmore').click(function(){
+			event.preventDefault();
+			$('#comment-short-'+$(this).attr('comment')).hide();
+			$('#comment-full-'+$(this).attr('comment')).show();
+		});
+		$('.readless').click(function(){
+			event.preventDefault();
+			$('#comment-short-'+$(this).attr('comment')).show();
+			$('#comment-full-'+$(this).attr('comment')).hide();
+		});
+		$('#write_review').click(function(){
+			$('#comment-from-wrapper').show();
+		});
+	});
+</script>
