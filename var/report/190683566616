@@ -1,0 +1,9 @@
+a:5:{i:0;s:41:"Unable to list current working directory.";i:1;s:1091:"#0 /Applications/MAMP/htdocs/bulbandkey/Dev/lib/Varien/Io/File.php(314): Varien_Io_File->cd('/Applications/M...')
+#1 /Applications/MAMP/htdocs/bulbandkey/Dev/app/code/local/MST/Pdp/controllers/UploadController.php(476): Varien_Io_File->open(Array)
+#2 /Applications/MAMP/htdocs/bulbandkey/Dev/app/code/core/Mage/Core/Controller/Varien/Action.php(418): MST_Pdp_UploadController->importemojioneAction()
+#3 /Applications/MAMP/htdocs/bulbandkey/Dev/app/code/core/Mage/Core/Controller/Varien/Router/Standard.php(254): Mage_Core_Controller_Varien_Action->dispatch('importemojione')
+#4 /Applications/MAMP/htdocs/bulbandkey/Dev/app/code/core/Mage/Core/Controller/Varien/Front.php(172): Mage_Core_Controller_Varien_Router_Standard->match(Object(Mage_Core_Controller_Request_Http))
+#5 /Applications/MAMP/htdocs/bulbandkey/Dev/app/code/core/Mage/Core/Model/App.php(365): Mage_Core_Controller_Varien_Front->dispatch()
+#6 /Applications/MAMP/htdocs/bulbandkey/Dev/app/Mage.php(684): Mage_Core_Model_App->run(Array)
+#7 /Applications/MAMP/htdocs/bulbandkey/Dev/index.php(84): Mage::run('', 'store')
+#8 {main}";s:3:"url";s:41:"/bulbandkey/Dev/pdp/upload/importemojione";s:11:"script_name";s:25:"/bulbandkey/Dev/index.php";s:4:"skin";s:7:"default";}

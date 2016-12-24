@@ -1,0 +1,5 @@
+app/code/local/Xcentia/Mobile    app/code/local/Xcentia/Mobile
+app/design/adminhtml/default/default/layout/xcentia_mobile.xml    app/design/adminhtml/default/default/layout/xcentia_mobile.xml
+app/design/adminhtml/default/default/template/xcentia_mobile    app/design/adminhtml/default/default/template/xcentia_mobile
+app/etc/modules/Xcentia_Mobile.xml    app/etc/modules/Xcentia_Mobile.xml
+app/locale/en_US/Xcentia_Mobile.csv    app/locale/en_US/Xcentia_Mobile.csv

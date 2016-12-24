@@ -1,0 +1,6 @@
+app/code/local/Xcentia/Pixels    app/code/local/Xcentia/Pixels
+app/design/adminhtml/default/default/layout/xcentia_pixels.xml    app/design/adminhtml/default/default/layout/xcentia_pixels.xml
+app/design/adminhtml/default/default/template/xcentia_pixels    app/design/adminhtml/default/default/template/xcentia_pixels
+app/design/frontend/base/default/layout/xcentia_pixels.xml    app/design/frontend/base/default/layout/xcentia_pixels.xml
+app/etc/modules/Xcentia_Pixels.xml    app/etc/modules/Xcentia_Pixels.xml
+app/locale/en_US/Xcentia_Pixels.csv    app/locale/en_US/Xcentia_Pixels.csv

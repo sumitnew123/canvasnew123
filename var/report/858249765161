@@ -1,0 +1,17 @@
+a:5:{i:0;s:876:"Error in file: "/Applications/MAMP/htdocs/bulbandkey/Dev/app/code/local/Xcentia/Vendors/sql/xcentia_vendors_setup/mysql4-upgrade-1.0.3-1.0.4.php" - SQLSTATE[42000]: Syntax error or access violation: 1072 Key column 'category_id' doesn't exist in table, query was: CREATE TABLE `xcentia_vendors_service_vendor` (
+  `rel_id` int UNSIGNED NOT NULL auto_increment COMMENT 'Relation ID' ,
+  `service_id` int UNSIGNED NOT NULL default '0' COMMENT 'Service ID' ,
+  `vendor_id` int UNSIGNED NOT NULL default '0' COMMENT 'Category ID' ,
+  `position` int NOT NULL default '0' COMMENT 'Position' ,
+  PRIMARY KEY (`rel_id`),
+  INDEX `IDX_XCENTIA_VENDORS_SERVICE_VENDOR_CATEGORY_ID` (`category_id`),
+  UNIQUE `UNQ_XCENTIA_VENDORS_SERVICE_VENDOR_SERVICE_ID_VENDOR_ID` (`service_id`, `vendor_id`)
+) COMMENT='Service to Vendor Linkage Table' ENGINE=INNODB charset=utf8 COLLATE=utf8_general_ci";i:1;s:1090:"#0 /Applications/MAMP/htdocs/bulbandkey/Dev/app/code/core/Mage/Core/Model/Resource/Setup.php(644): Mage::exception('Mage_Core', 'Error in file: ...')
+#1 /Applications/MAMP/htdocs/bulbandkey/Dev/app/code/core/Mage/Core/Model/Resource/Setup.php(437): Mage_Core_Model_Resource_Setup->_modifyResourceDb('upgrade', '1.0.3', '1.0.4')
+#2 /Applications/MAMP/htdocs/bulbandkey/Dev/app/code/core/Mage/Core/Model/Resource/Setup.php(320): Mage_Core_Model_Resource_Setup->_upgradeResourceDb('1.0.3', '1.0.4')
+#3 /Applications/MAMP/htdocs/bulbandkey/Dev/app/code/core/Mage/Core/Model/Resource/Setup.php(235): Mage_Core_Model_Resource_Setup->applyUpdates()
+#4 /Applications/MAMP/htdocs/bulbandkey/Dev/app/code/core/Mage/Core/Model/App.php(428): Mage_Core_Model_Resource_Setup::applyAllUpdates()
+#5 /Applications/MAMP/htdocs/bulbandkey/Dev/app/code/core/Mage/Core/Model/App.php(354): Mage_Core_Model_App->_initModules()
+#6 /Applications/MAMP/htdocs/bulbandkey/Dev/app/Mage.php(684): Mage_Core_Model_App->run(Array)
+#7 /Applications/MAMP/htdocs/bulbandkey/Dev/index.php(84): Mage::run('', 'store')
+#8 {main}";s:3:"url";s:41:"/bulbandkey/Dev/index.php/vendors/vendor/";s:11:"script_name";s:25:"/bulbandkey/Dev/index.php";s:4:"skin";s:7:"default";}

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+<namespace><![CDATA[Xwalker]]></namespace>
+<module_name><![CDATA[Metadetails]]></module_name>
+<install><![CDATA[0]]></install>
+<codepool><![CDATA[local]]></codepool>
+<version><![CDATA[1.0.0]]></version>
+<license><![CDATA[{{Namespace}}_{{Module}} extension
+
+NOTICE OF LICENSE
+
+This source file is subject to the MIT License
+that is bundled with this package in the file LICENSE.txt.
+It is also available through the world-wide-web at this URL:
+http://opensource.org/licenses/mit-license.php
+
+@category       {{Namespace}}
+@package        {{Namespace}}_{{Module}}
+@copyright      Copyright (c) {{Y}}
+@license        http://opensource.org/licenses/mit-license.php MIT License
+]]></license>
+<menu_text><![CDATA[Meta Details]]></menu_text>
+<menu_parent><![CDATA[]]></menu_parent>
+<sort_order><![CDATA[25]]></sort_order>
+<front_key><![CDATA[metadetails]]></front_key>
+<system_tab><![CDATA[Meta Details]]></system_tab>
+<system_tab_position><![CDATA[2000]]></system_tab_position>
+<entities>
+<entity>
+<label_singular><![CDATA[Meta]]></label_singular>
+<label_plural><![CDATA[Meta]]></label_plural>
+<name_singular><![CDATA[meta]]></name_singular>
+<name_plural><![CDATA[metas]]></name_plural>
+<is_tree><![CDATA[0]]></is_tree>
+<add_created_to_grid><![CDATA[1]]></add_created_to_grid>
+<add_updated_to_grid><![CDATA[0]]></add_updated_to_grid>
+<type><![CDATA[flat]]></type>
+<store><![CDATA[0]]></store>
+<create_frontend><![CDATA[0]]></create_frontend>
+<create_list><![CDATA[]]></create_list>
+<list_menu><![CDATA[]]></list_menu>
+<list_template><![CDATA[]]></list_template>
+<create_view><![CDATA[]]></create_view>
+<view_template><![CDATA[]]></view_template>
+<add_seo><![CDATA[]]></add_seo>
+<url_rewrite><![CDATA[]]></url_rewrite>
+<url_rewrite_list><![CDATA[]]></url_rewrite_list>
+<url_prefix><![CDATA[]]></url_prefix>
+<url_suffix><![CDATA[]]></url_suffix>
+<rss><![CDATA[]]></rss>
+<widget><![CDATA[]]></widget>
+<link_product><![CDATA[0]]></link_product>
+<show_on_product><![CDATA[]]></show_on_product>
+<show_products><![CDATA[]]></show_products>
+<product_attribute><![CDATA[0]]></product_attribute>
+<product_attribute_code><![CDATA[]]></product_attribute_code>
+<product_attribute_scope><![CDATA[]]></product_attribute_scope>
+<link_category><![CDATA[0]]></link_category>
+<show_on_category><![CDATA[]]></show_on_category>
+<show_category><![CDATA[]]></show_category>
+<category_attribute><![CDATA[0]]></category_attribute>
+<category_attribute_code><![CDATA[]]></category_attribute_code>
+<category_attribute_scope><![CDATA[]]></category_attribute_scope>
+<allow_comment><![CDATA[]]></allow_comment>
+<manage_comment><![CDATA[]]></manage_comment>
+<search><![CDATA[0]]></search>
+<api><![CDATA[0]]></api>
+<rest><![CDATA[0]]></rest>
+<product_attribute_group><![CDATA[]]></product_attribute_group>
+<category_attribute_group><![CDATA[]]></category_attribute_group>
+<attributes>
+<attribute>
+<code><![CDATA[url]]></code>
+<label><![CDATA[URL]]></label>
+<type><![CDATA[text]]></type>
+<note><![CDATA[]]></note>
+<position><![CDATA[10]]></position>
+<required><![CDATA[1]]></required>
+<admin_grid><![CDATA[1]]></admin_grid>
+<default_value><![CDATA[]]></default_value>
+<is_name><![CDATA[1]]></is_name>
+<index><![CDATA[0]]></index>
+<user_defined><![CDATA[]]></user_defined>
+</attribute>
+<attribute>
+<code><![CDATA[title]]></code>
+<label><![CDATA[TITLE]]></label>
+<type><![CDATA[text]]></type>
+<note><![CDATA[]]></note>
+<position><![CDATA[20]]></position>
+<required><![CDATA[1]]></required>
+<admin_grid><![CDATA[1]]></admin_grid>
+<default_value><![CDATA[]]></default_value>
+<index><![CDATA[1]]></index>
+</attribute>
+<attribute>
+<code><![CDATA[description]]></code>
+<label><![CDATA[DESCRIPTION]]></label>
+<type><![CDATA[textarea]]></type>
+<note><![CDATA[]]></note>
+<position><![CDATA[30]]></position>
+<required><![CDATA[1]]></required>
+<editor><![CDATA[0]]></editor>
+<default_value><![CDATA[]]></default_value>
+<index><![CDATA[2]]></index>
+</attribute>
+<attribute>
+<code><![CDATA[keywords]]></code>
+<label><![CDATA[KEYWORDS]]></label>
+<type><![CDATA[textarea]]></type>
+<note><![CDATA[]]></note>
+<position><![CDATA[40]]></position>
+<required><![CDATA[1]]></required>
+<editor><![CDATA[0]]></editor>
+<default_value><![CDATA[]]></default_value>
+<index><![CDATA[3]]></index>
+</attribute>
+<attribute>
+<code><![CDATA[h1tag]]></code>
+<label><![CDATA[H1 TAG]]></label>
+<type><![CDATA[text]]></type>
+<note><![CDATA[]]></note>
+<position><![CDATA[50]]></position>
+<required><![CDATA[1]]></required>
+<admin_grid><![CDATA[0]]></admin_grid>
+<default_value><![CDATA[]]></default_value>
+<index><![CDATA[4]]></index>
+</attribute>
+</attributes>
+</entity>
+</entities>
+<relations>
+</relations>
+</module>

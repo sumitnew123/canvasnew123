@@ -1,0 +1,14 @@
+<li>
+							<div class="dropdown-categories-left">
+								<div class="dropdown-categories-menubar">
+								<ul><h5><a onclick="location.href='http://localhost/bulbandkey/index.php/describe/apparel-printing.html'" href="http://localhost/bulbandkey/index.php/describe/apparel-printing.html">APPAREL PRINTING (1)</a></h5><li><a onclick="location.href='http://localhost/bulbandkey/index.php/describe/apparel-printing/t-shirt.html'" href="http://localhost/bulbandkey/index.php/describe/apparel-printing/t-shirt.html">T-Shirts</a></li></ul>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="dropdown-categories-right">
+								<div class="dropdown-categories-menubar">
+								<ul><h5><a onclick="location.href='http://localhost/bulbandkey/index.php/describe/fabrication.html'" href="http://localhost/bulbandkey/index.php/describe/fabrication.html">FABRICATION (1)</a></h5></ul><ul><h5><a onclick="location.href='http://localhost/bulbandkey/index.php/describe/tours-travels.html'" href="http://localhost/bulbandkey/index.php/describe/tours-travels.html">TOURS & TRAVELS (1)</a></h5><li><a onclick="location.href='http://localhost/bulbandkey/index.php/describe/tours-travels/taxi-cab-service-for-intra-city.html'" href="http://localhost/bulbandkey/index.php/describe/tours-travels/taxi-cab-service-for-intra-city.html">Taxi Cab service for Intra-City</a></li><li><a onclick="location.href='http://localhost/bulbandkey/index.php/describe/tours-travels/intercity-and-interstate-travel.html'" href="http://localhost/bulbandkey/index.php/describe/tours-travels/intercity-and-interstate-travel.html">Inter-City & Inter-State travel</a></li></ul>
+								</div>
+							</div>
+						</li>

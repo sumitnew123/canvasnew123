@@ -1,0 +1,5 @@
+app/code/local/Xwalker/Metadetails    app/code/local/Xwalker/Metadetails
+app/design/adminhtml/default/default/layout/xwalker_metadetails.xml    app/design/adminhtml/default/default/layout/xwalker_metadetails.xml
+app/design/adminhtml/default/default/template/xwalker_metadetails    app/design/adminhtml/default/default/template/xwalker_metadetails
+app/etc/modules/Xwalker_Metadetails.xml    app/etc/modules/Xwalker_Metadetails.xml
+app/locale/en_US/Xwalker_Metadetails.csv    app/locale/en_US/Xwalker_Metadetails.csv

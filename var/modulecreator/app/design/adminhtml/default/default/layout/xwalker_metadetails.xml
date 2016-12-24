@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Xwalker_Metadetails extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       Xwalker
+ * @package        Xwalker_Metadetails
+ * @copyright      Copyright (c) 2016
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+--> 
+<layout>
+    <adminhtml_metadetails_meta_index>
+        <reference name="menu">
+            <action method="setActive">
+                <menupath>xwalker_metadetails/meta</menupath>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="xwalker_metadetails/adminhtml_meta" name="meta" />
+
+        </reference>
+    </adminhtml_metadetails_meta_index>
+    <adminhtml_metadetails_meta_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="xwalker_metadetails/adminhtml_meta_grid" name="meta_grid"/>
+        </block>
+    </adminhtml_metadetails_meta_grid>
+    <!-- Meta add/edit action -->
+    <adminhtml_metadetails_meta_edit>
+        <update handle="editor"/>
+        <reference name="menu">
+            <action method="setActive">
+                <menupath>xwalker_metadetails/meta</menupath>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="xwalker_metadetails/adminhtml_meta_edit" name="meta_edit"></block>
+        </reference>
+        <reference name="left">
+            <block type="xwalker_metadetails/adminhtml_meta_edit_tabs" name="meta_tabs"></block>
+        </reference>
+    </adminhtml_metadetails_meta_edit>
+
+</layout>

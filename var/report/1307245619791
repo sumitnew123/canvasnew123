@@ -1,0 +1,9 @@
+a:5:{i:0;s:295:"Error in file: "/Applications/MAMP/htdocs/bulbandkey/Dev/app/code/local/MST/Pdp/sql/pdp_setup/mysql4-install-2.0.0.php" - SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'pdp_setup' for key 'PRIMARY', query was: INSERT INTO `core_resource` (`code`, `version`) VALUES (?, ?)";i:1;s:1076:"#0 /Applications/MAMP/htdocs/bulbandkey/Dev/app/code/core/Mage/Core/Model/Resource/Setup.php(644): Mage::exception('Mage_Core', 'Error in file: ...')
+#1 /Applications/MAMP/htdocs/bulbandkey/Dev/app/code/core/Mage/Core/Model/Resource/Setup.php(421): Mage_Core_Model_Resource_Setup->_modifyResourceDb('install', '', '3.1.4')
+#2 /Applications/MAMP/htdocs/bulbandkey/Dev/app/code/core/Mage/Core/Model/Resource/Setup.php(327): Mage_Core_Model_Resource_Setup->_installResourceDb('3.1.4')
+#3 /Applications/MAMP/htdocs/bulbandkey/Dev/app/code/core/Mage/Core/Model/Resource/Setup.php(235): Mage_Core_Model_Resource_Setup->applyUpdates()
+#4 /Applications/MAMP/htdocs/bulbandkey/Dev/app/code/core/Mage/Core/Model/App.php(428): Mage_Core_Model_Resource_Setup::applyAllUpdates()
+#5 /Applications/MAMP/htdocs/bulbandkey/Dev/app/code/core/Mage/Core/Model/App.php(354): Mage_Core_Model_App->_initModules()
+#6 /Applications/MAMP/htdocs/bulbandkey/Dev/app/Mage.php(684): Mage_Core_Model_App->run(Array)
+#7 /Applications/MAMP/htdocs/bulbandkey/Dev/index.php(84): Mage::run('', 'store')
+#8 {main}";s:3:"url";s:16:"/bulbandkey/Dev/";s:11:"script_name";s:25:"/bulbandkey/Dev/index.php";s:4:"skin";s:7:"default";}

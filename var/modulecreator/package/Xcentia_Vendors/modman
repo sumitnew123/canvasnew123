@@ -1,0 +1,7 @@
+app/code/local/Xcentia/Vendors    app/code/local/Xcentia/Vendors
+app/design/adminhtml/default/default/layout/xcentia_vendors.xml    app/design/adminhtml/default/default/layout/xcentia_vendors.xml
+app/design/adminhtml/default/default/template/xcentia_vendors    app/design/adminhtml/default/default/template/xcentia_vendors
+app/design/frontend/base/default/layout/xcentia_vendors.xml    app/design/frontend/base/default/layout/xcentia_vendors.xml
+app/etc/modules/Xcentia_Vendors.xml    app/etc/modules/Xcentia_Vendors.xml
+app/locale/en_US/Xcentia_Vendors.csv    app/locale/en_US/Xcentia_Vendors.csv
+skin/frontend/base/default/images/placeholder/vendor.jpg    skin/frontend/base/default/images/placeholder/vendor.jpg

@@ -1,0 +1,8 @@
+a:5:{i:0;s:56:"Module "Mage_GoogleCheckout" requires module "Mage_Usa".";i:1;s:849:"#0 /Applications/MAMP/htdocs/bulbandkey/Dev/app/code/core/Mage/Core/Model/Config.php(849): Mage::throwException('Module "Mage_Go...')
+#1 /Applications/MAMP/htdocs/bulbandkey/Dev/app/code/core/Mage/Core/Model/Config.php(812): Mage_Core_Model_Config->_sortModuleDepends(Array)
+#2 /Applications/MAMP/htdocs/bulbandkey/Dev/app/code/core/Mage/Core/Model/Config.php(315): Mage_Core_Model_Config->_loadDeclaredModules()
+#3 /Applications/MAMP/htdocs/bulbandkey/Dev/app/code/core/Mage/Core/Model/App.php(425): Mage_Core_Model_Config->loadModules()
+#4 /Applications/MAMP/htdocs/bulbandkey/Dev/app/code/core/Mage/Core/Model/App.php(354): Mage_Core_Model_App->_initModules()
+#5 /Applications/MAMP/htdocs/bulbandkey/Dev/app/Mage.php(684): Mage_Core_Model_App->run(Array)
+#6 /Applications/MAMP/htdocs/bulbandkey/Dev/index.php(83): Mage::run('', 'store')
+#7 {main}";s:3:"url";s:16:"/bulbandkey/Dev/";s:11:"script_name";s:25:"/bulbandkey/Dev/index.php";s:4:"skin";s:7:"default";}

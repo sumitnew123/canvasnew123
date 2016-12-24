@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package>
+    <name>Skumar_IndiaRegions</name>
+    <version>1.0.1</version>
+    <stability>stable</stability>
+    <license uri="http://www.opensource.org/licenses/osl-3.0.php">OSL v3.0</license>
+    <channel>community</channel>
+    <extends/>
+    <summary>Magento provides country and regions and cities as dropdown option in addresses. India Regions extension extends this feature by adding updated states of India.</summary>
+    <description>Magento provides country and regions and cities as dropdown option in addresses. India Regions extension extends this feature by adding updated states of India.</description>
+    <notes>Magento provides country and regions and cities as dropdown option in addresses. India Regions extension extends this feature by adding updated states of India.</notes>
+    <authors><author><name>Shyam Kumar</name><user>kumarshyam</user><email>kumar.30.shyam@gmail.com</email></author></authors>
+    <date>2014-12-31</date>
+    <time>04:42:42</time>
+    <contents><target name="mageetc"><dir name="modules"><file name="Skumar_IndiaRegions.xml" hash="9499be1a54281b9d4e729fdca3be8302"/></dir></target><target name="magecommunity"><dir name="Skumar"><dir name="IndiaRegions"><dir name="Model"><dir name="Resource"><file name="Setup.php" hash="f9c4b57feb75104eda86ff3a3711ec9b"/></dir></dir><dir name="etc"><file name="config.xml" hash="862edb83636f3a48f749ca4ec12e484c"/></dir><dir name="sql"><dir name="indiaregions_setup"><file name="install-1.0.1.php" hash="b9f4183dbe0d825afa7a7bef1bfd7917"/></dir></dir></dir></dir></target></contents>
+    <compatible/>
+    <dependencies><required><php><min>5.2.0</min><max>6.0.0</max></php></required></dependencies>
+</package>

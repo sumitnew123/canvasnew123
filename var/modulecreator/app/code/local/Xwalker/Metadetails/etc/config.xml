@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Xwalker_Metadetails extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       Xwalker
+ * @package        Xwalker_Metadetails
+ * @copyright      Copyright (c) 2016
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+-->
+<config>
+    <modules>
+        <Xwalker_Metadetails>
+            <version>1.0.0</version>
+        </Xwalker_Metadetails>
+    </modules>
+    <global>
+        <resources>
+            <xwalker_metadetails_setup>
+                <setup>
+                    <module>Xwalker_Metadetails</module>
+                    <class>Xwalker_Metadetails_Model_Resource_Setup</class>
+                </setup>
+            </xwalker_metadetails_setup>
+        </resources>
+        <blocks>
+            <xwalker_metadetails>
+                <class>Xwalker_Metadetails_Block</class>
+            </xwalker_metadetails>
+        </blocks>
+        <helpers>
+            <xwalker_metadetails>
+                <class>Xwalker_Metadetails_Helper</class>
+            </xwalker_metadetails>
+        </helpers>
+        <models>
+            <xwalker_metadetails>
+                <class>Xwalker_Metadetails_Model</class>
+                <resourceModel>xwalker_metadetails_resource</resourceModel>
+            </xwalker_metadetails>
+            <xwalker_metadetails_resource>
+                <class>Xwalker_Metadetails_Model_Resource</class>
+                <entities>
+                    <meta>
+                        <table>xwalker_metadetails_meta</table>
+                    </meta>
+                </entities>
+            </xwalker_metadetails_resource>
+        </models>
+    </global>
+    <adminhtml>
+        <layout>
+            <updates>
+                <xwalker_metadetails>
+                    <file>xwalker_metadetails.xml</file>
+                </xwalker_metadetails>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Xwalker_Metadetails>
+                    <files>
+                        <default>Xwalker_Metadetails.csv</default>
+                    </files>
+                </Xwalker_Metadetails>
+            </modules>
+        </translate>
+    </adminhtml>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Xwalker_Metadetails before="Mage_Adminhtml">Xwalker_Metadetails_Adminhtml</Xwalker_Metadetails>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+</config>

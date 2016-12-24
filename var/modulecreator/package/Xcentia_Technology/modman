@@ -1,0 +1,7 @@
+app/code/local/Xcentia/Technology    app/code/local/Xcentia/Technology
+app/design/adminhtml/default/default/layout/xcentia_technology.xml    app/design/adminhtml/default/default/layout/xcentia_technology.xml
+app/design/adminhtml/default/default/template/xcentia_technology    app/design/adminhtml/default/default/template/xcentia_technology
+app/design/frontend/base/default/layout/xcentia_technology.xml    app/design/frontend/base/default/layout/xcentia_technology.xml
+app/etc/modules/Xcentia_Technology.xml    app/etc/modules/Xcentia_Technology.xml
+app/locale/en_US/Xcentia_Technology.csv    app/locale/en_US/Xcentia_Technology.csv
+skin/frontend/base/default/images/placeholder/technology.jpg    skin/frontend/base/default/images/placeholder/technology.jpg

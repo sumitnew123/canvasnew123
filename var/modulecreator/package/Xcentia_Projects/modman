@@ -1,0 +1,6 @@
+app/code/local/Xcentia/Projects    app/code/local/Xcentia/Projects
+app/design/adminhtml/default/default/layout/xcentia_projects.xml    app/design/adminhtml/default/default/layout/xcentia_projects.xml
+app/design/adminhtml/default/default/template/xcentia_projects    app/design/adminhtml/default/default/template/xcentia_projects
+app/design/frontend/base/default/layout/xcentia_projects.xml    app/design/frontend/base/default/layout/xcentia_projects.xml
+app/etc/modules/Xcentia_Projects.xml    app/etc/modules/Xcentia_Projects.xml
+app/locale/en_US/Xcentia_Projects.csv    app/locale/en_US/Xcentia_Projects.csv

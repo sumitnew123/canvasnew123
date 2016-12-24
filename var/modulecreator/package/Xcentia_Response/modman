@@ -1,0 +1,7 @@
+app/code/local/Xcentia/Response    app/code/local/Xcentia/Response
+app/design/adminhtml/default/default/layout/xcentia_response.xml    app/design/adminhtml/default/default/layout/xcentia_response.xml
+app/design/adminhtml/default/default/template/xcentia_response    app/design/adminhtml/default/default/template/xcentia_response
+app/design/frontend/base/default/layout/xcentia_response.xml    app/design/frontend/base/default/layout/xcentia_response.xml
+app/etc/modules/Xcentia_Response.xml    app/etc/modules/Xcentia_Response.xml
+app/locale/en_US/Xcentia_Response.csv    app/locale/en_US/Xcentia_Response.csv
+skin/frontend/base/default/images/placeholder/form.jpg    skin/frontend/base/default/images/placeholder/form.jpg

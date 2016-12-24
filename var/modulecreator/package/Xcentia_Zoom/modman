@@ -1,0 +1,5 @@
+app/code/local/Xcentia/Zoom    app/code/local/Xcentia/Zoom
+app/design/adminhtml/default/default/layout/xcentia_zoom.xml    app/design/adminhtml/default/default/layout/xcentia_zoom.xml
+app/design/adminhtml/default/default/template/xcentia_zoom    app/design/adminhtml/default/default/template/xcentia_zoom
+app/etc/modules/Xcentia_Zoom.xml    app/etc/modules/Xcentia_Zoom.xml
+app/locale/en_US/Xcentia_Zoom.csv    app/locale/en_US/Xcentia_Zoom.csv
